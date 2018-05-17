@@ -18,9 +18,13 @@
  */
 package org.codefeedr.utilities
 
-import scalaj.http.HttpResponse
+import scalaj.http.{HttpRequest, HttpResponse}
 
 class Http() extends Serializable {
+
+  def getRequest(url: String): HttpRequest = {
+    scalaj.http.Http(url)
+  }
 
   def getResponse(url: String): HttpResponse[String] = {
     scalaj.http.Http(url).asString
