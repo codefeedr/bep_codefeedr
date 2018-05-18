@@ -6,7 +6,7 @@ import org.apache.flink.streaming.api.scala.DataStream
 import org.apache.flink.api.scala._
 import org.apache.flink.runtime.client.JobExecutionException
 import org.apache.flink.streaming.api.functions.sink.{PrintSinkFunction, RichSinkFunction, SinkFunction}
-import org.codefeedr.pipeline.{OutputStage, NoType, PipelineItem, PipelineObject}
+import org.codefeedr.pipeline._
 
 case class StringType(value: String) extends PipelineItem
 
@@ -16,7 +16,7 @@ final case class JobFinishedException() extends JobExecutionException(new JobID(
 final case class CodeHitException() extends RuntimeException
 
 //a simple test source which generates some StringType messages
-class SimpleSourcePipelineObject() extends PipelineObject[NoType, StringType] {
+class SimpleSourcePipelineObject(attributes: StageAttributes = StageAttributes()) extends PipelineObject[NoType, StringType](attributes) {
   override def transform(source: DataStream[NoType]): DataStream[StringType] = {
     pipeline.
       environment.addSource {

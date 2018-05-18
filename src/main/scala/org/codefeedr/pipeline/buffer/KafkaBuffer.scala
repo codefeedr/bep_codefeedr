@@ -20,7 +20,7 @@ package org.codefeedr.pipeline.buffer
 
 import java.util.Properties
 
-import com.sksamuel.avro4s.{FromRecord, SchemaFor}
+import com.sksamuel.avro4s.FromRecord
 import org.apache.avro.Schema
 import org.apache.avro.reflect.ReflectData
 import org.codefeedr.Properties._
@@ -31,8 +31,8 @@ import org.codefeedr.pipeline.buffer.serialization._
 import scala.reflect.classTag
 import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.apache.flink.streaming.api.scala.DataStream
-import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, KafkaAdminClient, NewTopic}
-import org.codefeedr.pipeline.Pipeline
+import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, NewTopic}
+import org.codefeedr.pipeline.{Pipeline, PipelineItem, PipelineObject, StageAttributes}
 import org.codefeedr.pipeline.buffer.serialization.schema_exposure.{RedisSchemaExposer, SchemaExposer, ZookeeperSchemaExposer}
 
 import scala.collection.JavaConverters._
@@ -67,7 +67,7 @@ private object KafkaBufferDefaults {
   val SCHEMA_EXPOSURE_DESERIALIZATION = false
 }
 
-class KafkaBuffer[T <: AnyRef : Manifest : FromRecord](pipeline: Pipeline, topic: String) extends Buffer[T](pipeline) {
+class KafkaBuffer[T <: AnyRef : Manifest : FromRecord](pipeline: Pipeline, properties: org.codefeedr.Properties, stageAttributes: StageAttributes, topic: String) extends Buffer[T](pipeline) {
 
   //Get type of the class at run time
   val inputClassType: Class[T] = classTag[T].runtimeClass.asInstanceOf[Class[T]]
@@ -76,18 +76,16 @@ class KafkaBuffer[T <: AnyRef : Manifest : FromRecord](pipeline: Pipeline, topic
   implicit val typeInfo = TypeInformation.of(inputClassType)
 
   override def getSource: DataStream[T] = {
-    val props = pipeline.bufferProperties
-
     val serde = Serializer.
-      getSerde[T](props.get[String](KafkaBuffer.SERIALIZER).
+      getSerde[T](properties.get[String](KafkaBuffer.SERIALIZER).
       getOrElse(Serializer.JSON))
-    
+
     //make sure the topic already exists
-    checkAndCreateSubject(topic, props.get[String](KafkaBuffer.BROKER).
+    checkAndCreateSubject(topic, properties.get[String](KafkaBuffer.BROKER).
       getOrElse(KafkaBufferDefaults.BROKER))
 
     //check if a schema should be used for deserialization
-    if (props.get[Boolean](KafkaBuffer.SCHEMA_EXPOSURE_DESERIALIZATION)
+    if (properties.get[Boolean](KafkaBuffer.SCHEMA_EXPOSURE_DESERIALIZATION)
       .getOrElse(KafkaBufferDefaults.SCHEMA_EXPOSURE_DESERIALIZATION)) {
 
       //get the schema
@@ -99,41 +97,38 @@ class KafkaBuffer[T <: AnyRef : Manifest : FromRecord](pipeline: Pipeline, topic
           .asInstanceOf[AvroSerde[T]]
           .setSchema(getSchema(topic).toString) //TODO find a better workaround for this
       } else {
-        throw new NoAvroSerdeException("You can't use an Avro schema for deserialization if Avro isn't the serde type.")
+        throw NoAvroSerdeException("You can't use an Avro schema for deserialization if Avro isn't the serde type.")
       }
     }
 
     pipeline.environment.
-      addSource(new FlinkKafkaConsumer011[T](topic, serde, getKafkaProperties()))
+      addSource(new FlinkKafkaConsumer011[T](topic, serde, getKafkaProperties))
   }
 
   override def getSink: SinkFunction[T] = {
-    val props = pipeline.bufferProperties
-
-    val serde = Serializer.getSerde[T](props.get[String](KafkaBuffer.SERIALIZER).
+    val serde = Serializer.getSerde[T](properties.get[String](KafkaBuffer.SERIALIZER).
       getOrElse(Serializer.JSON))
 
     //check if a schema should be exposed
-    if (props.get[Boolean](KafkaBuffer.SCHEMA_EXPOSURE)
+    if (properties.get[Boolean](KafkaBuffer.SCHEMA_EXPOSURE)
       .getOrElse(KafkaBufferDefaults.SCHEMA_EXPOSURE)) {
 
       exposeSchema()
     }
 
-    new FlinkKafkaProducer011[T](topic, serde, getKafkaProperties())
+    new FlinkKafkaProducer011[T](topic, serde, getKafkaProperties)
   }
 
   /**
     * Get all the kafka properties.
+    *
     * @return a map with all the properties.
     */
-  def getKafkaProperties() : java.util.Properties = {
-    val props = pipeline.bufferProperties
-
+  def getKafkaProperties: java.util.Properties = {
     val kafkaProp = new java.util.Properties()
-    kafkaProp.put("bootstrap.servers", props.get[String](KafkaBuffer.BROKER).
+    kafkaProp.put("bootstrap.servers", properties.get[String](KafkaBuffer.BROKER).
       getOrElse(KafkaBufferDefaults.BROKER))
-    kafkaProp.put("zookeeper.connect", props.get[String](KafkaBuffer.ZOOKEEPER).
+    kafkaProp.put("zookeeper.connect", properties.get[String](KafkaBuffer.ZOOKEEPER).
       getOrElse(KafkaBufferDefaults.ZOOKEEPER))
     kafkaProp.put("auto.offset.reset", "earliest")
     kafkaProp.put("auto.commit.interval.ms", "100")
@@ -144,10 +139,11 @@ class KafkaBuffer[T <: AnyRef : Manifest : FromRecord](pipeline: Pipeline, topic
 
   /**
     * Checks if a Kafka topic exists, if not it is created.
-    * @param topic the topic to create.
+    *
+    * @param topic      the topic to create.
     * @param connection the kafka broker to connect to.
     */
-  def checkAndCreateSubject(topic : String, connection : String) = {
+  def checkAndCreateSubject(topic: String, connection: String): Unit = {
     //set all the correct properties
     val props = new Properties()
     props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, connection)
@@ -178,44 +174,42 @@ class KafkaBuffer[T <: AnyRef : Manifest : FromRecord](pipeline: Pipeline, topic
   /**
     * Exposes the Avro schema to an external service (like redis/zookeeper).
     */
-  def exposeSchema() = {
-    val exposer = getExposer()
-
+  def exposeSchema(): Boolean = {
     //get the schema
     val schema = ReflectData.get().getSchema(inputClassType)
 
     //expose the schema
-    exposer.put(schema, topic)
+    getExposer.put(schema, topic)
   }
 
   /**
     * Get Schema of the subject.
+    *
     * @return the schema.
     */
-  def getSchema(subject : String) : Schema = {
-    val exposer = getExposer()
-
+  def getSchema(subject: String): Schema = {
     //get the schema corresponding to the topic
-    val schema = exposer.get(subject)
+    val schema = getExposer.get(subject)
 
     //if not found throw exception
-    if (schema.isEmpty) throw new SchemaNotFoundException(s"Schema for topic $topic not found.")
+    if (schema.isEmpty) {
+      throw SchemaNotFoundException(s"Schema for topic $topic not found.")
+    }
 
     schema.get
   }
 
   /**
     * Get schema exposer based on configuration.
+    *
     * @return a schema exposer.
     */
-  def getExposer() : SchemaExposer = {
-    val props = pipeline.bufferProperties
-
-    val exposeName = props.
+  def getExposer: SchemaExposer = {
+    val exposeName = properties.
       get[String](KafkaBuffer.SCHEMA_EXPOSURE_SERVICE).
       getOrElse(KafkaBufferDefaults.SCHEMA_EXPOSURE_SERVICE)
 
-    val exposeHost = props.
+    val exposeHost = properties.
       get[String](KafkaBuffer.SCHEMA_EXPOSURE_HOST).
       getOrElse(KafkaBufferDefaults.SCHEMA_EXPOSURE_HOST)
 

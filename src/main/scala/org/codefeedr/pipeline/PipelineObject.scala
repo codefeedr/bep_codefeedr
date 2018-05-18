@@ -19,9 +19,9 @@
 package org.codefeedr.pipeline
 
 import com.sksamuel.avro4s.FromRecord
-import org.apache.flink.api.java.operators.DataSink
 import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.apache.flink.streaming.api.scala.DataStream
+import org.codefeedr.Properties
 import org.codefeedr.pipeline.buffer.BufferFactory
 
 import scala.reflect.{ClassTag, Manifest}
@@ -33,13 +33,23 @@ import scala.reflect.runtime.universe._
   * @tparam In  input type for this pipeline object.
   * @tparam Out output type for this pipeline object.
   */
-abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRecord, Out <: PipelineItem : ClassTag : Manifest : FromRecord] {
+abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRecord, Out <: PipelineItem : ClassTag : Manifest : FromRecord](val attributes: StageAttributes = StageAttributes()) {
 
   var pipeline: Pipeline = _
-  val id: String = getClass.getName
+
+  def id: String = attributes.id.getOrElse(getClass.getName)
+
+  /**
+    * Stage properties
+    *
+    * @return Properties
+    */
+  def properties: Properties =
+    pipeline.propertiesOf(this)
 
   /**
     * Setups the pipeline object with a pipeline.
+    *
     * @param pipeline the pipeline it belongs to.
     */
   def setUp(pipeline: Pipeline): Unit = {
@@ -72,6 +82,7 @@ abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRec
 
   /**
     * Check if this pipeline object is sourced from a Buffer.
+    *
     * @return if this object has a (buffer) source.
     */
   def hasMainSource: Boolean =
@@ -79,12 +90,14 @@ abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRec
 
   /**
     * Check if this pipeline object is sinked to a Buffer.
+    *
     * @return if this object has a (buffer) sink.
     */
   def hasSink: Boolean = typeOf[Out] != typeOf[NoType]
 
   /**
     * Returns the buffer source of this pipeline object.
+    *
     * @return the DataStream resulting from the buffer.
     */
   def getMainSource: DataStream[In] = {
@@ -96,7 +109,7 @@ abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRec
 
     val parentNode = getParents(0)
 
-    val factory = new BufferFactory(pipeline, parentNode)
+    val factory = new BufferFactory(pipeline, this, parentNode)
     val buffer = factory.create[In]()
 
     buffer.getSource
@@ -104,6 +117,7 @@ abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRec
 
   /**
     * Returns the buffer sink of this pipeline object.
+    *
     * @return the SinkFunction resulting from the buffer.
     */
   def getSink: SinkFunction[Out] = {
@@ -113,7 +127,7 @@ abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRec
       throw NoSinkException("PipelineObject defined NoType as Out type. Buffer can't be created.")
     }
 
-    val factory = new BufferFactory(pipeline, this)
+    val factory = new BufferFactory(pipeline, this,this)
     val buffer = factory.create[Out]()
 
     buffer.getSink
@@ -131,7 +145,7 @@ abstract class PipelineObject[In <: PipelineItem : ClassTag : Manifest : FromRec
   def getSource[T <: AnyRef : Manifest : FromRecord](parentNode: PipelineObject[PipelineItem, PipelineItem]): DataStream[T] = {
     assert(parentNode != null)
 
-    val factory = new BufferFactory(pipeline, parentNode)
+    val factory = new BufferFactory(pipeline, this, parentNode)
     val buffer = factory.create[T]()
 
     buffer.getSource

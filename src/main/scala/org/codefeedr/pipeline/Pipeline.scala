@@ -19,7 +19,6 @@
 package org.codefeedr.pipeline
 
 import org.apache.flink.api.java.utils.ParameterTool
-import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.codefeedr.Properties
 import org.codefeedr.keymanager.KeyManager
@@ -29,10 +28,30 @@ import org.codefeedr.pipeline.RuntimeType.RuntimeType
 case class Pipeline(bufferType: BufferType,
                     bufferProperties: Properties,
                     graph: DirectedAcyclicGraph,
-                    properties: Properties,
-                    keyManager: KeyManager) {
+                    keyManager: KeyManager,
+                    objectProperties: Map[String, Properties]) {
   val environment: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
 
+  /**
+    * Get the properties of a stage
+    *
+    * @param obj Stage
+    * @return Properties
+    */
+  def propertiesOf[U <: PipelineItem, V <: PipelineItem](obj: PipelineObject[U, V]): Properties = {
+    if (obj == null) {
+      throw new IllegalArgumentException("Object can't be null")
+    }
+
+    objectProperties.getOrElse(obj.id, new Properties())
+  }
+
+
+  /**
+    * Start the pipeline with a list of command line arguments
+    *
+    * @param args Command line arguments
+    */
   def start(args: Array[String]): Unit = {
     val params = ParameterTool.fromArgs(args)
     var runtime = RuntimeType.Local
@@ -54,6 +73,12 @@ case class Pipeline(bufferType: BufferType,
     start(runtime, stage)
   }
 
+  /**
+    * Start the pipeline with a run configuration
+    *
+    * @param runtime Runtime type
+    * @param stage Stage of a cluster run
+    */
   def start(runtime: RuntimeType, stage: String = null): Unit = {
     runtime match {
       case RuntimeType.Mock => startMock()
@@ -62,7 +87,11 @@ case class Pipeline(bufferType: BufferType,
     }
   }
 
-  // Without any buffers. Connect all POs to each other
+  /**
+    * Run the pipeline as mock. Only works for sequential pipelines.
+    *
+    * In a mock run, all stages are put together without buffers and run as a single Flink job.
+    */
   def startMock(): Unit = {
     if (!graph.isSequential) {
       throw new IllegalStateException("Mock runtime can't run non-sequential pipelines")
@@ -84,7 +113,11 @@ case class Pipeline(bufferType: BufferType,
     environment.execute("CodeFeedr Mock Job")
   }
 
-  // With buffers, all in same program
+  /**
+    * Start a locally run pipeline.
+    *
+    * Starts every stage in the same Flink environment but with buffers.
+    */
   def startLocal(): Unit = {
     val objects = graph.nodes.asInstanceOf[Vector[PipelineObject[PipelineItem, PipelineItem]]]
 
@@ -101,7 +134,11 @@ case class Pipeline(bufferType: BufferType,
     environment.execute("CodeFeedr Local Job")
   }
 
-  // With buffers, running just one PO
+  /**
+    * Run the pipeline in a clustered manner: run a single stage only.
+    *
+    * @param stage Stage to run
+    */
   def startClustered(stage: String): Unit = {
     val optObj = graph.nodes.find(node => node.asInstanceOf[PipelineObject[PipelineItem, PipelineItem]].id == stage)
 

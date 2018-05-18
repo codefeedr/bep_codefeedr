@@ -24,14 +24,14 @@ import java.time.format.DateTimeFormatter
 import org.apache.flink.api.common.functions.FlatMapFunction
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.util.Collector
-import org.codefeedr.pipeline.InputStage
+import org.codefeedr.pipeline.{InputStage, StageAttributes}
 
 /**
   * Source that streams Apache log files
   *
   * @param absolutePath Absolute file path to the log
   */
-class ApacheLogFileInputStage(absolutePath: String) extends InputStage[ApacheAccessLogItem] with Serializable {
+class ApacheLogFileInputStage(absolutePath: String, stageAttributes: StageAttributes = StageAttributes()) extends InputStage[ApacheAccessLogItem](stageAttributes) with Serializable {
 
   override def main(): DataStream[ApacheAccessLogItem] = {
     pipeline.environment

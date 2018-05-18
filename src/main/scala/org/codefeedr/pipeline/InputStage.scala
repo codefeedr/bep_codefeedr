@@ -30,7 +30,7 @@ import scala.reflect.{ClassTag, Manifest}
   *
   * @tparam Out the output type of the job.
   */
-abstract class InputStage[Out <: PipelineItem : ClassTag : Manifest : FromRecord] extends PipelineObject[NoType, Out] {
+abstract class InputStage[Out <: PipelineItem : ClassTag : Manifest : FromRecord](attributes: StageAttributes = StageAttributes()) extends PipelineObject[NoType, Out](attributes) {
 
   override def transform(source: DataStream[NoType]): DataStream[Out] = {
     main()

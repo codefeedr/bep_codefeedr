@@ -34,7 +34,7 @@ import scala.reflect.Manifest
   * @param pipeline Pipeline
   * @param sinkObject Object that writes to the buffer
   */
-class BufferFactory[U <: PipelineItem, V <: PipelineItem](pipeline: Pipeline, sinkObject: PipelineObject[U, V]) {
+class BufferFactory[U <: PipelineItem, V <: PipelineItem, X <: PipelineItem, Y <: PipelineItem](pipeline: Pipeline, stage: PipelineObject[X, Y], sinkObject: PipelineObject[U, V]) {
 
   /**
     * Create a new buffer
@@ -55,7 +55,7 @@ class BufferFactory[U <: PipelineItem, V <: PipelineItem](pipeline: Pipeline, si
       case BufferType.None =>
         throw new IllegalStateException("Cannot instantiate buffer of type 'None'")
       case BufferType.Kafka =>
-        new KafkaBuffer[T](pipeline, subject)
+        new KafkaBuffer[T](pipeline, pipeline.bufferProperties, stage.attributes, subject)
     }
   }
 }

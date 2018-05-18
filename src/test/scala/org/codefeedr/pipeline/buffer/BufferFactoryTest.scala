@@ -16,7 +16,7 @@ class BufferFactoryTest extends FunSuite with BeforeAndAfter {
       .append(nodeB)
       .build()
 
-    val factory = new BufferFactory(pipeline, nodeB)
+    val factory = new BufferFactory(pipeline, nodeA, nodeB)
 
     assertThrows[IllegalStateException] {
       factory.create[StringType]()
@@ -30,7 +30,7 @@ class BufferFactoryTest extends FunSuite with BeforeAndAfter {
       .append(nodeB)
       .build()
 
-    val factory = new BufferFactory(pipeline, null)
+    val factory = new BufferFactory(pipeline, nodeA, null)
 
     assertThrows[IllegalArgumentException] {
       factory.create[StringType]()
@@ -44,7 +44,7 @@ class BufferFactoryTest extends FunSuite with BeforeAndAfter {
       .append(nodeB)
       .build()
 
-    val factory = new BufferFactory(pipeline, nodeB)
+    val factory = new BufferFactory(pipeline, nodeA, nodeB)
 
 
     // created for nodeB sink, so should have subject of nodeB

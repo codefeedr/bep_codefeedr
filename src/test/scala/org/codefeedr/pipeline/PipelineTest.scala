@@ -23,7 +23,7 @@ class PipelineTest extends FunSuite with BeforeAndAfter {
 
   test("Simple pipeline test wordcount") {
     builder
-      .append(new StringSource("hallo hallo doei doei doei"))
+      .append(new StringSource(str = "hallo hallo doei doei doei"))
       .append { x: DataStream[StringType] =>
         x.map(x => (x.value, 1))
           .keyBy(0)
@@ -160,7 +160,7 @@ class PipelineTest extends FunSuite with BeforeAndAfter {
       .edge(source, a)
       .edge(source, b)
       .edge(a, sink)
-      .extraEdge(b, sink)
+      .edge(b, sink)
   }
 
 
@@ -205,6 +205,19 @@ class PipelineTest extends FunSuite with BeforeAndAfter {
 
     assertThrows[JobExecutionException] {
       pipeline.startClustered("org.codefeedr.testUtils.FlinkCrashObjectTest")
+    }
+  }
+
+  test("Should throw when propertiesOf stage is null") {
+    val sink = new SimpleSinkPipelineObject(1)
+    val source = new SimpleSourcePipelineObject()
+
+    val pipeline = builder
+      .edge(source, sink)
+      .build()
+
+    assertThrows[IllegalArgumentException] {
+      pipeline.propertiesOf(null)
     }
   }
 }

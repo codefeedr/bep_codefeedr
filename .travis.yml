@@ -23,8 +23,6 @@ before_install:
   - "sed -i 's/KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100/KAFKA_ADVERTISED_HOST_NAME: localhost/' containers/kafka/docker-compose-single-broker.yml"
   - "sed -i 's/KAFKA_CREATE_TOPICS: \"test:1:1\"//' containers/kafka/docker-compose-single-broker.yml"
   - "echo 'EXPOSE 9092' >> containers/kafka/Dockerfile"
-  - cat containers/kafka/docker-compose-single-broker.yml
-  - cat containers/kafka/Dockerfile
   - docker-compose -f "containers/kafka/docker-compose-single-broker.yml" up -d
   - docker ps -a
 

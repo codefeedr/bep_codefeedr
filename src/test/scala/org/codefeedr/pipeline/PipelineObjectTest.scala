@@ -19,7 +19,7 @@
 package org.codefeedr.pipeline
 
 import org.apache.flink.streaming.api.scala.DataStream
-import org.codefeedr.testUtils.StringType
+import org.codefeedr.testUtils.{SimpleSourcePipelineObject, SimpleTransformPipelineObject, StringType}
 import org.scalatest.FunSuite
 
 class PipelineObjectTest extends FunSuite {
@@ -58,5 +58,11 @@ class PipelineObjectTest extends FunSuite {
     assertThrows[NoSinkException] {
       pipeline.startMock()
     }
+  }
+
+  test("Setting id attributed propagates") {
+    val a = new SimpleSourcePipelineObject(StageAttributes(id = Some("testId")))
+
+    assert(a.id == "testId")
   }
 }

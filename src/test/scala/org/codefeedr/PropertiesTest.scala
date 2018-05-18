@@ -83,4 +83,18 @@ class PropertiesTest extends FunSuite {
     assert(props.get("bool").get == "true")
     assert(props.get[Boolean]("bool").get)
   }
+
+  test("Getting with defaults") {
+    val props = new Properties()
+      .set[String]("foo", "hello")
+
+    assert(props.getOrElse[String]("foo", "bye") == "hello")
+    assert(props.getOrElse[String]("bar", "bye") == "bye")
+  }
+
+  test("Outputs readable string") {
+    val props = new Properties()
+
+    assert(props.toString == "Map()")
+  }
 }

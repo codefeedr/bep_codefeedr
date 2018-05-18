@@ -50,23 +50,28 @@ class PipelineBuilderTest extends FunSuite with BeforeAndAfter with Matchers {
     pipeline.graph.nodes.last shouldBe an[SimpleTransformPipelineObject]
   }
 
-  test("Set properties should be available in pipeline properties") {
+  test("Set properties should be available in stage properties") {
+    val stage = new SimpleSourcePipelineObject()
+    val stage2 = new SimpleTransformPipelineObject()
+
     val pipeline = builder
-      .append(new SimpleSourcePipelineObject())
-      .setProperty("key", "value")
+      .append(stage)
+      .setStageProperty(stage.id, "key", "value")
+      .setStageProperty(stage.id, "anotherKey", "true")
       .build()
 
-    assert(pipeline.properties.get("key").get == "value")
+    assert(pipeline.propertiesOf(stage).get("key").get == "value")
+    assert(pipeline.propertiesOf(stage2).get("key").isEmpty)
   }
 
   test("Set buffer properties should be available in pipeline buffer properties") {
+    val stage = new SimpleSourcePipelineObject()
     val pipeline = builder
-      .append(new SimpleSourcePipelineObject())
+      .append(stage)
       .setBufferProperty("key", "value")
       .build()
 
     assert(pipeline.bufferProperties.get("key").get == "value")
-    assert(pipeline.properties.get("key").isEmpty)
   }
 
   test("A set keymanager should be forwarded to the pipeline") {
@@ -78,10 +83,6 @@ class PipelineBuilderTest extends FunSuite with BeforeAndAfter with Matchers {
       .build()
 
     assert(pipeline.keyManager == km)
-  }
-
-  test("Building with edges creates a DAG") {
-
   }
 
   test("A DAG pipeline can't be appeneded to") {
@@ -129,7 +130,7 @@ class PipelineBuilderTest extends FunSuite with BeforeAndAfter with Matchers {
     builder.edge(a, b)
 
     assertThrows[IllegalArgumentException] {
-      builder.extraEdge(a, b)
+      builder.edge(a, b)
     }
   }
 
@@ -152,28 +153,6 @@ class PipelineBuilderTest extends FunSuite with BeforeAndAfter with Matchers {
 
     assertThrows[IllegalArgumentException] {
       builder.append(a)
-    }
-  }
-
-  test("Should disallow extra edge when no main edge is in the graph") {
-    val a = new SimpleSourcePipelineObject()
-    val b = new SimpleTransformPipelineObject()
-    val c = new SimpleTransformPipelineObject()
-
-    assertThrows[IllegalArgumentException] {
-      builder.extraEdge(a, b)
-    }
-  }
-
-  test("Should disallow a second main edge") {
-    val a = new SimpleSourcePipelineObject()
-    val b = new SimpleTransformPipelineObject()
-    val c = new SimpleTransformPipelineObject()
-
-    builder.edge(a, b)
-
-    assertThrows[IllegalArgumentException] {
-      builder.edge(c, b)
     }
   }
 
@@ -227,5 +206,21 @@ class PipelineBuilderTest extends FunSuite with BeforeAndAfter with Matchers {
     pipeline.graph.getParents(c)(0) shouldBe an[SimpleSourcePipelineObject]
     pipeline.graph.getParents(c)(1) shouldBe an[SimpleTransformPipelineObject]
     assert(pipeline.graph.getParents(c).size == 2)
+  }
+
+  test("Next level") {
+    val a = new SimpleSourcePipelineObject(StageAttributes(id = Some("testId")))
+    val b = new SimpleTransformPipelineObject()
+
+    val pipeline = builder
+        .append(a)
+//      .addStage(a)
+//      .usingId("AnId")
+//      .setProperty("foo", "bar")
+//      .setProperty("hello", "world")
+
+      .build()
+
+    assert(a.id == "testId")
   }
 }

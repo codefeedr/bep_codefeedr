@@ -49,6 +49,24 @@ class Properties(private val contents: Map[String,String] = Map()) {
   }
 
   /**
+    * Get a value converted to an implicity cobverted type with a default value.
+    *
+    * @param key Key
+    * @param default Default value
+    * @param convert Conversion implicit
+    * @tparam T Type of the value
+    * @return Value
+    */
+  def getOrElse[T](key: String, default: T)(implicit convert: String => T): T = {
+    val option = contents.get(key)
+    if (option.isEmpty) {
+      return default
+    }
+
+    option.get
+  }
+
+  /**
     * Set a value of an implicitly converted type
     *
     * @param key Key
@@ -89,4 +107,6 @@ class Properties(private val contents: Map[String,String] = Map()) {
 
     props
   }
+
+  override def toString: String = contents.toString()
 }

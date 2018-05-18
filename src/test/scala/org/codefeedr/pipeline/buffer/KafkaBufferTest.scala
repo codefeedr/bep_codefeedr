@@ -21,7 +21,7 @@ package org.codefeedr.pipeline.buffer
 import java.util.{Properties, UUID}
 
 import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig}
-import org.codefeedr.pipeline.PipelineBuilder
+import org.codefeedr.pipeline.{PipelineBuilder, StageAttributes}
 import org.codefeedr.testUtils.{SimpleSourcePipelineObject, StringType}
 import org.scalatest.{BeforeAndAfter, FunSuite}
 
@@ -39,7 +39,8 @@ class KafkaBufferTest extends FunSuite with BeforeAndAfter {
     client = AdminClient.create(props)
 
     //setup simple kafkabuffer
-    kafkaBuffer = new KafkaBuffer[StringType](new PipelineBuilder().append(new SimpleSourcePipelineObject()).build(), "test-subject")
+    val pipeline = new PipelineBuilder().append(new SimpleSourcePipelineObject()).build()
+    kafkaBuffer = new KafkaBuffer[StringType](pipeline, pipeline.bufferProperties, StageAttributes(),"test-subject")
   }
 
 
