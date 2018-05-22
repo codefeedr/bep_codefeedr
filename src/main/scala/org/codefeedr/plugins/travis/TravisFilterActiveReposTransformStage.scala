@@ -5,7 +5,7 @@ import org.codefeedr.pipeline.PipelineObject
 
 class TravisFilterActiveReposTransformStage extends PipelineObject[GithubPushEventItem, GithubPushEventItem] {
 
-  val travis: TravisService = new TravisService("su_9TrVO1Tbbti1UoG0Z_w")
+  val travis: TravisService = new TravisService()
 
   /**
     * Transforms the pipeline object from its input type to its output type.

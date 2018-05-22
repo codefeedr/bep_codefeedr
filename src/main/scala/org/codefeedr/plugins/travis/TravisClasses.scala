@@ -1,5 +1,9 @@
 package org.codefeedr.plugins.travis
 
+import java.time.LocalDateTime
+
+import org.codefeedr.pipeline.PipelineItem
+
 case class TravisBuilds(`@type`: String,
                         `@href`: String,
                         `@representation`: String,
@@ -18,13 +22,13 @@ case class TravisBuild(`@type`: String,
                        previous_state: String,
                        pull_request_title: Option[String],
                        pull_request_number: Option[Int],
-                       started_at: String,
-                       finished_at: String,
+                       started_at: LocalDateTime,
+                       finished_at: LocalDateTime,
                        `private`: Boolean,
                        repository: TravisRepository,
                        branch: TravisBranch,
                        tag: String,
-                       commit: TravisCommit)
+                       commit: TravisCommit) extends PipelineItem
 
 case class TravisPermissions(read: Boolean,
                              cancel: Boolean,
