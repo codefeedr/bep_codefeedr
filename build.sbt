@@ -21,13 +21,15 @@ val flinkDependencies = Seq(
   "org.apache.flink" %% "flink-streaming-scala" % flinkVersion % "compile",
   "org.apache.flink" %% "flink-connector-kafka-0.11" % flinkVersion % "compile",
   // https://mvnrepository.com/artifact/org.apache.flink/flink-avro
-  "org.apache.flink" % "flink-avro" % "1.4.0"
+  "org.apache.flink" % "flink-avro" % flinkVersion,
+  "org.apache.flink" % "flink-runtime-web_2.11" % flinkVersion,
+
+  "org.apache.flink" % "flink-connector-elasticsearch5_2.11" % flinkVersion
 
   //  "org.apache.flink" %% "flink-table" % flinkVersion % "provided"
 )
 
 val coreDependencies = Seq(
-  // "codes.reactive" %% "scala-time" % "0.4.1",
   "org.apache.zookeeper" % "zookeeper" % "3.4.9",
   // "org.mockito" % "mockito-core" % "2.13.0" % "test",
   "org.json4s" % "json4s-scalap_2.11" % "3.6.0-M2",
@@ -37,33 +39,32 @@ val coreDependencies = Seq(
 
    "org.scalactic" %% "scalactic" % "3.0.1",
    "org.scalatest" %% "scalatest" % "3.0.1" % "test",
-  // "ch.qos.logback" % "logback-classic" % "1.1.7",
-  // "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0",
 
-  // "org.eclipse.mylyn.github" % "org.eclipse.egit.github.core" % "2.1.5" % "provided",
-  // "com.typesafe" % "config" % "1.3.1",
   // "org.mongodb.scala" %% "mongo-scala-driver" % "2.1.0"
+  "org.apache.logging.log4j" % "log4j-api" % "2.11.0",
+  "org.apache.logging.log4j" % "log4j-core" % "2.11.0",
+
   "org.apache.kafka" % "kafka-clients" % "1.0.0",
   "io.confluent" % "kafka-avro-serializer" % "4.0.0",
   "me.lyh" %% "shapeless-datatype-avro" % "0.1.9",
   "org.json4s" % "json4s-scalap_2.11" % "3.6.0-M2",
   "org.json4s" % "json4s-jackson_2.11" % "3.6.0-M2",
 
-
   // "com.jsuereth" %% "scala-arm" % "2.0",
   // "org.scala-lang.modules" % "scala-java8-compat_2.11" % "0.8.0",
   // "org.scala-lang.modules" %% "scala-async" % "0.9.7",
   // "io.reactivex" %% "rxscala" % "0.26.5"
+  "org.json4s" %% "json4s-ext" % "3.6.0-M3",
 
   // https://mvnrepository.com/artifact/org.scalaj/scalaj-http
   "org.scalaj" %% "scalaj-http" % "2.4.0",
   "org.json4s" %% "json4s-ext" % "3.6.0-M3",
 
-  "org.scalamock" % "scalamock_2.11" % "4.1.0"
+  "com.chuusai" %% "shapeless" % "2.3.3",
 
-
+  "org.scalamock" % "scalamock_2.11" % "4.1.0" % "test",
+  "org.mockito" % "mockito-all" % "1.10.19" % "test"
 )
-
 
 
 lazy val root = (project in file("."))
