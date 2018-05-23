@@ -16,29 +16,37 @@
  * limitations under the License.
  *
  */
-package org.codefeedr.keymanager
+package org.codefeedr.plugins.github.util
 
-/**
-  * Key manager implementation with a static set of keys. Does not allow for more than one key
-  * per target, nor does it keep track of the number of uses.
-  *
-  * @param map Map of target -> key.
-  */
-class StaticKeyManager(map: Map[String, String] = Map()) extends KeyManager with Serializable {
+import org.scalatest.{BeforeAndAfter, FunSuite}
 
-  override def request(target: String, numberOfCalls: Int): Option[ManagedKey]= {
-    if (target == null)
-      throw new IllegalArgumentException()
+import scala.collection.mutable.Queue
 
-    if (numberOfCalls == 0) {
-      return Option.empty
-    }
+class FiniteQueueTest extends FunSuite with BeforeAndAfter {
 
-    val key = map.get(target)
-    if (key.isEmpty)
-      None
-    else
-      Some(ManagedKey(key.get, Int.MaxValue))
+  var queue : FiniteQueue[String] = new FiniteQueue[String]()
+
+  before {
+    queue = new FiniteQueue[String]()
   }
+
+  test ("Should properly enqueue") {
+    queue.enqueueFinite("test", 2)
+    queue.enqueueFinite("test2", 2)
+
+    assert(queue.contains("test"))
+    assert(queue.contains("test2"))
+  }
+
+  test ("Should properly remove on enqueue") {
+    queue.enqueueFinite("test", 2)
+    queue.enqueueFinite("test2", 2)
+    queue.enqueueFinite("test3", 2)
+
+    assert(queue.contains("test2"))
+    assert(queue.contains("test3"))
+    assert(!queue.contains("test"))
+  }
+
 
 }

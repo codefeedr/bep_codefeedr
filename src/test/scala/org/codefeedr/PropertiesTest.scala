@@ -97,4 +97,14 @@ class PropertiesTest extends FunSuite {
 
     assert(props.toString == "Map()")
   }
+
+  test("Should give correct value when checking content") {
+    var props = new Properties()
+
+    assert(!props.has("a"))
+
+    props = props.set("foo", "bar")
+    assert(props.has("foo"))
+    assert(!props.has("bar"))
+  }
 }

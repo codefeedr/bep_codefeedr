@@ -19,6 +19,9 @@
 package org.codefeedr.pipeline
 
 import org.apache.flink.api.java.utils.ParameterTool
+import org.apache.flink.configuration.{ConfigConstants, Configuration}
+import org.apache.flink.streaming.api.environment.LocalStreamEnvironment
+//import org.apache.flink.streaming.api.environment.{LocalStreamEnvironment, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.codefeedr.Properties
 import org.codefeedr.keymanager.KeyManager
@@ -30,7 +33,22 @@ case class Pipeline(bufferType: BufferType,
                     graph: DirectedAcyclicGraph,
                     keyManager: KeyManager,
                     objectProperties: Map[String, Properties]) {
-  val environment: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+  var _environment: StreamExecutionEnvironment = _
+  //StreamExecutionEnvironment.getExecutionEnvironment
+
+//  val environment: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+
+  val environment: StreamExecutionEnvironment = {
+    if (_environment == null) {
+      val conf = new Configuration()
+
+      conf.setBoolean(ConfigConstants.LOCAL_START_WEBSERVER, true)
+
+      _environment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf)
+    }
+
+    _environment
+  }
 
   /**
     * Get the properties of a stage

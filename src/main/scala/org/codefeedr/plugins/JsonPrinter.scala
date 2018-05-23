@@ -16,29 +16,24 @@
  * limitations under the License.
  *
  */
-package org.codefeedr.keymanager
+package org.codefeedr.plugins
 
-/**
-  * Key manager implementation with a static set of keys. Does not allow for more than one key
-  * per target, nor does it keep track of the number of uses.
-  *
-  * @param map Map of target -> key.
-  */
-class StaticKeyManager(map: Map[String, String] = Map()) extends KeyManager with Serializable {
+import com.sksamuel.avro4s.FromRecord
+import org.apache.flink.api.scala._
+import org.apache.flink.streaming.api.scala.DataStream
+import org.codefeedr.pipeline.{OutputStage, PipelineItem}
+import org.json4s._
+import org.json4s.jackson.Serialization
 
-  override def request(target: String, numberOfCalls: Int): Option[ManagedKey]= {
-    if (target == null)
-      throw new IllegalArgumentException()
+import scala.reflect.{ClassTag, Manifest}
 
-    if (numberOfCalls == 0) {
-      return Option.empty
-    }
+class JsonPrinter[T <: PipelineItem : ClassTag : Manifest : FromRecord] extends OutputStage[T] {
 
-    val key = map.get(target)
-    if (key.isEmpty)
-      None
-    else
-      Some(ManagedKey(key.get, Int.MaxValue))
+  override def main(source: DataStream[T]): Unit = {
+    source
+      .map { x =>
+        implicit lazy val formats = Serialization.formats(NoTypeHints)
+        new String(Serialization.write[T](x)(formats))
+      }.print()
   }
-
 }

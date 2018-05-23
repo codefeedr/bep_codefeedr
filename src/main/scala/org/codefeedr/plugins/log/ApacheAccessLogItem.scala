@@ -24,17 +24,21 @@ import org.codefeedr.pipeline.PipelineItem
 
 /**
   * Pipeline item that contains an entrie from an Apache Request log.
-  * @param ipAdress IP Address of the requester
+  * @param ip IP Address of the requester
   * @param date Date that the request is made
-  * @param request HTTP request
+  * @param method HTTP method
+  * @param path Path of request
+  * @param version Http version
   * @param status HTTP Response status
   * @param amountOfBytes Size of the request in bytes
   * @param referer Referer
   * @param userAgent Information about the user agent that made the request
   */
-case class ApacheAccessLogItem(ipAdress: String,
+case class ApacheAccessLogItem(ip: String,
                                date: LocalDateTime,
-                               request: String,
+                               method: String,
+                               path: String,
+                               version: String,
                                status: Int,
                                amountOfBytes: Int,
                                referer: String,

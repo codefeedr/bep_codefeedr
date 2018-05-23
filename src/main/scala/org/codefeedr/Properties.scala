@@ -67,6 +67,14 @@ class Properties(private val contents: Map[String,String] = Map()) {
   }
 
   /**
+    * Get whether a key has any value
+    *
+    * @param key Key
+    * @return True when it exists
+    */
+  def has(key: String): Boolean = contents.isDefinedAt(key)
+
+  /**
     * Set a value of an implicitly converted type
     *
     * @param key Key

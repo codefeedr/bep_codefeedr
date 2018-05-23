@@ -36,9 +36,10 @@ class ApacheLogFileInputStage(absolutePath: String, stageAttributes: StageAttrib
   override def main(): DataStream[ApacheAccessLogItem] = {
     pipeline.environment
       .readTextFile(absolutePath)
+      .setParallelism(1)
       .flatMap(_.split('\n'))
       .flatMap(new LogMapper())
-      .assignAscendingTimestamps(line => line.date.atZone(ZoneId.systemDefault()).toEpochSecond)
+      .assignAscendingTimestamps(_.date.atZone(ZoneId.systemDefault()).toEpochSecond)
   }
 
 }
@@ -46,14 +47,14 @@ class ApacheLogFileInputStage(absolutePath: String, stageAttributes: StageAttrib
 private class LogMapper extends FlatMapFunction[String, ApacheAccessLogItem] {
 
   lazy val dateFormatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z")
-  lazy val pattern = """^(\S+) \S+ \S+ \[([\w:\/]+\s[+\-]\d{4})\] "(\S+\s*\S+\s*\S+)?\s*" (\d{3}) (\S+) ("[^"]*") ("[^"]*") ("[^"]*")""".r
+  lazy val pattern = """^(\S+) \S+ \S+ \[([\w:\/]+\s[+\-]\d{4})\] "(\S+)\s+(\S+)\s+(\S+)?\s*" (\d{3}) (\S+) ("[^"]*") ("[^"]*") ("[^"]*")""".r
 
   def flatMap(line: String, out: Collector[ApacheAccessLogItem]): Unit = line match {
-    case pattern(ipAddress, dateString, request, status, amountOfBytes, referer, userAgent, _*) => {
+    case pattern(ipAddress, dateString, method, path, version, status, amountOfBytes, referer, userAgent, _*) => {
       val date = LocalDateTime.parse(dateString, dateFormatter)
       val amountOfBytesInt = if (amountOfBytes != "-") amountOfBytes.toInt else -1
 
-      out.collect(ApacheAccessLogItem(ipAddress, date, request, status.toInt, amountOfBytesInt, referer, userAgent))
+      out.collect(ApacheAccessLogItem(ipAddress, date, method, path, version, status.toInt, amountOfBytesInt, referer, userAgent))
     }
     case _ =>
   }

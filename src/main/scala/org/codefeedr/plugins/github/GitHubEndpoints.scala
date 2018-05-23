@@ -16,29 +16,17 @@
  * limitations under the License.
  *
  */
-package org.codefeedr.keymanager
+package org.codefeedr.plugins.github
 
-/**
-  * Key manager implementation with a static set of keys. Does not allow for more than one key
-  * per target, nor does it keep track of the number of uses.
-  *
-  * @param map Map of target -> key.
-  */
-class StaticKeyManager(map: Map[String, String] = Map()) extends KeyManager with Serializable {
+object GitHubEndpoints {
 
-  override def request(target: String, numberOfCalls: Int): Option[ManagedKey]= {
-    if (target == null)
-      throw new IllegalArgumentException()
+  val DEFAULT_URL = "https://api.github.com"
 
-    if (numberOfCalls == 0) {
-      return Option.empty
-    }
-
-    val key = map.get(target)
-    if (key.isEmpty)
-      None
-    else
-      Some(ManagedKey(key.get, Int.MaxValue))
-  }
+  /**
+    * EVENTS
+    */
+  val EVENTS = "/events"
+  val EVENTS_PAGE_SEGMENT = "page="
+  val EVENTS_SIZE_SEGMENT = "per_page="
 
 }

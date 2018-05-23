@@ -23,7 +23,7 @@ class LogInputStageTest extends FunSuite with MockFactory with BeforeAndAfter {
 
     val res = StringCollectSink.result
 
-    assert(res.contains("ApacheAccessLogItem(46.72.177.4,2015-12-12T18:31:08,POST /administrator/index.php HTTP/1.1,200,4494,\"http://almhuette-raith.at/administrator/\",\"Mozilla/5.0 (Windows NT 6.0; rv:34.0) Gecko/20100101 Firefox/34.0\")"))
+    assert(res.contains("ApacheAccessLogItem(46.72.177.4,2015-12-12T18:31:08,POST,/administrator/index.php,HTTP/1.1,200,4494,\"http://almhuette-raith.at/administrator/\",\"Mozilla/5.0 (Windows NT 6.0; rv:34.0) Gecko/20100101 Firefox/34.0\")"))
 
   }
 }

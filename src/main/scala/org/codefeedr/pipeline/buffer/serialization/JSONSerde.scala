@@ -19,23 +19,18 @@
 package org.codefeedr.pipeline.buffer.serialization
 
 import java.nio.charset.StandardCharsets
-import java.util.Properties
 
-import org.apache.flink.api.common.serialization.{AbstractDeserializationSchema, SerializationSchema}
-import org.apache.flink.api.common.typeinfo.TypeInformation
-import org.apache.flink.api.java.typeutils.TypeExtractor
-import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, NewTopic}
 import org.json4s.NoTypeHints
+import org.json4s.ext.JavaTimeSerializers
 import org.json4s.jackson.Serialization
 
-import scala.collection.JavaConverters._
-import scala.reflect.{ClassTag, classTag}
+import scala.reflect.ClassTag
 
 class JSONSerde[T <: AnyRef : Manifest : ClassTag](limit : Int = -1) extends AbstractSerde[T] {
 
 
   //implicit serialization format
-  implicit lazy val formats = Serialization.formats(NoTypeHints)
+  implicit lazy val formats = Serialization.formats(NoTypeHints) ++ JavaTimeSerializers.all
 
   /**
     * Serializes a (generic) element into a json format.
