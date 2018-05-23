@@ -24,7 +24,7 @@ package org.codefeedr.keymanager
   *
   * @param map Map of target -> key.
   */
-class StaticKeyManager(map: Map[String, String] = Map()) extends KeyManager {
+class StaticKeyManager(map: Map[String, String] = Map()) extends KeyManager with Serializable {
 
   override def request(target: String, numberOfCalls: Int): Option[ManagedKey]= {
     if (target == null)
