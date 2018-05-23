@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 import org.codefeedr.keymanager.{KeyManager, StaticKeyManager}
 import org.codefeedr.utilities.Http
-import org.json4s.DefaultFormats
+import org.json4s.{DefaultFormats, JValue}
 import org.json4s.ext.JavaTimeSerializers
 import org.json4s.jackson.JsonMethods.parse
 
@@ -20,13 +20,11 @@ import org.json4s.jackson.JsonMethods.parse
 //  }
 //}
 
-class TravisService() {
+class TravisService(keyManager: KeyManager) extends Serializable {
 
-  implicit val formats = DefaultFormats ++ JavaTimeSerializers.all
+  lazy implicit val formats = DefaultFormats ++ JavaTimeSerializers.all
 
   private val url = "https://api.travis-ci.org"
-
-  val keyManager: KeyManager = new StaticKeyManager(Map("travis" -> "su_9TrVO1Tbbti1UoG0Z_w"))
 
   def repoIsActive(slug: String): Boolean = {
     val responseBody = getTravisResource("/repo/" + slug)
@@ -34,74 +32,72 @@ class TravisService() {
     isActive
   }
 
-  def getTravisBuilds(owner: String, repoName: String, branch: String = "", offset: Int = 0, limit: Int = 25): TravisBuilds = {
+  def getTravisBuilds(owner: String, repoName: String, branch: String = "", offset: Int = 0, limit: Int = 25): Option[TravisBuilds] = {
     getTravisBuildsWithSlug(owner + "%2F" + repoName, branch, offset, limit)
   }
 
-  def getTravisBuildsWithSlug(slug: String, branch: String = "", offset: Int = 0, limit: Int = 25): TravisBuilds = {
+  def getTravisBuildsWithSlug(slug: String, branch: String = "", offset: Int = 0, limit: Int = 25): Option[TravisBuilds] = {
 
-    println("\tGetting travis builds " + offset + " until " + (offset + limit))
+//    println("\tGetting travis builds " + offset + " until " + (offset + limit))
 
     val url = "/repo/" + slug + "/builds" +
       (if (branch.nonEmpty) "?branch.name=" + branch else "?") +
-      "&sort_by=started_at" +
+      "&sort_by=started_at:desc" +
 //      "&state=created,started,failed,passed" +
       "&include=build.repository" +
       "&offset=" + offset +
       "&limit=" + limit
 
     val responseBody = getTravisResource(url)
-    val json =  parse(responseBody)
-    val builds = json.extract[TravisBuilds]
-    builds
-  }
 
-//  def getBuild(owner: String, repoName: String, branch: String, pushCommitSha: String, afterDate: LocalDateTime, cachedBuilds: Option[TravisBuilds] = None): Option[TravisBuild] = {
-//
-//    var builds: TravisBuilds = cachedBuilds.orNull
-//
-//    do {
-//      val offset = if (builds == null ) 0 else builds.`@pagination`.next.offset
-//      println("offset", offset)
-//      builds = getTravisBuilds(owner, repoName, branch, offset, limit = 5)
-//      val buildIterator = builds.builds.iterator
-//
-//      while (buildIterator.hasNext) {
-//        val x = buildIterator.next()
-//        println(x.number)
-//        if (x.commit.sha == pushCommitSha) {
-//          return Some(x)
-//        }
-//        else if (x.started_at.isBefore(afterDate)) {
-//          return None
-//        }
-//      }
-//
-//    } while (!builds.`@pagination`.is_last)
-//
-//    None
-//  }
+    val json = parse(responseBody)
+
+    val builds = extract[TravisBuilds](json)
+    Some(builds)
+  }
 
   def getBuild(buildID: Int): TravisBuild = {
     val url = "/build/" + buildID
 
     val responseBody = getTravisResource(url)
     val json =  parse(responseBody)
-    val build = json.extract[TravisBuild]
+    val build = extract[TravisBuild](json)
     build
   }
 
-  private def getTravisResource(endpoint: String): String = {
-    new Http()
-      .getRequest(url + endpoint)
-      .headers(getHeaders())
-      .asString.body
+  private def extract[A : Manifest](json: JValue): A = {
+    try {
+      json.extract[A]
+    } catch {
+      case _: Throwable =>
+        throw CouldNotExctractException("Could not extract case class from JValue: " + json)
+    }
   }
 
-  private def getHeaders() = {
+  private def getTravisResource(endpoint: String): String = {
+    try {
+      new Http()
+        .getRequest(url + endpoint)
+        .headers(getHeaders)
+        .asString.body
+    } catch {
+      case _: Throwable =>
+        throw CouldNotGetResourceException("Could not get the requested resource from: " + url + endpoint)
+    }
+  }
+
+  private def getHeaders = {
     ("Travis-API-Version", "3") ::
       ("Authorization", "token " + keyManager.request("travis").get.value) ::
       Nil
 
   }
 }
+
+final case class CouldNotGetResourceException(private val message: String = "",
+                                        private val cause: Throwable = None.orNull)
+  extends Exception(message, cause)
+
+final case class CouldNotExctractException(private val message: String = "",
+                                        private val cause: Throwable = None.orNull)
+  extends Exception(message, cause)

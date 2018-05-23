@@ -38,3 +38,4 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+src/main/resources/github_api_key
