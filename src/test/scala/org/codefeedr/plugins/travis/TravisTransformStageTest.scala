@@ -5,6 +5,8 @@ import org.codefeedr.keymanager.StaticKeyManager
 import org.codefeedr.pipeline.{PipelineBuilder, PipelineItem}
 import org.codefeedr.plugins.github.GitHubProtocol.PushEvent
 import org.codefeedr.plugins.github.stages.{GitHubEventToPushEvent, GitHubEventsInput}
+import org.codefeedr.plugins.travis.TravisProtocol.{PushEventFromActiveTravisRepo, TravisBuild}
+import org.codefeedr.plugins.travis.stages.{TravisFilterActiveReposTransformStage, TravisPushEventBuildInfoTransformStage}
 
 import scala.io.Source
 
@@ -16,13 +18,20 @@ object TravisTransformStageTest {
       .setKeyManager(new StaticKeyManager(Map("travis" -> "su_9TrVO1Tbbti1UoG0Z_w",
         "events_source" -> Source.fromInputStream(getClass.getResourceAsStream("/github_api_key")).getLines().next())))
 
-      .append(new GitHubEventsInput(1))
+      .append(new GitHubEventsInput())
       .append(new GitHubEventToPushEvent())
-      .append{x: DataStream[PushEvent] => x.map{event => println(event.repo); event}}
-//      .append(new TravisFilterActiveReposTransformStage)
-      .append(new TravisPushEventBuildInfoTransformStage())
+      .append(new TravisFilterActiveReposTransformStage)
+      .append{x: DataStream[PushEventFromActiveTravisRepo] =>
+        x.map{event =>
+          println(event.pushEventItem.repo.name,
+            event.pushEventItem.payload.ref.replace("refs/heads/", ""),
+            event.pushEventItem.payload.head)
+          event
+        }
+      }
+      .append(new TravisPushEventBuildInfoTransformStage(10))
       .append{x: DataStream[TravisBuild] =>
-        x.map(x => (x.id, x.state, x.repository.name, x.duration)).print()
+        x.map(x => (x.repository.slug, x.state, x.duration.getOrElse(0), x.branch.name, x.commit.sha)).print()
       }
 
       .build()

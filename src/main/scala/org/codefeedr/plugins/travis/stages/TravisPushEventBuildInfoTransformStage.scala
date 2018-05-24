@@ -1,16 +1,18 @@
-package org.codefeedr.plugins.travis
+package org.codefeedr.plugins.travis.stages
 
 import java.util.concurrent.TimeUnit
 
-import org.apache.flink.streaming.api.scala.{AsyncDataStream, DataStream, _}
 import org.apache.flink.streaming.api.scala.async.{AsyncFunction, ResultFuture}
-
-import scala.concurrent.{ExecutionContext, Future}
-import ExecutionContext.Implicits.global
+import org.apache.flink.streaming.api.scala.{AsyncDataStream, DataStream, _}
 import org.codefeedr.pipeline.{Pipeline, TransformStage}
 import org.codefeedr.plugins.github.GitHubProtocol.PushEvent
+import org.codefeedr.plugins.travis.TravisProtocol.{PushEventFromActiveTravisRepo, TravisBuild}
+import org.codefeedr.plugins.travis.util.{TravisBuildCollector, TravisService}
 
-class TravisPushEventBuildInfoTransformStage(capacity: Int = 100) extends TransformStage[PushEvent, TravisBuild]{
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+
+class TravisPushEventBuildInfoTransformStage(capacity: Int = 100) extends TransformStage[PushEventFromActiveTravisRepo, TravisBuild]{
 
   var travis: TravisService = _
 
@@ -19,15 +21,14 @@ class TravisPushEventBuildInfoTransformStage(capacity: Int = 100) extends Transf
     travis = new TravisService(pipeline.keyManager)
   }
 
-  override def transform(source: DataStream[PushEvent]): DataStream[TravisBuild] = {
+  override def transform(source: DataStream[PushEventFromActiveTravisRepo]): DataStream[TravisBuild] = {
     AsyncDataStream.unorderedWait(
-      source,
+      source.map(x => x.pushEventItem),
       new TravisBuildStatusRequest(travis),
       20,
       TimeUnit.MINUTES,
       capacity)
   }
-
 }
 
 private class TravisBuildStatusRequest(travis: TravisService) extends AsyncFunction[PushEvent, TravisBuild] {
@@ -39,7 +40,7 @@ private class TravisBuildStatusRequest(travis: TravisService) extends AsyncFunct
     val repoOwner = input.repo.name.split('/')(0)
     val repoName = input.repo.name.split('/')(1)
     val branchName = input.payload.ref.replace("refs/heads/", "")
-    val commitSHA = input.payload.commits.last.sha
+    val commitSHA = input.payload.head
     val pushDate = input.created_at
 
     val futureResultBuild: Future[TravisBuild] =
