@@ -43,3 +43,4 @@ fabric.properties
 .idea/httpRequests
 codefeedr-plugins/codefeedr-travis/src/main/resources/github_api_key
 codefeedr-plugins/codefeedr-travis/src/main/resources/travis_api_key
+*.jar

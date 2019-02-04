@@ -52,3 +52,27 @@ IntelliJ splash screen
 In order to run your application from within IntelliJ, you have to select the classpath of the
 'mainRunner' module in  the run/debug configurations. Simply open 'Run -> Edit configurations...'
 and then select 'mainRunner' from the "Use  classpath of module" dropbox.
+
+## Installing dependencies
+
+CodeFeedr depends on the following external programs:
+
+* [Kafka](https://kafka.apache.org) is used as intermediate storage between
+nodes in the CodeFeedr processing graph.
+* [Zookeeper](https://zookeeper.apache.org) is used to share
+information between CodeFeedr jobs (e.g. output schemata).
+It is also a dependency to Kafka.
+
+The following components are optional and their use depends on which / how
+plug-ins have been configured:
+
+* [MongoDB](https://www.mongodb.com) is used to cache things that may be
+useful for future use, e.g. API responses that will never change
+* [Redis](https://redis.io/) For high performance key management
+
+At the moment, CodeFeedr uses default configurations for connecting to
+all external services.
+
+The dependencies can be simply installed by using `docker-compose up` with the
+provided `docker/docker-compose.yml` file as input. If you are working on a Mac,
+use the `docker/docker-compose-mac.yml` file.

@@ -21,3 +21,8 @@ The CodeFeedr framework can be split into 3 parts, each having a different secti
 - Core: All the implementations for stages, pipelines and utilities.
 - Plugins: Set of plugins, which contain context related stages.
 - Orchestration: Tools for running your pipeline on a cluster.
+
+## FAQ
+**Q:** I get the following error: `could not find implicit value for evidence of parameter of type org.apache.flink.api.common.typeinfo.TypeInformation`
+
+**A:** Make sure to import the following: `import org.apache.flink.api.scala._` to get the TypeInformation implicits.
