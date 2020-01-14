@@ -82,7 +82,7 @@ protected class GHTAbstractEventStage[
         .addSink(
           new FlinkKafkaProducer[Record](
             sideOutput.sideOutputTopic,
-            Serializer.getSerde[Record](Serializer.JSON),
+            Serializer.getSerde[Record](Serializer.JSON4s),
             props))
     }
 

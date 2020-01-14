@@ -31,7 +31,7 @@ import scala.reflect.runtime.universe._
   *
   * @tparam T Type of the SerDe.
   */
-class JSONSerde[T <: Serializable with AnyRef: TypeTag: ClassTag]
+class JSON4sSerde[T <: Serializable with AnyRef: TypeTag: ClassTag]
     extends AbstractSerde[T] {
 
   // Implicitly and lazily define the serialization to JSON.
@@ -58,9 +58,9 @@ class JSONSerde[T <: Serializable with AnyRef: TypeTag: ClassTag]
 }
 
 /** Companion object to simply instantiation of a JSONSerde. */
-object JSONSerde {
+object JSON4sSerde {
 
   /** Creates new JSON Serde. */
-  def apply[T <: Serializable with AnyRef: ClassTag: TypeTag]: JSONSerde[T] =
-    new JSONSerde[T]()
+  def apply[T <: Serializable with AnyRef: ClassTag: TypeTag]: JSON4sSerde[T] =
+    new JSON4sSerde[T]()
 }

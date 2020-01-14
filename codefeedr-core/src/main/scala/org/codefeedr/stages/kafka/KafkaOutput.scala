@@ -38,7 +38,7 @@ import scala.reflect.runtime.universe._
 class KafkaOutput[T <: Serializable with AnyRef: ClassTag: TypeTag](
     topic: String,
     properties: Properties,
-    serializer: String = Serializer.JSON,
+    serializer: String = Serializer.JSON4s,
     stageId: Option[String] = None)
     extends OutputStage[T](stageId) {
 

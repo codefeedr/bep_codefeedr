@@ -28,7 +28,7 @@ import scala.reflect.{ClassTag, classTag}
 import scala.reflect.runtime.universe._
 
 /** BSON (de-)serializer.
-  * Uses also a JSON serializer in between to go to BSON. This makes it slower then for instance the [[JSONSerde]].
+  * Uses also a JSON serializer in between to go to BSON. This makes it slower then for instance the [[JSON4sSerde]].
   *
   * @tparam T Type of the SerDe.
   */

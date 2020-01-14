@@ -40,7 +40,7 @@ import scala.reflect.{ClassTag, classTag}
 class KafkaInput[T <: Serializable with AnyRef: ClassTag: TypeTag](
     topic: String,
     properties: Properties,
-    serializer: String = Serializer.JSON,
+    serializer: String = Serializer.JSON4s,
     stageId: Option[String] = None)
     extends InputStage[T](stageId) {
   //Get type of the class at run time

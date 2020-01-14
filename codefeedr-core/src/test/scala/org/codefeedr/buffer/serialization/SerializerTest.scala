@@ -25,9 +25,9 @@ class SerializerTest extends FunSuite {
   case class Item()
 
   test("Should recognise JSON") {
-    val serde = Serializer.getSerde[Item](Serializer.JSON)
+    val serde = Serializer.getSerde[Item](Serializer.JSON4s)
 
-    assert(serde.isInstanceOf[JSONSerde[Item]])
+    assert(serde.isInstanceOf[JSON4sSerde[Item]])
   }
 
   test("Should recognise Bson") {
@@ -45,32 +45,32 @@ class SerializerTest extends FunSuite {
   test("Should default to JSON") {
     val serde = Serializer.getSerde[Item]("YAML")
 
-    assert(serde.isInstanceOf[JSONSerde[Item]])
+    assert(serde.isInstanceOf[JSON4sSerde[Item]])
   }
 
   test("I should be able to add my own serializer") {
-    Serializer.register[JSONSerde[_]]("my_very_own_serializer")
+    Serializer.register[JSON4sSerde[_]]("my_very_own_serializer")
 
     val serde = Serializer.getSerde[Item]("my_very_own_serializer")
-    assert(serde.isInstanceOf[JSONSerde[Item]])
+    assert(serde.isInstanceOf[JSON4sSerde[Item]])
   }
 
   test("I should be able to add my own serializer through codefeedr entrypoint") {
-    registerSerializer[JSONSerde[_]]("wow")
+    registerSerializer[JSON4sSerde[_]]("wow")
 
     val serde = Serializer.getSerde[Item]("wow")
-    assert(serde.isInstanceOf[JSONSerde[Item]])
+    assert(serde.isInstanceOf[JSON4sSerde[Item]])
   }
 
   test("Cannot register duplicate names.") {
     assertThrows[IllegalArgumentException] {
-      Serializer.register[JSONSerde[_]]("BSON")
+      Serializer.register[JSON4sSerde[_]]("BSON")
     }
 
     Serializer.register[BsonSerde[_]]("very_unique")
 
     assertThrows[IllegalArgumentException] {
-      Serializer.register[JSONSerde[_]]("very_unique")
+      Serializer.register[JSON4sSerde[_]]("very_unique")
     }
   }
 }

@@ -22,12 +22,12 @@ import org.scalatest.{BeforeAndAfter, FunSuite}
 
 private case class SimpleCaseClass(str: String, i: Int)
 
-class JSONSerdeTest extends FunSuite with BeforeAndAfter {
+class JSON4sSerdeTest extends FunSuite with BeforeAndAfter {
 
-  private var serde: JSONSerde[SimpleCaseClass] = null
+  private var serde: JSON4sSerde[SimpleCaseClass] = null
 
   before {
-    serde = new JSONSerde[SimpleCaseClass]()
+    serde = new JSON4sSerde[SimpleCaseClass]()
   }
 
   test("Serializes simple values") {

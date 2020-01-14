@@ -420,10 +420,10 @@ class PipelineBuilderTest extends FunSuite with BeforeAndAfter with Matchers {
   test("Set the serializer directly") {
     val pipeline = builder
       .append(new SimpleSourceStage())
-      .setSerializer(Serializer.JSON)
+      .setSerializer(Serializer.JSON4s)
       .build()
 
-    assert(pipeline.bufferProperties.get(Buffer.SERIALIZER).get == "JSON")
+    assert(pipeline.bufferProperties.get(Buffer.SERIALIZER).get == "JSON4s")
   }
 
   test("Next level") {

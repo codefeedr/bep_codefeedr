@@ -58,7 +58,7 @@ class RabbitMQOutput[T <: Serializable with AnyRef: ClassTag: TypeTag](
     * @return The correct SerDe.
     */
   protected def getSerializer: AbstractSerde[T] = {
-    val serializer = Serializer.JSON
+    val serializer = Serializer.JSON4s
 
     Serializer.getSerde[T](serializer)
   }

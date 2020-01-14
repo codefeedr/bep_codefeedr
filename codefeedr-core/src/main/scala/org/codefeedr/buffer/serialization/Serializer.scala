@@ -30,7 +30,7 @@ object Serializer extends Enumeration {
   /** JSON serde support.
     * See: http://json4s.org/
     */
-  val JSON = "JSON"
+  val JSON4s = "JSON4s"
 
   /** BSON serde support.
     * See: http://bsonspec.org/
@@ -43,7 +43,7 @@ object Serializer extends Enumeration {
   val KRYO = "KRYO"
 
   /** Reserved key words for serializer names. */
-  private val reserved = List(JSON, BSON, KRYO)
+  private val reserved = List(JSON4s, BSON, KRYO)
 
   /** Map containing (type) references to SerDe by name. */
   private var registry: Map[String, Manifest[_ <: AbstractSerde[_]]] = Map()
@@ -57,9 +57,9 @@ object Serializer extends Enumeration {
     */
   def getSerde[T <: Serializable with AnyRef: ClassTag: TypeTag](name: String) =
     name match {
-      case "JSON" => JSONSerde[T]
-      case "BSON" => BsonSerde[T]
-      case "KRYO" => KryoSerde[T]
+      case "JSON4s" => JSON4sSerde[T]
+      case "BSON"   => BsonSerde[T]
+      case "KRYO"   => KryoSerde[T]
       case _ if registry.exists(_._1 == name) => {
         val tt = typeTag[T]
         val ct = classTag[T]
@@ -72,7 +72,7 @@ object Serializer extends Enumeration {
           .newInstance(tt, ct) // Provide class and type tags.
           .asInstanceOf[AbstractSerde[T]] // Create instance of serde.
       }
-      case _ => JSONSerde[T] //default is JSON
+      case _ => JSON4sSerde[T] //default is JSON
     }
 
   /** Registers a new SerDe. This SerDe needs to be subclassed from [[AbstractSerde]].
