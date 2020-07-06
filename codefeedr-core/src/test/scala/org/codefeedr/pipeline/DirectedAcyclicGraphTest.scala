@@ -40,15 +40,15 @@ class DirectedAcyclicGraphTest extends FunSuite {
   class StringTypeStringTypeNothing
       extends OutputStage2[StringType, StringType] {
     override def main(source: DataStream[StringType],
-                      secondSource: DataStream[StringType]): Unit = null
+                      secondSource: DataStream[StringType]): Unit = Unit
   }
 
   class StringTypeNothing extends OutputStage[StringType] {
-    override def main(source: DataStream[StringType]) = null
+    override def main(source: DataStream[StringType]) = Unit
   }
 
   class IntTypeNothing extends OutputStage[IntType] {
-    override def main(source: DataStream[IntType]) = null
+    override def main(source: DataStream[IntType]) = Unit
   }
 
   class NothingIntType extends InputStage[IntType] {

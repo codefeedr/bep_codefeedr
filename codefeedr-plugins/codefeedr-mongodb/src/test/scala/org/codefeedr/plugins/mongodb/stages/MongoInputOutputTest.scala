@@ -30,9 +30,9 @@ import org.codefeedr.pipeline.PipelineBuilder
 import org.codefeedr.plugins.mongodb.MongoQuery
 import org.codefeedr.stages.utilities.{SeqInput, StringInput, StringType}
 import org.mongodb.scala.MongoClient
-import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, FunSuite}
+import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
@@ -96,7 +96,7 @@ Etiam nisl sem, egestas sit amet pretium quis, tristique ut diam. Ut dapibus sod
     val list = StringCollectSink.asList
     val items = longString.split("[ \n]").toList
 
-    assert(items.containsAll(StringCollectSink.result))
+    assert(items.asJava.containsAll(StringCollectSink.result))
     assert(list.size == items.size)
     assert(StringCollectSink.numEventTimes == 0)
   }
@@ -193,7 +193,7 @@ Etiam nisl sem, egestas sit amet pretium quis, tristique ut diam. Ut dapibus sod
     pipeline.startMock()
 
     assert(TestEventCollectSink.result.size == 2)
-    assert(TestEventCollectSink.result.containsAll(Seq("klaas", "nagellak")))
+    assert(TestEventCollectSink.result.containsAll(Seq("klaas", "nagellak").asJava))
   }
 
 }
@@ -209,7 +209,7 @@ object StringCollectSink {
     numEventTimes = 0
   }
 
-  def asList: List[String] = result.toList
+  def asList: List[String] = result.asScala.toList
 }
 
 class StringCollectSink extends SinkFunction[StringType] {
@@ -234,7 +234,7 @@ object TestEventCollectSink {
     numEventTimes = 0
   }
 
-  def asList: List[String] = result.toList
+  def asList: List[String] = result.asScala.toList
 }
 
 class TestEventCollectSink extends SinkFunction[TestEvent] {

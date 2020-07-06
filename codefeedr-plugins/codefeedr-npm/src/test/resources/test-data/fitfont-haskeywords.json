@@ -1,0 +1,790 @@
+{
+  "_id": "fitfont",
+  "_rev": "9-8893e3db2492f122c3bf2293ec25d2e0",
+  "name": "fitfont",
+  "dist-tags": {
+    "latest": "1.3.1"
+  },
+  "versions": {
+    "0.0.1": {
+      "scripts": {
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js",
+        "fitfont-install": "./bin/install.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "0.0.1",
+      "main": "index.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "gitHead": "6ae164d40a8cbc227bb0d7908adb618afecad06b",
+      "_id": "fitfont@0.0.1",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-E+8dIVsx7MZV3ytehJsYgBb2BvZDk4m81XTRKu+5EYFCnzd9S+jHAEUrFT4CIiOcdkj2Tlu3EJ9qZbPeWhJ1Zw==",
+        "shasum": "96da0851e97fff396313436150b656ea37f16fce",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-0.0.1.tgz",
+        "fileCount": 10,
+        "unpackedSize": 31602,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJblR8ACRA9TVsSAnZWagAAOvcP/RtE9knxVoXoBjqSOkA2\nz/giX9gjOAgZufwocJGl1dFyS/sgKblEceB8TKVvV7JxvWPDuSloA1caBwJj\n427zglwVeYDGvW7htWm5w4ZSPq56ce4YUpPmkY2xNbzNv6XSJI/s71QQVz3J\nMUufIlE8lCZ5GVFfjbbNbeaO0nNB3gHJh7G2bVcWDwK9L59OT08uRy4rp1lE\nizAiXlAPEW52i9LKQvSyzqh+XBbsEi8HPKKbnsnBDBL29nmW4rbBl7DRNHmK\n2PbBjAlgcMwkCcTMHDG9LpUky6uv0pRNv2qBdcoHyDVs8U3E4jwlUoRvY6SQ\nL6GivQmQBMC8KGpLijVHIMQ3WARDBDlA22tJ1nzS3dY6igrXr9Wug9tcRiRn\nZ17L+rvIXbn/fGvYP2YDE3rJ2GXMLf7Uv+9bfdJvtp7bMw/kAht0Phmib9cU\nibEY+xX+Bzh70jUDpwT8gE0QKIECzQ73Aygsj2C7AawjeYG8EYJf0SFzPLIY\nsZxGUp+JkgUHNw2raCPYpWUNpZStzwb0T7mkQHaYReBgCImmzckHnfJOwTWl\nVKP7NJJK9jtcCqL58u1FhujdAF/c+mYxBnGx6LJ7nZvDPwKsKmiJZJGr5L1v\np1SlZJgtAR98RPfbJ6yqw1WA8ALZNRQq2Bo4ctNmKjXAEicXmMfk5e5JUP9K\nZjVV\r\n=xNgX\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_0.0.1_1536499455691_0.6102768079553382"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.0.2": {
+      "scripts": {
+        "postinstall": "./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js",
+        "fitfont-install": "./bin/install.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "0.0.2",
+      "main": "index.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4"
+      },
+      "gitHead": "54c2f8dd2383235b6ecc39fe7416f3289261fb3f",
+      "_id": "fitfont@0.0.2",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-puBxABg+Suc1PXiXxGBI2bzcVpfi+GBTRtHjFkuNEXYngw4wr2c8Rz4SOqQLaSfBvpZEZRGv/voWkpvSMM8Y+A==",
+        "shasum": "cb3c63fd689c7dd5e41756c151ec17ac973d2bdc",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-0.0.2.tgz",
+        "fileCount": 10,
+        "unpackedSize": 32299,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJblYN3CRA9TVsSAnZWagAA4KoP/3U7gORpnDbmTuyXvsPM\nz6feox0orrlU0nkbViwalP9gwC7Ax3L7mvWe3N2hv952Gyo+G6vIvJmJ/eeW\niH3DNA6eIfgxQ6n17Cw6QzTPaykE7q++CRTj3BuKd7jpkdSW1T8CFfTNrL5U\nOcyxm6Q2kc6mx60xWVbaQ798txGGH+94D00mmNCfih1IltR9wI4/HJeXf7vU\nEHehFOiSpjmDo0q4zCUlfiYoy2hcTGr4JzZdDbDSyMV6QUMyt9CE0R+oQW9J\nmBSKUvJiex8yIsh6Scq3enwFwKz8uYpfpONhSyzSHu0dM5m5TPp+AAhAuSno\n8iyg9nW9RYFu6XgZGvxmjkVBBzXDWYsqWCP6IYtALiruTMbioIddpFT877RN\nGIi1IKBeNWzIwFwX9EzL+kuQp31dRcRrQ4KU0Y/S7uFd9iVCTK6YZqAFNxoS\n2ucn40HSkcxYE85lCdAyEwFcGH7MLcUim6Sw3IPjbjvdyJTiiyohqFa2oBCT\nSlN1eqgnzzp6RzdsJ4m7BHtDwpU2tuUU30zxM52c8QOaHunpxljeBJAnt4MI\ncZzoZn+KnijOi2rv/u1ax/FUuIENiNuL7tVH5HlavVkcljjJzTPpRLWLK1UR\nP2gK19IVCEjDbT37E//AhMaVuKTcySTfjFxUsOJqTDVC8+MSCrCZqcZd6Xta\nWQam\r\n=Trgp\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_0.0.2_1536525174509_0.11024666130343586"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.2.0": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.2.0",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "gitHead": "3499d4b4ec4296cb8fd5f7425e3f5adf519c4588",
+      "_id": "fitfont@1.2.0",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-uP9Jv+4HNiYUAD6JWBySqGLcAQk9SJjbWQ7DMUmZdNSp45alTUHFLckQ2Vk7KpaSmmJ0RReUtyKQ67qmDjWEBg==",
+        "shasum": "ed4d1fbf36b612debff9ed2819b243afabdf136e",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.2.0.tgz",
+        "fileCount": 9,
+        "unpackedSize": 30861,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJblaoUCRA9TVsSAnZWagAAUh8P/iPR8/Za/rqh4m3mlsMw\n6nC7dagOFp+fR7l2Buczg9XWcf1A9mhFNDaZvuYrDhTU+JmSOaPHbVKrDNzS\nXam6zAS4o+sTzdaRBYJSu32/ksq7aDw2HG15RFVOHafLQtU3Vd4AvLj5Eoqa\nBOUYEOYf6dwJzbzb5Gxlwp6XCAIQxma2cFjXxHV/OIjv9la2DXEz7hTajx/n\ncZik0qsPwY0Mr7AMPcMKlahy2wNw1lRLdwHu2eu8dXUtWH35RTYL4IztMFq/\n29t0OaaVzmW1jxtf6TcXxThLcICEPrMqRVWsYWPehXa5DRZw3lkXfWQ8u4kf\nZ29+NHBUtFHG3chyJIc0Y+x6M5fbHzwSJBXmL1CBWHcCsCn2sPEf9d/6OOiN\nwDdhlsiRuT4+3odyh5cdCjauPsbTa0nBWh4g2rQd1yr65ALZwPhTm0G/dpUU\n5pKcVYI5XSww2R2vFnIjnSX12Hi9Su8fVnUbIyQ1GAmYLX/gPwa6DwuhQqE0\n4csiR0RF8PxRxYxsJbPzMUo6Lv2wUum6qDvqtJFFS73CvOhl4oMEoONZmEpL\n+PA2YGn3Q2lUZmMGrgkYDtwvUkQOBgfIcd4WPmTDOsjeQV8TbJLGV0oC+Qz3\nBrhWfPbJAKjNvfIYe5/ODVEQA/Bs1itJad9XRo5yzAmWaW1Iqc12ez+GI3Cc\ni9ot\r\n=p3OO\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.2.0_1536535060164_0.5761924881591736"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.2.1": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.2.1",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "gitHead": "a06f6220a0efc876e80773ffd64ca1e8f0d90088",
+      "_id": "fitfont@1.2.1",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-XHfSiCRHkGRZUiBPJSKeRpWiOd4+6aSX2KJzpe8BL7/dHWxNhPam3Mh/Gdn1inkR2H2KiZScN965D3aLCElxWQ==",
+        "shasum": "d01db9565f970d1a6a71d1caa8d4dc971d21d32e",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.2.1.tgz",
+        "fileCount": 9,
+        "unpackedSize": 30870,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJblas8CRA9TVsSAnZWagAAW3IP+wUHLn5vydiy276ibzQP\n8JTFwzY9XJTUF4R9fLTqzrghSCkbQWiLKH1WXMi940w0wD7dz/aPeIcpAjuQ\nPOowEQZzHJDXXc9BWTWEaA7n6UIlk66Kyhq4HD5/3r2FQ9aauIoZtzuj6HSa\nIP4OFGeBxlks7mbatdTwv0kwUsrjl1xCo6yk+BZjp1Xm1sIE3vVH/2M18ILf\nYwhb6BPyfhVfgRHwnr9UrGe220WDw9uN8Ue7lINQjV8jie9C8Mf+AowBvWBY\nkQJy/xnQc55ypdpvSe278FME0BPRLE/A4LsxxT2kG8te/qMKDURkmVZgxOnW\nV/eW/yRevS4dFnE91ura28yltPdBByPhtK8mJwYJElU1a6+ESXo86ukNpnJa\nsbga/2tTUU50TKVuzzRhVJu+bXfB1IRyzhCL5vuti8wMd4r8LIwNARcMPkTD\nDjiR4HkbsiMFX4aFlQ+nBJxeGi278nh7aDYzu/IG0QNL3Lf6jJPyZWQyO87M\nneb30gvIUu4a/wqIK6ogEi2uusEU6+Oc7d62KWSez99JgPtEV4oCIMnhwKQW\nIfhK3Hex1HnQDqa77kwHQJYIGavnYD/fZAxtGCtp1n7rlMYQj6+AfARFqJjs\n5kFf/LpUvlfpCI9DLggwFPovNOpygx5RR/d3QHZMpFQJ+aT9DiwK71ZSAHyQ\nqaMr\r\n=EgYw\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.2.1_1536535355516_0.30012284760267915"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.2.2": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.2.2",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "gitHead": "2ebb034f82713ae79c61f1d147708c11b2ddfac5",
+      "_id": "fitfont@1.2.2",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-YOaosTQf7HW511x4bTv6VfGNs/UKIDVU9YXWCpElK3u445hnH52J3cPS+tQlQ1mitNcq4ZXH8lb9hN5TEmMhxQ==",
+        "shasum": "da186bcb57e7e108fe24c79faceac548641da970",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.2.2.tgz",
+        "fileCount": 9,
+        "unpackedSize": 30734,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJblax/CRA9TVsSAnZWagAAvVAP/1asIefoKOjBiEds2BG9\npSsmPevlCMiIcZKDr6xC/z+g4O3Es40xBHJLsfw6PDh+fqiZa5Rm6Fj+oZ8L\n3F7G9HyQzo4GOU+e8YB/GHkpFkQhAkNRc3oNRR/S64XwigzleL87SIkCG10g\nAiQxWjj3rFk9BM7W4t+0+r78RvTInj5DWE90KiG7PKXwm2lGjXFxOGCNdzyp\n5B3KPwquLfQ9jZuBF+kqg3hyWGi92kSdEl+aS3YhHwkL7f0voJ8w6OxDdwlY\nEpzek+XVhFc/EOGYXLBb1pjlaV51bFAb/U339SQm6YZ+dbXqsdlEKnpAzGQj\nbM3B3NquCB3zjqKNppMkspTYYlodigEUd5Zj1Rsae+9s9IS3fW3MHtJrWZR2\njwQDn0zkT2X4KV+dY84NX1JfL2j9eYWvpG6It9VRN4cN7l7fYSOYznaM+sVH\nF7mv7wura1NfcrXWJOiIXypQl+RsNJrfOuX3yQ8KGNtm7UUmoamR2MUjGvlB\njMzwEJpVIeFdD3qhW42U73R1AjWhHk/AQyQb2SeW2zSVD/8U9BOhsriZA84j\n5UlYVDHEHfK7kv2D1gun5bqVp+99mAGG2Bw+FBj8CVx1xaYHZtCboQgLlSba\n4iiDE/ZqTGUKkws7cPe+xoLKBgCVWWiIj4w/WMKCvzT12IFmBjK4hPuC2QVE\nhMTL\r\n=lxph\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.2.2_1536535679294_0.3985967115691982"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.2.3": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.2.3",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "gitHead": "07f0bbd06ee97b8cc85e79de27d39dea2766b03b",
+      "_id": "fitfont@1.2.3",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-Ni9twpJqzl+I2fCx8Ka/ueTDwyC8DJaRCGMgA7BuSz0GRqws3d/uBFsvioXZPV6V9EAzt+wqA1pcOtTnY3ZpUQ==",
+        "shasum": "17d5ab368594dad9babdfb981c640a4698d9f805",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.2.3.tgz",
+        "fileCount": 9,
+        "unpackedSize": 30835,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbmDC4CRA9TVsSAnZWagAAdOQP/RcV0mWga1ijZm3Kax3i\njAae6HSUp3MyFNw3sVd/uJt8oRKqErsgJVjuDIRBHlVskvVI5IeBHt4QP91a\nNFgw/por8Uzp4dabvmvKtb0yPTMcP+21ELI360W/rQSA/z5Yvk7+9v/idpDL\n3aPDVTm5xA8JejQwibkkz8Z9/ZVPj93qL1/jShxrHBWGZy01y5munsa7gVBz\n5qjA3LFVi//t9qYq/mndOF/giQhUhCc8Yupws7EG7tuxLoi+50PKWaUDXsW0\nhasuuXJltP3afv9U0hox6kIuWRycm/0yOVLuT7U/fG1scXl3Pa0kQrAybNae\nvzALNeeaD5hjcu/zig5LLWIfrrcvtcrqArYSRv69r/12MmQ5iOf0jX3bNJfk\nAOhuawvKYot1VClFe1mJmMcGZZD9/tfNntJWLL36yR70/AqFShpKWfrLlKmo\nDH6EbijjNh5pfYDIAYPiY964iQ8ChaTmG8D8QSsel5IgW6tT7szjzvvAe6uY\nL6mSS0Wtx46CGouruMDuvI26pfFNh9TecbVSPJJQV+xEjWU8xAtZNudBEykF\nOgV0ZBw/yEhVcrQdMRugGmJOijc5NdVIv1ohfHd7OwCvVyTQWNkINwbQLUDK\nqJQ3HsUUx1O46QpAWjVwBPGONEndthijaeF5ZlqS6a9WMa5jgubrvmFq1P5J\nWFXF\r\n=uku6\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.2.3_1536700599865_0.3798776170592211"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.2.4": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.2.4",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "gitHead": "9c447b677a57782f0c65bf5c622764279c558a8f",
+      "_id": "fitfont@1.2.4",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-cNuLPvppDLz3nRThNgb65CD+SnX+teF0Ur/o9+YQc7r5wjVjliVTM1hueJjIvWsng3iEZU6ZZbhiMIMk8/ZCqg==",
+        "shasum": "40c63286706d704f04b0c83d748fda95ed213bcf",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.2.4.tgz",
+        "fileCount": 9,
+        "unpackedSize": 30998,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbmEA8CRA9TVsSAnZWagAAS74P/izScTA6Kn33SVehVu/G\n9zQ51uoG1Ga/FAokWAHMN76vL89M2vBV53gpMBCS9YpiVZbTinEQ8I3gIz7Z\n7+EJbKm5L/EhgQiX5wPZM+oP5XUfh/dMZsLsPwMuJWRr1ooMsCRVD3SkrD/7\nb0Pl22PLKmC/vpCKTYnoYcDDOJh1eUApl5oj+Uls6s3GhuTp8qO9xC5zJCjR\nxEYpXTqeh6McU2e/jVD/MRRBinWWYExrb6B/k+0UEjIToCVwWwpIKjSao0FH\nzqhf5gl70Kv/NsTAbbwXUSHvKSMoWtJZbbs7yjXCUqQ528LKpFxKxOgiNVhJ\n4PQzmsXkk9lxynm6ErVMkjtj9UtH2waGkUZP/+o+1ZRjcM2k4Ql1slQX3vhS\n40aY7+jh1cpOPe/74SFInHkolKB1g1anruaGxxm1fQr4Tp/z7Tv95hDL+zqd\nIx1T6EZGQ8tiPITsMBS6xnw84+0ewLg3m0N/HO75yyjbbs0VaRuqC9cdWEZi\ntQKimOijhLoBuykBgVzXeS4ykGFgBuakaqnwsRi7qAjAtGrL4JK0NKTvPKv7\ndH+pz3uLlxEtVTZ0VBC9TJ68QnIBlrnuj6QQNaBaN1P1KeinGI7ImyBng5Zn\nwWQXK1p28PpvDx9+/1e3qU03exh0k2yk8NkcPk2iTlfFoIGAjPaByF1fKKvo\nM7qx\r\n=1Gya\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.2.4_1536704571698_0.6181887635371259"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.2.5": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.2.5",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "gitHead": "3baadbeda8d17e71a6edb2b3dfcd59c867fb0a4f",
+      "_id": "fitfont@1.2.5",
+      "_npmVersion": "6.4.1",
+      "_nodeVersion": "8.10.0",
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-mbgCQ5Zh3/dlnlXvN9gsJkes5DH38E2cZ8eVcPGaxhb8dlBd9NX3pDicBMgc4J9oi2XpoLNyDb5m7w5t2RuOsg==",
+        "shasum": "bff3b8058f4aacce2503efb62d05bbecaca56848",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.2.5.tgz",
+        "fileCount": 9,
+        "unpackedSize": 31076,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJboqsRCRA9TVsSAnZWagAAYtgP/1hshuCaevghGgd0TLrt\nnn0b3c5HY4rXWgOoh+8wtBIiYp+2m6rYo/XPGHTKmBAS/bzU39Tly0lpHcZd\nDP8Q7LUBTaNEXHgy73NNQbZQrVzg2b/WldRmr3UYvlEjHwEB6+IUPwSygIiG\np99dNZrPE2HO5O5kNWUTwV20e4tUNqphj6i3R9NHln6E28OO5secyfClewu1\nJ6NwmjeooypIn1e9iesCNNa56u1Hessu2XkV3DMbi6bea9cGPOjBEIQ3/DnD\nxxmDP1jBvoeqhKgEPhT7i5K4cPXc0Wcx81rRheuK6IfJbMq9eM182zo2eYMe\nT+5dFETQ5tVHQg1Bg2sTHb2rRHf3yQtsuXjhqZjgIbrzE5T5p/VOJFGgphgF\nYcyYWVoQ5DEkzDSVzzQnJPYfsjXseR3oO8Ypq4cTcvIP0E7M58hkussNlKs9\n3E4UKAX1ojzrF9Qq4E6mmpsgm9m+Ypl+QNlAxWHds7ljUVcT+vLZ5lu5tsVY\n/X90Hiz/zCwdp05M8IcHRnzfsORtzXuoOzRvWgBHSLyH2yQu38FvVkgZD/nz\nz311decjFbBIIT0HueKZvUkeGudV9JvcbG41gCcpP8PoP6nL5j64F9F5BB9F\nBSDh5PPHJujGRLv3UjEkRbTNe8YEi0//c7mWXUmn9lTD7MIKYveoIC2DAks9\nu0FL\r\n=SDCu\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.2.5_1537387280956_0.6980933336802038"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.3.0": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.3.0",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "licenseText": "MIT License\n\nCopyright (c) 2018 Grégoire Sage\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "_id": "fitfont@1.3.0",
+      "dist": {
+        "shasum": "b74c79d1c12b3283d9b0066668796361c9741c9d",
+        "integrity": "sha512-YQaTECVSK2lFeRStSjMg/1KYGS4tk43WqGER8LDY2UpxRo1xkOemqJOC0jSCUMJyYzqwfRI7O2zzxH/SLCGA9w==",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.3.0.tgz",
+        "fileCount": 23,
+        "unpackedSize": 42653,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJeEgd/CRA9TVsSAnZWagAAfCoP/2CJmvyEjl32loFmzIEJ\nly25GXNaVwx8Z2lGtUFS7S2N79jSNrJN6ILKJZXst0M2KO2AFOsyk1iAy7Sr\nq8ilh/gsyPrzjxdaCWCbkHUVIWXPNye2nflBAbYb1kUMwBEiERCZRBVj6dQK\nsk89HtZsiWdtisyheRNC0LMqPMICUAthgneapnDT6wxcfXMNTruG7+MYP9vF\nfD4Csrq9TcJRUd2z/nEx2QFXttzV44KOuv6qQHO7eNfcuO1MryhthiGhjqTO\nAlZYhD8KyzZAYaU51CYmqH/K1ccUmaa5eQ3b5B4B4hamX/LfZ+gvBRPWry0Z\nsSJPH68Q83zfLIjle3auDBdzC+h3UVKdHbD0BWvQ+4Vr3XFeiLzYX9Fkix85\nXXb/srMfaO5D57l3Jh1G/cSscN1/hnrXYeE2/uL8LMKXHPyC/zhF+1pgQ1cW\nUqu6tbFKEFw9nD97sjrhBcCqzahZhabxT8aGQbg5sfSqFq1j2NDYrEGdQiEZ\nhcL2WoMudtcyZ60n6fM150/Z6PlRY2gi9qs29UlfU2VqHsxCocaVPy1Z523r\nTxyHwan0AAEddgf8/FIfeAIonI7JK1gKpMqkUm7LoMqZ32OyjxAt2bhgaekR\nTr1hU2+tYAiYZyvmmB4QYiShMfvTBA2y3Dq2XeZaHXNYkw+dUlRfRhAh5IEL\nM1D0\r\n=66E0\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.3.0_1578239870840_0.15126135136832675"
+      },
+      "_hasShrinkwrap": false
+    },
+    "1.3.1": {
+      "scripts": {
+        "postinstall": "node ./bin/install.js",
+        "build": "babel source --out-dir .",
+        "prepublish": "npm run build"
+      },
+      "babel": {
+        "presets": [
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      },
+      "bin": {
+        "fitfont-generate": "./bin/generate.js"
+      },
+      "name": "fitfont",
+      "description": "This library allows you to easily display text with custom fonts.",
+      "version": "1.3.1",
+      "main": "fitfont.js",
+      "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gregoiresage/fitfont.git"
+      },
+      "keywords": [
+        "fitbitdev"
+      ],
+      "author": {
+        "name": "Grégoire Sage"
+      },
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/gregoiresage/fitfont/issues"
+      },
+      "homepage": "https://github.com/gregoiresage/fitfont#readme",
+      "dependencies": {
+        "python-shell": "^1.0.4",
+        "readline2": "^1.0.1"
+      },
+      "licenseText": "MIT License\n\nCopyright (c) 2018 Grégoire Sage\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "_id": "fitfont@1.3.1",
+      "dist": {
+        "shasum": "766ef53baea9c03406d52760313617aa31e9bdc6",
+        "integrity": "sha512-09b0eYCAgZ6l+G1pvkmtJ4YiwADxvTWlDmX/isd7/3qdxdi75+OJQfYJFnT9qRLIkexKssXK2dG1n77Pr/pdYw==",
+        "tarball": "https://registry.npmjs.org/fitfont/-/fitfont-1.3.1.tgz",
+        "fileCount": 49,
+        "unpackedSize": 57902,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJeFlVZCRA9TVsSAnZWagAAtp8P/1SjtqNQMJ92kiJr9Uic\nQiaoiVFvLCp6rgWl8tTTdinJbKEcLtSagoMfBxhiD6ZpsKilXzVLGZ34JOmY\nqE1mxDNIIFHXMGR0z3962zVXV4bmLmdSmIypKjgE2nxr99Qneo41zj+oso65\n8OArXcjvNYkbjj4NpMr8Lb7HR6pq4abRDwJYgcP+YDimn/ORCGW6pqEa3AU5\nl5Inu7qF8vtTnfUhfYSZiefOeFpqnMncepcvkM8KghyDtG/CPWjneXHOV+bH\ntSPSgnvpq0GSWFQl8ER50TVV5LbmS08sJSENSrRxNIvCx5mMqf9YwHnRFghh\n/KYXizzQkmakqkKlLYKhP+mD1ebkNGLx8pMOgji+s4PfmlWzSyaJC1ugk88N\naIzzHurLReQIo0kGhNfBtibmL0cycCXKatknuX3xxqrTCBBBnEOED8+VlB2H\ng5YrGwGtnX6y32GBuoEB8Ak0v42YSUJwsq9o9brmJ0B2ObxPZbQ4mUfSc+QA\njmWp5f+952b6ViQYUC/vFupDyHcHVB4fp1Zngzassa33u0LwST6aOqzeLOIY\nvahpLSj45vWyNLwZ+BCcP2FgFD6hAsnn6U3x2cT6ZkKIJ2Qq/CwA8qLP2wry\nymBwSsMt2MlPsjH2v6RsAaaIwArWaikyqKwHbt4p8e/daJ243DAw/sWhNiRC\nU4Wp\r\n=xE98\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "gregoire",
+          "email": "gregoire.sage@gmail.com"
+        }
+      ],
+      "_npmUser": {
+        "name": "gregoire",
+        "email": "gregoire.sage@gmail.com"
+      },
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/fitfont_1.3.1_1578521944205_0.14338694411758457"
+      },
+      "_hasShrinkwrap": false
+    }
+  },
+  "time": {
+    "created": "2018-09-09T13:24:15.691Z",
+    "0.0.1": "2018-09-09T13:24:15.868Z",
+    "modified": "2020-01-08T22:19:07.288Z",
+    "0.0.2": "2018-09-09T20:32:54.674Z",
+    "1.2.0": "2018-09-09T23:17:40.293Z",
+    "1.2.1": "2018-09-09T23:22:35.718Z",
+    "1.2.2": "2018-09-09T23:27:59.477Z",
+    "1.2.3": "2018-09-11T21:16:40.057Z",
+    "1.2.4": "2018-09-11T22:22:51.832Z",
+    "1.2.5": "2018-09-19T20:01:21.047Z",
+    "1.3.0": "2020-01-05T15:57:50.949Z",
+    "1.3.1": "2020-01-08T22:19:04.303Z"
+  },
+  "maintainers": [
+    {
+      "name": "gregoire",
+      "email": "gregoire.sage@gmail.com"
+    }
+  ],
+  "description": "This library allows you to easily display text with custom fonts.",
+  "homepage": "https://github.com/gregoiresage/fitfont#readme",
+  "keywords": [
+    "fitbitdev"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregoiresage/fitfont.git"
+  },
+  "author": {
+    "name": "Grégoire Sage"
+  },
+  "bugs": {
+    "url": "https://github.com/gregoiresage/fitfont/issues"
+  },
+  "license": "MIT",
+  "readme": "# FitFont for Fitbit\n\nThis library allows you to easily display text with custom fonts.\n\n[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/gsage/)\n\n![alt text](screenshot.png \"Sorry for the colors\")\n\n## With the Fitbit CLI\n\n### Installation\n\nInstall the library with `npm i fitfont`\n\n   The installer will ask you if it can copy the library gui files in your `resources` folder:  \n   Press `Y` and the `fitfont.gui` file will be created automatically.  \n   Press `N` if you prefer to copy the file manually afterwards (default choice is Yes)  \n  \nYou still need to modify the `resources/widgets.gui` file to add the link to `fitfont.gui`:\n``` xml\n<svg>\n    <defs>\n        <link rel=\"stylesheet\" href=\"styles.css\" />\n        <link rel=\"import\" href=\"/mnt/sysassets/widgets_common.gui\" />\n        <!-- import FitFont ui file -->\n        <link rel=\"import\" href=\"fitfont.gui\" />\n    </defs>\n</svg>\n```\n\n### Assets generation\n\nDownload your favourite ttf font and generate the library needed files with:\n```\n  npx fitfont-generate [path/to_the_font_file]  [font_size]  [list_of_characters_to_generate]\n```\ne.g.\n```\n  npx fitfont-generate /path/to/my_cool_font.ttf 200 0123456789:.\n```\nThe generated folder (named [font_name]_[font_size]) will be automatically copied in your `resources` folder.\n\nRepeat this for every font/size you need.\n\n\n## Without the Fitbit CLI (shame on you)\n\n### Library integration\n\nCopy the `fitfont.js` file in your `app` folder.\n\nCopy the `fitfont.gui` file in your `resources` folder.\n\nModify the `resources/widgets.gui` file to add the link to `fitfont.gui`:\n``` xml\n<svg>\n    <defs>\n        <link rel=\"stylesheet\" href=\"styles.css\" />\n        <link rel=\"import\" href=\"/mnt/sysassets/widgets_common.gui\" />\n        <!-- import FitFont ui file -->\n        <link rel=\"import\" href=\"fitfont.gui\" />\n    </defs>\n</svg>\n```\n\n### Assets generation\n\nInstall the python dependencies:\n```\n  pip install Pillow\n```\n\nDownload your favourite font file and call the python `generator.py` script of this repo.\n```\n  python generate.py [path/to_the_font_file]  [font_size]  [list_of_characters_to_generate]\n```\ne.g.\n```\n  python generate.py /path/to/my_cool_font.ttf 200 0123456789:.\n```\n\nCopy the generated folder (named [font_name]_[font_size]) in your project's `resources` folder.\n\nRepeat this for every font/size you need.\n\n# Usage\n\nUse a `fitfont` symbol in your `index.gui` file:\n``` xml\n    <use href=\"#fitfont\" id=\"myLabel\">\n        <use href=\"#fitfont-char\"/>\n        <use href=\"#fitfont-char\"/>\n        <use href=\"#fitfont-char\"/>\n        <use href=\"#fitfont-char\"/>\n        <use href=\"#fitfont-char\"/>\n        <use href=\"#fitfont-char\"/>\n        <!-- add as many characters as needed -->\n    </use>\n```\n\nImport and use the library in your `app/index.js`:\n``` javascript\n    import { FitFont } from 'fitfont'\n    // or if you are not using the CLI : import { FitFont } from './fitfont.js'\n    \n    const myLabel = new FitFont({ \n        id:'myLabel',               // id of your symbol in the index.gui, you can also give an element object e.g. id: document.getElementById('foo')\n        font:'Market_Saturday_200'  // name of the generated font folder\n\n        // Optional\n        halign: 'start',            // horizontal alignment : start / middle / end\n        valign: 'baseline',         // vertical alignment   : baseline / top / middle / bottom\n        letterspacing: 0            // letterspacing...\n    })\n    \n    myLabel.text = '12:55'          // only the characters generated with the python script will be displayed\n\n    // It is also possible to change the halign/valign/letterspacing dynamically\n    myLabel.halign = 'middle'\n    myLabel.valign = 'top'\n    myLabel.letterspacing = -3\n```\n\nLaunch your app and enjoy.\n\n# Demo\n\nA demo is available [here](https://github.com/gregoiresage/fitfont-demo)\n",
+  "readmeFilename": "README.md"
+}

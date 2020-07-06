@@ -1,0 +1,112 @@
+{
+  "_id": "tiny",
+  "_rev": "15-5aede384a190b4164eaf840629010349",
+  "name": "tiny",
+  "description": "An in-process key-value store",
+  "dist-tags": {
+    "latest": "0.0.10"
+  },
+  "versions": {
+   "0.0.10": {
+      "name": "tiny",
+      "description": "An in-process key-value store",
+      "author": {
+        "name": "Christopher Jeffrey"
+      },
+      "version": "0.0.10",
+      "main": "./lib/tiny.js",
+      "bin": {
+        "tiny": "./bin/tiny"
+      },
+      "man": [
+        "./man/tiny.1"
+      ],
+      "preferGlobal": true,
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/chjj/tiny.git"
+      },
+      "homepage": "https://github.com/chjj/tiny",
+      "bugs": {
+        "url": "http://github.com/chjj/tiny/issues"
+      },
+      "license": "MIT",
+      "keywords": [
+        "database",
+        "nosql",
+        "in-process"
+      ],
+      "tags": [
+        "database",
+        "nosql",
+        "in-process"
+      ],
+      "scripts": {
+        "test": "node test",
+        "bench": "node test --bench"
+      },
+      "dependencies": {
+        "lru-cache": 1
+      },
+      "engines": {
+        "node": ">= 0.8.0"
+      },
+      "_id": "tiny@0.0.10",
+      "_shasum": "92d540b507c67034b8c7a53797aeb30b6c1780a3",
+      "_from": ".",
+      "_npmVersion": "1.4.9",
+      "_npmUser": {
+        "name": "chjj",
+        "email": "chjjeffrey@gmail.com"
+      },
+      "maintainers": [
+        {
+          "name": "chjj",
+          "email": "chjjeffrey@gmail.com"
+        }
+      ],
+      "dist": {
+        "shasum": "92d540b507c67034b8c7a53797aeb30b6c1780a3",
+        "tarball": "https://registry.npmjs.org/tiny/-/tiny-0.0.10.tgz"
+      },
+      "directories": {}
+    }
+  },
+  "maintainers": [
+    {
+      "name": "chjj",
+      "email": "chjjeffrey@gmail.com"
+    }
+  ],
+  "time": {
+    "modified": "2014-06-01T00:32:24.082Z",
+    "created": "2011-07-20T06:42:43.303Z",
+    "0.0.4": "2011-12-08T18:15:35.613Z",
+    "0.0.5": "2011-12-08T18:15:35.613Z",
+    "0.0.6": "2011-12-08T18:15:35.613Z",
+    "0.0.7": "2011-12-08T18:15:35.613Z",
+    "0.0.8": "2011-12-08T18:15:35.613Z",
+    "0.0.9": "2014-05-19T01:11:09.573Z",
+    "0.0.10": "2014-06-01T00:32:24.082Z"
+  },
+  "author": {
+    "name": "Christopher Jeffrey"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chjj/tiny.git"
+  },
+  "readme": "# tiny\n\n__tiny__ is an in-process document/object store for node.js.\n\nIt is largely inspired by [nStore](https://github.com/creationix/nstore),\nhowever, its goal was to implement real querying which goes easy on the memory.\n\nTiny is very simple, there are no schemas, just store your objects. It supports\nmongo-style querying, or alternatively a \"mapreduce-like\" interface similar to\nCouchDB's views.\n\n## Install\n\n``` bash\n$ npm install tiny\n```\n\n## How Tiny works...\n\nTiny takes advantage of the fact that, normally, when you query for records in\na database, you're only comparing small properties (<128b) in the query itself.\nFor example, when you query for articles on a weblog, you'll usually only be\ncomparing the timestamp of the article, the title, the author, the category,\nthe tags, etc. - pretty much everything except the content of the article\nitself.\n\nTiny stores each document/object's property individually in the DB file and\ncaches all the small properties into memory when the DB loads, leaving anything\nabove 128b behind. When a query is performed, Tiny only lets you compare the\nproperties stored in memory, which is what you were going to do anyway. Once\nthe query is complete, Tiny will perform lookups on the FD to grab the large\nproperties and put them in their respective objects before results are returned\nto you.\n\nThis my attempt at combining what I think the best aspects of nStore and\nnode-dirty are. node-dirty is incredibly fast and simple (everything is\nin-memory), and nStore is very memory effecient, (but this only lasts until you\nperform a query). node-tiny allows for queries that perform lookups on the db\nfile, and it selectively caches properties as well, so it's fast and easier on\nmemory.\n\n## Example Querying\n\n``` js\nvar Tiny = require('./tiny');\nTiny('articles.tiny', function(err, db) {\n  var time = Date.now()\n    , low = time - (60*60*1000)\n    , high = time - (30*60*1000);\n\n  // mongo-style query\n  db.find({$or: [\n    { timestamp: { $lte: low } },\n    { timestamp: { $gte: high } }\n  ]})\n  .desc('timestamp')\n  .limit(3)(function(err, results) {\n    console.log('Results:', results);\n  });\n\n  // is equivalent to...\n  db.fetch({\n    desc: 'timestamp',\n    limit: 3\n  }, function(doc, key) {\n    if (doc.timestamp <= low\n        || doc.timestamp >= high) {\n      console.log('Found:', key);\n      return true;\n    }\n  }, function(err, results) {\n    console.log('Results:', results);\n  });\n});\n```\n\nThe mongo-style querying should be fairly self-explanatory. The second query is\nsupposed to be similar to a mapreduce interface, but it's the rough equivalent\nof a `.filter` function.\n\nNote: there is a `shallow` parameter for `.fetch`, `.find`, and `.get`, wherein\nit will __only__ lookup properties that are under 128b in size. This is to go\neasy on the memory. `.each` and `.all` are shallow by default, but they do have\na `deep` parameter, (which I don't recommend using).\n\n## Other Usage\n\n``` js\n// save a document\ndb.set('myDocument', {\n  title: 'a document',\n  content: 'hello world'\n}, function(err) {\n  console.log('set!');\n});\n\n// .each will iterate through\n// every object in the database\n// it is shallow by default\ndb.each(function(doc) {\n  console.log(doc.title);\n});\n\n// returns every object in the DB\n// in an array, this is shallow\n// by default\ndb.all(function(err, docs) {\n  console.log(docs.length);\n});\n\n// remove a doc\ndb.remove('myDocument', function(err) {\n  console.log('deleted');\n});\n\n// retrieve an object from the database\ndb.get('someOtherThing', function(err, data) {\n  // data._key is a property which\n  // holds the key of every object\n  console.log('found:', data._key);\n});\n\n// updates the object\n// without overwriting its other properties\ndb.update('article_1', {\n  title: 'new title'\n}, function(err) {\n  console.log('done');\n});\n\n// close the file descriptor\ndb.close(function(err) {\n  console.log('db closed');\n});\n\n// clean up the mess\ndb.compact(function(err) {\n  console.log('done');\n});\n\n// dump the entire database to a JSON file\n// in the same directory as the DB file\n// (with an optional pretty-print parameter)\ndb.dump(true, function(err) {\n  console.log('dump complete');\n});\n```\n\n## Making data more memory efficient\n\nBecause of the way Tiny works, there are ways to alter your data to make it\nmore memory efficient. For example, if you have several properties on your\nobjects that aren't necessary to for queries, its best to nest them in an\nobject.\n\n``` js\nuser: {\n  name: 'joe',\n  prop1: 'data',\n  prop2: 'data',\n  prop3: 'data'\n}\n\nuser: {\n  name: 'joe',\n  data: {\n    prop1: 'data',\n    prop2: 'data',\n    prop3: 'data'\n  }\n}\n```\n\nThat way, the data will not be cached if it exceeds 128b collectively.\nEventually there may be an `ignore` method or an `index` method, which will be\nexplicitly inclusive or exclusive to which properties are cached and which\nproperties are able to be referenced within a query.\n\n## Documentation\n\n### Database\n- [Construction](#construction)\n- [dump](#dump)\n- [close](#close)\n- [kill](#kill)\n\n### Querying\n- [set](#set)\n- [each](#each)\n- [all](#all)\n\n## Database\n\n<a name=\"construction\"></a>\n\n### Tiny(name, callback)\nCreates and returns a database with the given name.\n\n__Arguments__\n\n- name - filename to store and load the Tiny database\n- callback(err, db) - Called after the database file is opened and loaded\n\n__Example__\n\n``` js\nvar db;\nTiny('./articles.tiny', function(err, db_) {\n  if (err) throw err;\n  db = db_;\n  ...\n});\n```\n\n---------------------------------------\n\n<a name=\"dump\"></a>\n\n### dump(pretty, func) or dump(func)\n\nDumps the a database to a JSON file with the name as name.json. Pretty\nspecifies whether to indent each line with two spaces or not. Alternatively,\ndump(func) can be called.\n\n__Arguments__\n\n- pretty - if true, the JSON file will be indented with two spaces\n- func(err) - called after the dump is complete.\n\n__Example__\n\n``` js\ndb.dump(true, function(err) {\n  console.log('dump complete');\n});\n```\n\n---------------------------------------\n\n<a name=\"close\"></a>\n\n### close(func)\n\nCloses the Tiny database file handle. A new Tiny object must be made to reopen\nthe file.\n\n__Arguments__\n\n- func() - callback function after the database has been closed\n\n__Example__\n\n``` js\ndb.close(function(err) {\n  console.log('db closed');\n});\n```\n\n---------------------------------------\n\n<a name=\"kill\"></a>\n\n### kill(func)\n\nCloses the Tiny database file, deletes the file and all the data in the\ndatabase, and then creates a new database with the same name and file.\n\n__Arguments__\n\n- func() - callback function after the database has been reloaded\n\n__Example__\n\n``` js\ndb.kill(function(err) {\n  console.log('db has been destroyed and a new db has been loaded');\n});\n```\n\n## Querying\n\n<a name=\"set\"></a>\n\n### set(docKey, doc, func)\n\nSaves a object `doc` to database under the key `docKey`. Ideally, docKey should\nbe 128b or smaller.\n\n__Arguments__\n\n- docKey - a key to search the database for\n- doc - an object to save to the database under the given key\n- func - callback function after the doc object has been saved to the database\n\n__Example__\n\n``` js\ndb.set('myDocument', {\n  title: 'a document',\n  content: 'hello world'\n}, function(err) {\n  console.log('set!');\n});\n```\n\n---------------------------------------\n\n<a name=\"each\"></a>\n\n### each(func, deep) or each(func)\n\nIterates through every object in the database.\n\n__Arguments__\n\n- func(doc) - Callback function that is called with every iterated object `doc`\n  from the database\n- done() - Callback to be executed after the iterations complete.\n- deep - `true` if every object should be returned, `false` or unset if only\n  cacheable objects should be returned (ones smaller than 128b)\n\n__Example__\n\n``` js\ndb.each(function(doc) {\n  console.log(doc.title);\n}, function() {\n  console.log('done');\n});\n```\n\n### Contribution and License Agreement\n\nIf you contribute code to this project, you are implicitly allowing your code\nto be distributed under the MIT license. You are also implicitly verifying that\nall code is your original work. `</legalese>`\n\n## License\n\nCopyright (c) 2011-2014, Christopher Jeffrey. (MIT License)\n\nSee LICENSE for more info.\n",
+  "homepage": "https://github.com/chjj/tiny",
+  "keywords": [
+    "database",
+    "nosql",
+    "in-process"
+  ],
+  "bugs": {
+    "url": "http://github.com/chjj/tiny/issues"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "_attachments": {}
+}

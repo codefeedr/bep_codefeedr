@@ -47,6 +47,10 @@ class KafkaOutput[T <: Serializable with AnyRef: ClassTag: TypeTag](
 
   //add producer as sink
   override def main(source: DataStream[T]): Unit = {
-    source.addSink(new FlinkKafkaProducer[T](topic, serde, properties))
+    source.addSink(
+      new FlinkKafkaProducer[T](topic,
+                                serde,
+                                properties,
+                                FlinkKafkaProducer.Semantic.NONE))
   }
 }

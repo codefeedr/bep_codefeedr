@@ -30,7 +30,8 @@ import scala.reflect.runtime.universe._
   *
   * @tparam T Type of the SerDe.
   */
-class KryoSerde[T <: Serializable: TypeTag: ClassTag](topic: String = "") extends AbstractSerde[T](topic) {
+class KryoSerde[T <: Serializable: TypeTag: ClassTag](topic: String = "")
+    extends AbstractSerde[T](topic) {
 
   // Lazily retrieve kryo instance.
   private lazy val kryo: KryoBase = getKryo
@@ -70,7 +71,7 @@ class KryoSerde[T <: Serializable: TypeTag: ClassTag](topic: String = "") extend
     * @return ProducerRecord.
     */
   override def serialize(element: T, timestamp: lang.Long) = {
-    val buffer : Array[Byte] = new Array[Byte](KryoSerde.BUFFER_SIZE)
+    val buffer: Array[Byte] = new Array[Byte](KryoSerde.BUFFER_SIZE)
     val output = new Output(buffer)
     kryo.writeObject(output, element)
 
@@ -83,6 +84,7 @@ object KryoSerde {
   val BUFFER_SIZE = 4096
 
   /** Creates new Kryo Serde. */
-  def apply[T <: Serializable: ClassTag: TypeTag](topic: String = ""): KryoSerde[T] =
+  def apply[T <: Serializable: ClassTag: TypeTag](
+      topic: String = ""): KryoSerde[T] =
     new KryoSerde[T](topic)
 }

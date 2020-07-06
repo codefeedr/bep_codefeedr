@@ -83,7 +83,8 @@ protected class GHTAbstractEventStage[
           new FlinkKafkaProducer[Record](
             sideOutput.sideOutputTopic,
             Serializer.getSerde[Record](Serializer.JSON),
-            props))
+            props,
+            FlinkKafkaProducer.Semantic.NONE))
     }
 
     trans

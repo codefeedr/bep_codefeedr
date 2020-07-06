@@ -2,6 +2,8 @@ package org.codefeedr.plugins.pypi.stages
 
 import java.util.concurrent.TimeUnit
 
+import com.sksamuel.avro4s.AvroSchema
+import org.apache.avro.Schema
 import org.apache.flink.streaming.api.scala.DataStream
 import org.apache.flink.streaming.api.datastream.{
   AsyncDataStream => JavaAsyncDataStream
@@ -11,8 +13,10 @@ import org.codefeedr.plugins.pypi.protocol.Protocol.{
   PyPiReleaseExt
 }
 import org.codefeedr.stages.TransformStage
-import org.apache.flink.api.scala._
 import org.codefeedr.plugins.pypi.operators.RetrieveProjectAsync
+import org.codefeedr.stages.utilities.DefaultTypeMapper.DateSchemaFor
+
+import scala.language.higherKinds
 
 /** Transform a [[PyPiRelease]] to [[PyPiReleaseExt]].
   *
@@ -37,5 +41,10 @@ class PyPiReleaseExtStage(stageId: String = "pypi_releases")
                                                 100)
 
     new org.apache.flink.streaming.api.scala.DataStream(async)
+  }
+
+  override def getSchema: Schema = {
+    implicit val dateSchema: DateSchemaFor = new DateSchemaFor(true)
+    AvroSchema[PyPiReleaseExt]
   }
 }

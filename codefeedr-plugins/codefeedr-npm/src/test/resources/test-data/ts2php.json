@@ -1,0 +1,371 @@
+{
+  "_id": "ts2php",
+  "_rev": "84-a99a3e14f1d576d910aafb083cba8673",
+  "name": "ts2php",
+  "dist-tags": {
+    "alpha": "0.0.1-alpha.1",
+    "latest": "0.19.11",
+    "beta": "0.13.0-beta.0"
+  },
+  "versions": {
+    "0.0.1-alpha.1": {
+      "name": "ts2php",
+      "version": "0.0.1-alpha.1",
+      "description": "ts转php",
+      "main": "dist/index.js",
+      "scripts": {
+        "build": "tsc",
+        "sync": "sync-files -w ./typescript.d.ts ./node_modules/typescript/lib/typescript.d.ts",
+        "test": "tsc && mocha",
+        "mocha": "mocha"
+      },
+      "repository": {
+        "type": "git",
+        "url": "ssh://git@icode.baidu.com:8235/baidu/atom/ts2php"
+      },
+      "author": {
+        "name": "meixuguang"
+      },
+      "license": "UNLICENSED",
+      "dependencies": {
+        "fs-extra": "^7.0.1",
+        "hash-sum": "^1.0.2",
+        "lodash": "^4.17.11",
+        "typescript": "3.1.3"
+      },
+      "devDependencies": {
+        "@types/fs-extra": "^5.0.5",
+        "@types/lodash": "^4.14.117",
+        "@types/node": "^10.12.0",
+        "koa": "^2.6.2",
+        "koa-bodyparser": "^4.2.1",
+        "koa-router": "^7.4.0",
+        "koa-static": "^5.0.0",
+        "mocha": "^5.2.0",
+        "sync-files": "^1.0.3",
+        "ts-node": "^7.0.1"
+      },
+      "gitHead": "fb29a2f4c4a0d064f029bdb9e89dbe61a00ad90b",
+      "_id": "ts2php@0.0.1-alpha.1",
+      "_npmVersion": "6.5.0",
+      "_nodeVersion": "8.11.2",
+      "_npmUser": {
+        "name": "cxtom",
+        "email": "cxtom2010@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-jNa0yRwS0zMlzwMxpzyaOZtadDut94gc1kLgS+L/MSBh+227j7VD6RSTnG1XjYqJdrbnAst2bzI7DSlPBQVQcA==",
+        "shasum": "78f934fdaf7ba2e24a9614efffbdb30b1b280411",
+        "tarball": "https://registry.npmjs.org/ts2php/-/ts2php-0.0.1-alpha.1.tgz",
+        "fileCount": 25,
+        "unpackedSize": 584356,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJca5tlCRA9TVsSAnZWagAASW4P/2vkJkr7cBs7RHSv1iUI\n6AFzmuLXbUM2XZfJ+DHjXE+l2ZGIPRFeeu5b2W/7gyWVNbCN9dHA0ohYTj6R\nAi8mpweo3eeIcvHdf7CxhCYtVbiMHWfjamjsTLeDWOgcWcVnKjcaeOTq4ami\nOIkmEsH73tcWKehn9j759yGd57EsIVDyVuoyBQh+RLJdlkZqcylP9Xed8f1/\nsF1GvW+ACr4ydSwISyHuboC8DWXWzpUmYJpxZsajyl2wIjbc3sb48M53BL/t\noukDr046N1CDlA+6YnThWGc2b9LI7cAeXL7Y5Cy7H8999+jJtuCKFoAHf0H3\nwk4Ka+IYJ8XvJHt85V9KDvgtIwpSCDtRlpD+ouKj/DfRTtVA7G8YY5c2Uz1R\nr3uH6ZmE2qtlDcTHY+ayrhhYVZcbRyiI7WD7KIrZTtmBzMQkEdDHFZ7zBtOj\nvur98IfoUuZFQ0EtxN+LbCMxqxBWJxAaFzOaA20l5okEbrq3MhjM1Llkvq/u\nS43FOQy3TzG+EyjQ6YiQmpCgr7E7GY5nsPPJeLFhm6zNZJp/kkLmbIhVl5rq\n+zsbPknsaqjmVocCBLoK4v+JicP7tE6pswjctLAZAqJ9we58+oI7wEWkNITK\noxHTm4iutuIuklunItsWOncUXQkANTWmqdyJ4RPD+QggkUvECXNdUQtWBu8c\nnzWN\r\n=7Cyd\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "cxtom",
+          "email": "cxtom2010@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/ts2php_0.0.1-alpha.1_1550556004976_0.9770363962614048"
+      },
+      "_hasShrinkwrap": false
+    },
+
+    "0.19.11": {
+      "name": "ts2php",
+      "version": "0.19.11",
+      "description": "TypeScript to PHP Transpiler",
+      "main": "dist/index.js",
+      "typings": "types/index.d.ts",
+      "bin": {
+        "ts2php": "dist/bin/ts2php.js"
+      },
+      "scripts": {
+        "prebuild": "rimraf dist",
+        "build": "tsc && mkdir -p dist/runtime && cp src/runtime/*.php dist/runtime && chmod a+x dist/bin/*",
+        "sync": "cp ./typescript.d.ts ./node_modules/typescript/lib/typescript.d.ts",
+        "test": "mocha",
+        "coverage": "nyc _mocha",
+        "prepublishOnly": "npm test && npm run build",
+        "test:feature": "ts-node ./src/bin/ts2php.ts",
+        "test:runtime": "sh ./test/runtime/run.sh",
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+        "doc": "typedoc --out docs --theme minimal --includeDeclarations --excludeNotExported --excludeExternals --mode file ./types/index.d.ts"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/searchfe/ts2php.git"
+      },
+      "author": {
+        "name": "meixuguang"
+      },
+      "contributors": [
+        {
+          "name": "cxtom",
+          "email": "cxtom2008@gmail.com"
+        }
+      ],
+      "license": "MIT",
+      "dependencies": {
+        "fs-extra": "^7.0.1",
+        "lodash": "^4.17.14",
+        "semver": "^6.2.0",
+        "ts-morph": "^3.1.0",
+        "yargs": "^13.2.4"
+      },
+      "nyc": {
+        "include": [
+          "src/*.ts",
+          "src/**/*.ts"
+        ],
+        "exclude": [
+          "test/**/*.ts",
+          "**/*.d.ts"
+        ],
+        "extension": [
+          ".ts"
+        ],
+        "require": [
+          "ts-node/register"
+        ],
+        "reporter": [
+          "text-summary",
+          "html"
+        ],
+        "sourceMap": true,
+        "instrument": true
+      },
+      "commitlint": {
+        "extends": [
+          "@commitlint/config-conventional"
+        ]
+      },
+      "husky": {
+        "hooks": {
+          "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+      },
+      "peerDependencies": {
+        "typescript": "~3.4.5"
+      },
+      "devDependencies": {
+        "@commitlint/cli": "^7.6.1",
+        "@commitlint/config-conventional": "^7.6.0",
+        "@semantic-release/changelog": "^3.0.2",
+        "@semantic-release/commit-analyzer": "^6.1.0",
+        "@semantic-release/git": "^7.0.8",
+        "@semantic-release/npm": "^5.1.8",
+        "@semantic-release/release-notes-generator": "^7.1.4",
+        "@types/fs-extra": "^5.1.0",
+        "@types/lodash": "^4.14.132",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^10.14.7",
+        "@typescript-eslint/eslint-plugin": "^2.6.1",
+        "@typescript-eslint/experimental-utils": "^2.6.1",
+        "@typescript-eslint/parser": "^2.6.1",
+        "camelcase": "^5.3.1",
+        "chalk": "^3.0.0",
+        "conventional-changelog": "^3.1.3",
+        "conventional-changelog-cli": "^2.0.12",
+        "eslint": "^6.6.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jsdoc": "^17.1.1",
+        "eslint-plugin-no-null": "^1.0.2",
+        "glob": "^7.1.6",
+        "husky": "^1.3.1",
+        "istanbul": "^0.4.5",
+        "koa": "^2.7.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-router": "^7.4.0",
+        "koa-static": "^5.0.0",
+        "mdgator": "^1.1.2",
+        "mocha": "^6.1.4",
+        "nyc": "^14.1.1",
+        "rimraf": "^2.6.3",
+        "source-map-support": "^0.5.12",
+        "ts-node": "^8.2.0",
+        "typedoc": "^0.15.3",
+        "typescript": "~3.4.5",
+        "vue": "^2.6.10"
+      },
+      "release": {
+        "branch": "master",
+        "plugins": [
+          "@semantic-release/commit-analyzer",
+          "@semantic-release/release-notes-generator",
+          "@semantic-release/changelog",
+          "@semantic-release/npm",
+          [
+            "@semantic-release/git",
+            {
+              "assets": [
+                "package.json",
+                "CHANGELOG.md"
+              ],
+              "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            }
+          ],
+          "@semantic-release/github"
+        ]
+      },
+      "gitHead": "f16f0b57edd6d18fec721202dfa076ab037b205b",
+      "bugs": {
+        "url": "https://github.com/searchfe/ts2php/issues"
+      },
+      "homepage": "https://github.com/searchfe/ts2php#readme",
+      "_id": "ts2php@0.19.11",
+      "_nodeVersion": "10.18.0",
+      "_npmVersion": "6.13.4",
+      "dist": {
+        "integrity": "sha512-y2xfD5YtbOEz9OU619Wo9G3QCk0th0QnKQ5y2N271NbTf1bg6AmxQxj+2MIBjKS01D6v30hZVHyOojpkAgFDpw==",
+        "shasum": "25f221cd688e1733548a157713cb746b6716c23d",
+        "tarball": "https://registry.npmjs.org/ts2php/-/ts2php-0.19.11.tgz",
+        "fileCount": 95,
+        "unpackedSize": 921808,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJeANSgCRA9TVsSAnZWagAAjCMP/iHDZjz2zVX6gT6AY/jn\nc/EQTsRH3/+vpqeHIEKiIieTvJh1zbwzSoYVgFdJxbMXFocY0ApFZc2FsA7D\nBLeyJmQteZzUdQA1AkG+n7Hcb5RobWIOCER/tIlQw0x7Ma7gVQChaaFX991/\nt2LAJRt9V+bcxEQA1Qdbg/LNstk8vEm7uQbbht6GobciU0Vm/2NRVGY1a4+L\nf5VOCZYpeCXIKUT3WbeklAGHsmBeB+rrWyD5z0dXHd8iICO4a6/KuY1L+NCq\ns8Xxv+iy7CYb5d2rPq6qPqq7ajvihqHFW/GfpLJH/BN6KGCus7PPPrmMwcwR\ng3Sh7qhtISBhnSCs+8TepYRFPb4eGsbJxlCArx6QQePjNehzHj1nVFIjsewN\nfXptkd/hGIVIp5aTp3D9n59vIDlxQzMxd2pxsHDHkzuhZ281TOZ3YbUVY9iQ\neP8oVAvdsbC01t2TMmJCUyLHb+yX/zWA3n/H3rPuULaaDt6GL1VXB+QrraGC\n85HJR1E7V87oLTUV4n1Lc9UWR/gWLEUJZ9aFxy6xsYSAIv425nw/5T7fCfYi\nldB/QVyO5n83zFaJFd6O4YqKloTmniEOYQvghZBwMYvsWdjPMT3eJyHoO7Nd\n6xnS5nV2k6HG1xSj189tHVe81frA2H+S+JxecifzY3fac27O96Q4nNIltM0S\nb0YQ\r\n=2tOU\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "email": "cxtom2010@gmail.com",
+          "name": "cxtom"
+        },
+        {
+          "email": "meixg@foxmail.com",
+          "name": "meixg"
+        }
+      ],
+      "_npmUser": {
+        "name": "meixg",
+        "email": "meixg@foxmail.com"
+      },
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/ts2php_0.19.11_1577112735797_0.6937637919869244"
+      },
+      "_hasShrinkwrap": false
+    }
+  },
+  "time": {
+    "created": "2019-02-19T06:00:04.974Z",
+    "0.0.1-alpha.1": "2019-02-19T06:00:05.161Z",
+    "modified": "2019-12-23T14:52:18.893Z",
+    "0.0.1-alpha.2": "2019-02-20T11:46:01.275Z",
+    "0.0.1-alpha.3": "2019-02-21T06:48:31.546Z",
+    "0.0.1-alpha.4": "2019-02-21T12:49:50.908Z",
+    "0.0.1-alpha.6": "2019-02-25T12:07:08.830Z",
+    "0.0.1-alpha.7": "2019-02-26T03:35:03.094Z",
+    "0.0.1-alpha.8": "2019-02-27T06:11:13.414Z",
+    "0.0.1-alpha.9": "2019-02-27T07:34:41.024Z",
+    "0.0.1-alpha.10": "2019-02-27T08:32:15.941Z",
+    "0.1.0": "2019-02-28T08:13:09.981Z",
+    "0.1.1": "2019-03-03T07:33:43.056Z",
+    "0.1.2": "2019-03-03T08:02:21.727Z",
+    "0.1.3": "2019-03-14T09:54:10.092Z",
+    "0.1.4": "2019-03-15T03:59:19.296Z",
+    "0.1.5": "2019-04-09T06:40:24.570Z",
+    "0.2.1": "2019-04-17T04:51:30.993Z",
+    "0.2.2": "2019-04-17T11:06:17.482Z",
+    "0.3.0": "2019-04-18T05:50:25.518Z",
+    "0.3.1": "2019-04-18T12:11:54.733Z",
+    "0.4.0": "2019-04-22T07:19:48.144Z",
+    "0.5.0": "2019-04-23T12:59:54.544Z",
+    "0.6.0": "2019-04-25T12:24:05.843Z",
+    "0.6.1": "2019-04-26T11:58:51.226Z",
+    "0.7.0": "2019-04-29T03:48:11.423Z",
+    "0.8.0": "2019-04-29T09:52:06.880Z",
+    "0.8.1": "2019-05-05T10:10:58.988Z",
+    "0.9.0": "2019-05-07T03:45:05.264Z",
+    "0.9.1": "2019-05-09T11:20:44.006Z",
+    "0.9.2": "2019-05-09T12:39:57.707Z",
+    "0.9.3": "2019-05-10T08:51:01.355Z",
+    "0.9.4": "2019-05-22T13:34:05.644Z",
+    "0.9.5": "2019-05-27T02:26:25.910Z",
+    "0.9.6": "2019-05-30T07:44:57.376Z",
+    "0.9.7": "2019-06-03T09:58:29.813Z",
+    "0.9.8": "2019-06-04T07:38:22.169Z",
+    "0.10.0": "2019-06-05T02:30:07.099Z",
+    "0.10.1": "2019-06-18T08:25:43.895Z",
+    "0.10.2": "2019-06-19T11:40:44.116Z",
+    "0.10.3": "2019-06-20T08:23:04.535Z",
+    "0.10.4": "2019-06-21T09:39:51.064Z",
+    "0.10.5": "2019-06-21T10:21:49.268Z",
+    "0.10.6": "2019-06-25T08:14:16.897Z",
+    "0.10.7": "2019-06-26T02:14:13.182Z",
+    "0.10.8": "2019-07-08T06:04:09.312Z",
+    "0.10.9": "2019-07-08T06:20:09.902Z",
+    "0.11.0": "2019-07-10T03:56:11.273Z",
+    "0.11.1": "2019-07-10T05:49:50.783Z",
+    "0.11.2": "2019-07-22T04:07:01.360Z",
+    "0.11.3": "2019-07-22T06:11:44.686Z",
+    "0.12.0-0": "2019-08-05T05:59:53.409Z",
+    "0.12.0": "2019-08-05T06:34:12.203Z",
+    "0.12.1": "2019-08-26T08:09:33.064Z",
+    "0.13.0-beta.0": "2019-09-09T05:11:08.522Z",
+    "0.12.2": "2019-09-10T03:45:03.336Z",
+    "0.12.3": "2019-09-26T02:52:33.384Z",
+    "0.12.4": "2019-10-12T14:56:21.873Z",
+    "0.12.5": "2019-10-18T06:48:56.019Z",
+    "0.12.6": "2019-10-21T09:04:42.673Z",
+    "0.12.7": "2019-10-24T03:13:53.119Z",
+    "0.12.8": "2019-10-24T06:13:11.518Z",
+    "0.12.9": "2019-10-28T04:36:55.589Z",
+    "0.12.10": "2019-10-29T05:44:08.928Z",
+    "0.12.11": "2019-10-30T09:47:53.414Z",
+    "0.12.12": "2019-10-31T12:49:48.831Z",
+    "0.13.0": "2019-11-14T08:21:00.574Z",
+    "0.14.0": "2019-11-14T09:40:06.032Z",
+    "0.15.0": "2019-11-18T13:34:00.137Z",
+    "0.16.0": "2019-11-19T05:10:12.864Z",
+    "0.16.1": "2019-11-19T07:57:04.131Z",
+    "0.17.0": "2019-11-20T07:06:37.111Z",
+    "0.18.0": "2019-11-20T12:18:54.613Z",
+    "0.19.0": "2019-11-24T02:37:11.290Z",
+    "0.19.1": "2019-11-27T10:04:19.510Z",
+    "0.19.2": "2019-11-28T04:09:55.188Z",
+    "0.19.3": "2019-11-28T07:35:34.312Z",
+    "0.19.4": "2019-12-01T10:21:41.384Z",
+    "0.19.5": "2019-12-06T10:45:02.236Z",
+    "0.19.6": "2019-12-09T12:13:29.254Z",
+    "0.19.7": "2019-12-11T12:38:28.958Z",
+    "0.19.8": "2019-12-12T07:01:55.430Z",
+    "0.19.9": "2019-12-13T07:50:58.615Z",
+    "0.19.10": "2019-12-23T10:36:43.218Z",
+    "0.19.11": "2019-12-23T14:52:15.964Z"
+  },
+  "maintainers": [
+    {
+      "email": "cxtom2010@gmail.com",
+      "name": "cxtom"
+    },
+    {
+      "email": "meixg@foxmail.com",
+      "name": "meixg"
+    }
+  ],
+  "description": "TypeScript to PHP Transpiler",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/searchfe/ts2php.git"
+  },
+  "author": {
+    "name": "meixuguang"
+  },
+  "license": "MIT",
+  "readme": "# ts2php\n\n**under development**\n\nTypeScript 转 PHP\n\nA Compiler which can compile TypeScript to PHP.\n\n![Language](https://img.shields.io/badge/-TypeScript-blue.svg)\n[![Build Status](https://travis-ci.com/searchfe/ts2php.svg?branch=master)](https://travis-ci.org/searchfe/ts2php)\n[![npm package](https://img.shields.io/npm/v/ts2php.svg)](https://www.npmjs.org/package/ts2php)\n[![npm downloads](http://img.shields.io/npm/dm/ts2php.svg)](https://www.npmjs.org/package/ts2php)\n[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/searchfe/ts2php)\n\n- [ts2php](#ts2php)\n  - [Usage](#usage)\n    - [compiler](#compiler)\n    - [runtime](#runtime)\n    - [CLI](#cli)\n    - [update ts2php version](#update-ts2php-version)\n  - [Features](#features)\n    - [Javascript Syntax](#javascript-syntax)\n    - [Core JavaScript API](#core-javascript-api)\n  - [Thanks to](#thanks-to)\n\n## Usage\n\n### compiler\n\n```javascript\nimport {compile} from 'ts2php';\n\nconst result = compile(filePath, options);\n```\n\n### runtime\n\n> 部分功能依赖一个 PHP 的类库，需要在 PHP 工程中引入\n\n> Some features are implemented by a PHP helper class, which need to be included in your PHP\n code.\n\n```php\nrequire_once(\"/path/to/ts2php/dist/runtime/Ts2Php_Helper.php\");\n```\n\n### CLI\n\nQuick Start：\n\n```bash\n$ npm i -g ts2php\n$ ts2php ./a.ts                   # 编译输出到 stdout\n```\n\n使用[配置][options]并输出到文件：\n\n```bash\n$ cat config.js\nmodule.exports = {\n  emitHeader: false\n};\n$ ts2php -c config.js src/ -o output/\n```\n\n更多选项：\n\n```bash\n$ ts2php --show-diagnostics       # 输出诊断信息\n$ ts2php --emit-header            # 输出头部信息\n$ ts2php -h                       # 更多功能请查看帮助\n```\n\n### update ts2php version\n\nSame TS code with different version of ts2php may result to different PHP code. When updating the version of ts2php, we should check the result PHP code manually. To simplify this process, we recommend to use [ts2php-diff-checker][ts2php-diff-checker]. Specify two version of ts2php, and some source TS code, [ts2php-diff-checker][ts2php-diff-checker] will generate diff info directly.\n\n```sh\nts2php-check <pattern> <old-version> <new-version> [destination]\n```\n\n## Features\n\n### Javascript Syntax\n\n- [`for`/`for of`/`for in`](./test/features/ForStatement.md)\n- [`if`/`else if`/`else`](./test/features/IfStatement.md)\n- [`swtich`](./test/features/SwitchStatement.md)\n- [`while`/`do while`](./test/features/WhileStatement.md)\n- [`Class`](./test/features/Class.md)\n- [`typeof`](./test/features/GlobalApi.md)\n- [`delete`](./test/features/GlobalApi.md)\n- [`destructuring`](./test/features/Destructuring.md)\n- [`template string`](./test/features/template.md)\n- [`object computed property`](./test/features/ComputedPropertyName.md)\n- [`object shorthand property`](./test/features/ShorthandPropertyAssignment.md)\n- [`enum`](./test/features/EnumDeclaration.md)\n- [`anonymous function inherit variables`](./test/features/inheritedVariables.md)\n- [`rest function arguments`](./test/features/spreadExpression.md)\n- [`spread`](./test/features/spreadExpression.md)\n- [`exception`](./test/features/exception.md)\n\nFor more, see feature test markdowns: [Javascript Syntax](./test/features)\n\n### Core JavaScript API\n\n- parseInt **只接收一个参数**\n- parseFloat\n- encodeURIComponent\n- decodeURIComponent\n- encodeURI\n- __dirname\n- __filename\n- Date\n  - Date.now\n  - Date.prototype.getTime\n  - Date.prototype.getDate\n  - Date.prototype.getDay\n  - Date.prototype.getFullYear\n  - Date.prototype.getHours\n  - Date.prototype.getMinutes\n  - Date.prototype.getMonth\n  - Date.prototype.getSeconds\n  - Date.prototype.setDate\n  - Date.prototype.setFullYear\n  - Date.prototype.setHours\n  - Date.prototype.setMinutes\n  - Date.prototype.setMonth\n  - Date.prototype.setSeconds\n  - Date.prototype.setTime\n- Object\n  - Object.assign\n  - Object.keys\n  - Object.values\n  - Object.freeze\n  - Object.prototype.hasOwnProperty\n- JSON\n  - JSON.stringify **只接收一个参数**\n  - JSON.parse **只接收一个参数**\n- console\n  - console.log\n  - console.info **转成 var_dump**\n  - console.error\n- String\n  - String.prototype.replace **第二个参数只支持 string，不支持 Function**\n  - String.prototype.trim\n  - String.prototype.trimRight\n  - String.prototype.trimLeft\n  - String.prototype.toUpperCase\n  - String.prototype.toLowerCase\n  - String.prototype.split\n  - String.prototype.indexOf\n  - String.prototype.substring\n  - String.prototype.repeat\n  - String.prototype.startsWidth\n  - String.prototype.endsWidth\n  - String.prototype.includes\n  - String.prototype.padStart\n  - String.prototype.match **只支持正则和字符串匹配**\n- Array\n  - Array.isArray\n  - Array.prototype.length\n  - Array.prototype.filter **回调函数只接收第一个参数**\n  - Array.prototype.push\n  - Array.prototype.pop\n  - Array.prototype.shift\n  - Array.prototype.unshift\n  - Array.prototype.concat\n  - Array.prototype.reverse\n  - Array.prototype.splice\n  - Array.prototype.reverse\n  - Array.prototype.map\n  - Array.prototype.forEach\n  - Array.prototype.indexOf\n  - Array.prototype.join\n  - Array.prototype.some\n  - Array.prototype.every\n  - Array.prototype.find\n  - Array.prototype.findIndex\n  - Array.prototype.sort\n- Number\n  - Number.isInterger\n  - Number.prototype.toFixed\n- Math\n  - Math.abs\n  - Math.acos\n  - Math.acosh\n  - Math.asin\n  - Math.asinh\n  - Math.atan\n  - Math.atanh\n  - Math.atan2\n  - Math.cbrt\n  - Math.ceil\n  - Math.clz32\n  - Math.cos\n  - Math.cosh\n  - Math.exp\n  - Math.expm1\n  - Math.floor\n  - Math.hypot\n  - Math.log\n  - Math.log1p\n  - Math.log10\n  - Math.max\n  - Math.min\n  - Math.pow\n  - Math.random\n  - Math.round\n  - Math.sin\n  - Math.sinh\n  - Math.sqrt\n  - Math.tan\n  - Math.tanh\n\n## Thanks to\n\nBased on [Typescript](https://github.com/Microsoft/TypeScript) compiler\n\n[options]: https://searchfe.github.io/ts2php/interfaces/ts2phpoptions.html\n[ts2php-diff-checker]: https://github.com/meixg/ts2php-diff-checker\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/searchfe/ts2php#readme",
+  "contributors": [
+    {
+      "name": "cxtom",
+      "email": "cxtom2008@gmail.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/searchfe/ts2php/issues"
+  }
+}

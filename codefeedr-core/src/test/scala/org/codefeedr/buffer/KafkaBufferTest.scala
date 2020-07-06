@@ -37,7 +37,7 @@ import org.codefeedr.testUtils.{JobFinishedException, SimpleSourceStage}
 import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, FunSuite}
 import redis.embedded.RedisServer
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 class KafkaBufferTest
     extends FunSuite
@@ -186,7 +186,7 @@ object StringCollectSink {
     result = new util.ArrayList[String]()
   }
 
-  def asList: List[String] = result.toList
+  def asList: List[String] = result.asScala.toList
 }
 
 class StringCollectSink extends SinkFunction[StringType] {

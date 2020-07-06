@@ -2,59 +2,24 @@ package org.codefeedr.plugins.pypi.operators
 
 import java.text.SimpleDateFormat
 
-import org.apache.flink.api.common.accumulators.LongCounter
-import org.apache.flink.api.common.state.{ListState, ListStateDescriptor}
-import org.apache.flink.configuration.Configuration
-import org.apache.flink.runtime.state.{
-  FunctionInitializationContext,
-  FunctionSnapshotContext
-}
-import org.apache.flink.streaming.api.checkpoint.CheckpointedFunction
-import org.apache.flink.streaming.api.functions.source.{
-  RichSourceFunction,
-  SourceFunction
-}
+import org.apache.flink.streaming.api.functions.source.SourceFunction
+import org.codefeedr.pipeline.{PluginReleasesSource, PluginSourceConfig}
 import org.codefeedr.plugins.pypi.protocol.Protocol.PyPiRelease
 import org.codefeedr.stages.utilities.{HttpRequester, RequestException}
 import scalaj.http.Http
 
-import scala.collection.JavaConverters._
 import scala.xml.XML
 
 case class PyPiSourceConfig(pollingInterval: Int = 1000,
                             maxNumberOfRuns: Int = -1)
+    extends PluginSourceConfig
 
 class PyPiReleasesSource(config: PyPiSourceConfig = PyPiSourceConfig())
-    extends RichSourceFunction[PyPiRelease]
-    with CheckpointedFunction {
+    extends PluginReleasesSource[PyPiRelease](config) {
 
   /** Format and URL of RSS Feed. */
   val dateFormat = "EEE, dd MMM yyyy HH:mm:ss ZZ"
   val url = "https://pypi.org/rss/updates.xml"
-
-  /** Some track variables of this source. */
-  private var isRunning = false
-  private var runsLeft = 0
-  private var lastItem: Option[PyPiRelease] = None
-  @transient
-  private var checkpointedState: ListState[PyPiRelease] = _
-
-  def getIsRunning: Boolean = isRunning
-
-  /** Accumulator for the amount of processed releases. */
-  val releasesProcessed = new LongCounter()
-
-  /** Opens this source. */
-  override def open(parameters: Configuration): Unit = {
-    isRunning = true
-    runsLeft = config.maxNumberOfRuns
-  }
-
-  /** Close the source. */
-  override def cancel(): Unit = {
-    isRunning = false
-
-  }
 
   /** Runs the source.
     *
@@ -79,13 +44,9 @@ class PyPiReleasesSource(config: PyPiSourceConfig = PyPiSourceConfig())
           val validSortedItems = sortAndDropDuplicates(items)
           validSortedItems.foreach(x =>
             ctx.collectWithTimestamp(x, x.pubDate.getTime))
-          releasesProcessed.add(validSortedItems.size)
-          if (validSortedItems.nonEmpty) {
-            lastItem = Some(validSortedItems.last)
-          }
 
-          // Wait until the next poll
-          waitPollingInterval()
+          // call parent run
+          super.runPlugin(ctx, validSortedItems)
         } catch {
           case _: Throwable =>
         }
@@ -142,51 +103,12 @@ class PyPiReleasesSource(config: PyPiSourceConfig = PyPiSourceConfig())
     */
   def xmlToPyPiRelease(node: scala.xml.Node): PyPiRelease = {
     val title = (node \ "title").text
-    val description = (node \ "description").text
     val link = (node \ "link").text
+    val description = (node \ "description").text
 
     val formatter = new SimpleDateFormat(dateFormat)
     val pubDate = formatter.parse((node \ "pubDate").text)
 
-    PyPiRelease(title, description, link, pubDate)
-  }
-
-  /**
-    * If there is a limit to the amount of runs decrease by 1
-    */
-  def decreaseRunsLeft(): Unit = {
-    if (runsLeft > 0) {
-      runsLeft -= 1
-    }
-  }
-
-  /**
-    * Wait a certain amount of times the polling interval
-    * @param times Times the polling interval should be waited
-    */
-  def waitPollingInterval(times: Int = 1): Unit = {
-    Thread.sleep(times * config.pollingInterval)
-  }
-
-  /** Make a snapshot of the current state. */
-  override def snapshotState(context: FunctionSnapshotContext): Unit = {
-    if (lastItem.isDefined) {
-      checkpointedState.clear()
-      checkpointedState.add(lastItem.get)
-    }
-  }
-
-  /** Initializes state by reading from a checkpoint or creating an empty one. */
-  override def initializeState(context: FunctionInitializationContext): Unit = {
-    val descriptor =
-      new ListStateDescriptor[PyPiRelease]("last_element", classOf[PyPiRelease])
-
-    checkpointedState = context.getOperatorStateStore.getListState(descriptor)
-
-    if (context.isRestored) {
-      checkpointedState.get().asScala.foreach { x =>
-        lastItem = Some(x)
-      }
-    }
+    PyPiRelease(title, link, description, pubDate)
   }
 }

@@ -52,7 +52,12 @@ class GHTInputStage(username: String,
   override def main(context: Context): DataStream[Record] = {
     context.env
       .addSource(
-        new GHTorrentRabbitMQSource(username, host, port, routingKeysFile, password = password, virtualHost = virtualHost))
+        new GHTorrentRabbitMQSource(username,
+                                    host,
+                                    port,
+                                    routingKeysFile,
+                                    password = password,
+                                    virtualHost = virtualHost))
       .map { x =>
         val splitEl = x.split("#", 2)
         val routingKey = splitEl(0)

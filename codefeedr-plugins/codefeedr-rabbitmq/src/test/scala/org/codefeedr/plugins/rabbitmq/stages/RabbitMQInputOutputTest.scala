@@ -21,23 +21,17 @@ import java.util
 
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.functions.sink.SinkFunction
-import org.apache.flink.streaming.api.functions.sink.SinkFunction.Context
-import org.apache.flink.streaming.api.scala.{
-  DataStream,
-  StreamExecutionEnvironment
-}
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.connectors.rabbitmq.RMQSource
 import org.codefeedr.pipeline
-import org.codefeedr.pipeline.Context
+import org.codefeedr.plugins.rabbitmq.RMQSinkDurable
 import org.codefeedr.stages.utilities.StringType
 import org.scalatest.FunSuite
 import org.scalatest.mockito.MockitoSugar
 import org.mockito.Matchers._
 import org.mockito.Mockito._
-import org.apache.flink.api.scala._
-import org.codefeedr.plugins.rabbitmq.RMQSinkDurable
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 class RabbitMQInputOutputTest extends FunSuite with MockitoSugar {
 
@@ -106,7 +100,7 @@ object RMQStringCollectSink {
     numEventTimes = 0
   }
 
-  def asList: List[String] = result.toList
+  def asList: List[String] = result.asScala.toList
 }
 
 class RMQStringCollectSink extends SinkFunction[StringType] {

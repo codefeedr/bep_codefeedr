@@ -26,9 +26,6 @@ object Properties {
   // Conversion implicits
   implicit def stringToBoolean(str: String): Boolean = str.toBoolean
   implicit def booleanToString(bool: Boolean): String = bool.toString
-
-
-
 }
 
 /** Object containing configuration properties. */

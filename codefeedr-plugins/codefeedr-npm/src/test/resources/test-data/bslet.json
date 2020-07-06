@@ -1,0 +1,288 @@
+{
+  "_id": "bs-let",
+  "_rev": "3-bbdfd0170944489f4dc72db21d4b9f3c",
+  "name": "bs-let",
+  "dist-tags": {
+    "latest": "0.1.11"
+  },
+  "versions": {
+    "0.1.8": {
+      "name": "bs-let",
+      "version": "0.1.8",
+      "description": "A PPX for async/await (and general monadic binding) in ReasonML.",
+      "license": "MIT",
+      "esy": {
+        "build": "refmterr dune build -p let_anything_ppx"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "scripts": {
+        "build": "esy"
+      },
+      "dependencies": {},
+      "resolutions": {
+        "@esy-ocaml/esy-installer": "0.0.1",
+        "@opam/menhir": "20171013",
+        "@opam/re": "1.8.0"
+      },
+      "devDependencies": {
+        "@opam/dune": "*",
+        "@opam/ocaml-migrate-parsetree": "^1.0.11",
+        "@esy-ocaml/reason": "*",
+        "refmterr": "*",
+        "@esy-ocaml/merlin": "*",
+        "esy": "^0.5.8",
+        "ocaml": "~4.6.1000"
+      },
+      "gitHead": "405b34184b8858742d53a836eba465aa2057d1aa",
+      "_id": "bs-let@0.1.8",
+      "_nodeVersion": "11.15.0",
+      "_npmVersion": "6.7.0",
+      "dist": {
+        "integrity": "sha512-mRZnkdNsjg49os9R9ljnkJOVSNX801f+Hmjjb2GY3JtG8NgO82PPXT5EFF765AYW3zxpZlMJ6Ub4/EL7R6TpUA==",
+        "shasum": "1c9e89546aa6b78ec2e4eb00c6cb9364f06412cf",
+        "tarball": "https://registry.npmjs.org/bs-let/-/bs-let-0.1.8.tgz",
+        "fileCount": 49,
+        "unpackedSize": 20796010,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJd1YNKCRA9TVsSAnZWagAADF0P/R70D0TyS+480y9AVtLZ\nmVGcIAoVRcl9tW6aUBa/GBg2utOsRo8PWzvxkpm086WZvYDYySSyZxs7Im5F\ndaPZbh2E5olbe6JcZP/lmE3KtJ+Tw1TtpQZ2iNEng8BF2KhmMK6F+UrnCdJH\n0wjfgCPgbpcBkJ/b3yN16VzS2VEXv3cym7u7Yi+p3Tfv0bJ+/AKieczFj0eU\ncDpDwMqviHK7jQyGUHtbCw74HHFiW6riWdaehKWo95+DvMOKqSv7ChFimOta\n86RLN58yiPc22Xuvoj907XO4NHQR4m45AmCuJk3bCJbaHp0YD9TkMD9Ip5YN\nyrHSs93C/b7UoDHrkv6PohNuyTMNmlRw6QfbUvstKKD/VP2bydEvADHrQ3Ca\nDTznaxrUeG+0NVA8XFBIo5Mj1USF15zw4TPyfS1a8e4f79nL02rN6bJfnQhT\nVgx5IqYsJxee7eCg12BLNhLxPSSVobdRbXCmWvkewqdGGgn4+Zw/C+QeWAEk\nl2YSX6Dp+ZAHGkmWEgGCKCtRCUAuKl/i93rCS0RnqawMwfYYSeu1+hPCg++q\nkIS9EbKV3Y4XsEYtl5MFe/K07rKhZpLgNep+tVHVMvltZcdr2XiQYUTyQlOY\nxJBkr2qTdaK+a7axYZFe+5KNm36aFSX7nYYzGwan2VfhewTNOOH2pQo1OuDJ\nVqS3\r\n=PpD6\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "mrmurphy",
+          "email": "m@mrmurphy.dev"
+        }
+      ],
+      "_npmUser": {
+        "name": "mrmurphy",
+        "email": "m@mrmurphy.dev"
+      },
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/bs-let_0.1.8_1574273865936_0.5986737878860178"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.9": {
+      "name": "bs-let",
+      "version": "0.1.9",
+      "description": "A PPX for async/await (and general monadic binding) in ReasonML.",
+      "repository": {
+        "url": "git+https://github.com/reasonml-labs/bs-let.git"
+      },
+      "license": "MIT",
+      "esy": {
+        "build": "refmterr dune build -p let_anything_ppx"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "scripts": {
+        "build": "esy"
+      },
+      "dependencies": {},
+      "resolutions": {
+        "@esy-ocaml/esy-installer": "0.0.1",
+        "@opam/menhir": "20171013",
+        "@opam/re": "1.8.0"
+      },
+      "devDependencies": {
+        "@opam/dune": "*",
+        "@opam/ocaml-migrate-parsetree": "^1.0.11",
+        "@esy-ocaml/reason": "*",
+        "refmterr": "*",
+        "@esy-ocaml/merlin": "*",
+        "esy": "^0.5.8",
+        "ocaml": "~4.6.1000"
+      },
+      "gitHead": "5058093bcb24c92d8ef4def8b657c6c650f67d4f",
+      "bugs": {
+        "url": "https://github.com/reasonml-labs/bs-let/issues"
+      },
+      "homepage": "https://github.com/reasonml-labs/bs-let#readme",
+      "_id": "bs-let@0.1.9",
+      "_nodeVersion": "11.15.0",
+      "_npmVersion": "6.7.0",
+      "dist": {
+        "integrity": "sha512-bS7afS9OXtv1RiKkRo/rVL/jGR1R0izUUWhWGdoZ0pr7OlHfr/MS2vSADFmOVpHS9CD2weuzV/alJnxbyU7UVw==",
+        "shasum": "bf2418bfd2a1629bdb4c72d6a66ed5d6df7dc5d3",
+        "tarball": "https://registry.npmjs.org/bs-let/-/bs-let-0.1.9.tgz",
+        "fileCount": 49,
+        "unpackedSize": 20796137,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJd1YhtCRA9TVsSAnZWagAASqgP/A0SfRvrqQvoJZhL2nPw\nK3LjbqBwMktxGeRnurs+YCIc7MSFZWDWPu6xMuwehS6AUQUxhl/onW3VCEfm\n2NizPjKs7KlnDc2QE9Bd9jt/Ar75XeaMBMXCPXBiYW+rYkTbYm5EMNA4MnE0\nt7vq5WP/exOQs92ED7czoQB4EPZkD8bh2Xugmd1H+hQUHXdkrEzCDcA7bl/l\nsItdOw2uESmuQIrKN4h+ryjWuXExFLvubuglrHBGzqC0OkSy6A1jelVfmZsc\nJPrkkBjQdovvfwqw7hkCVcNLaHPWc4sHaHmy5x3hR4CyfqRDX7z11CRPnPAa\n6gv9ifUGCHSci/brkY+OtS41mjCsa/8WOG+yoBQcKvEMgkT8uzkcy6Ni/gxN\nBa9qDFlkocp1yzhwUlAIJTuqs9q/3aozea45TA7SSTBP3FITd0UQI07jQikD\nKh0AO2X3WsVVTUjrAqi/tZ0xy2T6IphuMkgurc5v/Qi//BasRCcDxjuj6QdN\nAa178grCGzQ2zlT9B4AdTz7LipiFz6zBtuzNpIxmPjuxEXTjn15lcSPUfuRj\ncAemlbVmGHA9HgCYlDwy06eIM9OAv/TArw4nxQaJLGN/ZqXv+BYg+qop4CBQ\nmi8+sm3aWvHyFqPH1uf7JYj6Wji3DLScTXDD8yQqr6NYY29db6Cl/pBxrTvq\nd3Bv\r\n=R53s\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "mrmurphy",
+          "email": "m@mrmurphy.dev"
+        }
+      ],
+      "_npmUser": {
+        "name": "mrmurphy",
+        "email": "m@mrmurphy.dev"
+      },
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/bs-let_0.1.9_1574275180805_0.19962669483563134"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.10": {
+      "name": "bs-let",
+      "version": "0.1.10",
+      "description": "A PPX for async/await (and general monadic binding) in ReasonML.",
+      "repository": {
+        "url": "git+https://github.com/reasonml-labs/bs-let.git"
+      },
+      "license": "MIT",
+      "esy": {
+        "build": "refmterr dune build -p let_anything_ppx"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "scripts": {
+        "build": "esy"
+      },
+      "dependencies": {},
+      "resolutions": {
+        "@esy-ocaml/esy-installer": "0.0.1",
+        "@opam/menhir": "20171013",
+        "@opam/re": "1.8.0"
+      },
+      "devDependencies": {
+        "@opam/dune": "*",
+        "@opam/ocaml-migrate-parsetree": "^1.0.11",
+        "@esy-ocaml/reason": "*",
+        "refmterr": "*",
+        "@esy-ocaml/merlin": "*",
+        "esy": "^0.5.8",
+        "ocaml": "~4.6.1000"
+      },
+      "gitHead": "d7225c554afd9816ca1e99a86849cccd295acb81",
+      "bugs": {
+        "url": "https://github.com/reasonml-labs/bs-let/issues"
+      },
+      "homepage": "https://github.com/reasonml-labs/bs-let#readme",
+      "_id": "bs-let@0.1.10",
+      "_nodeVersion": "11.15.0",
+      "_npmVersion": "6.7.0",
+      "dist": {
+        "integrity": "sha512-4YOXsX4qgXlToH7ciht8ne9rJpXU90PJo5ozPv7HtQSxFx7XaQ9U6IT7O4RW/TyuUiDyi0AszvwHo/1v1ZKXFg==",
+        "shasum": "acfcd9640743cda8201b628201fffad296320914",
+        "tarball": "https://registry.npmjs.org/bs-let/-/bs-let-0.1.10.tgz",
+        "fileCount": 49,
+        "unpackedSize": 20798484,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJd3XEPCRA9TVsSAnZWagAA5PIP/iVAIHq8gkY2ji3FvhGB\niNO1LIK22Kx2d0v34TSrJW1lOKujdOG6XEpYJ/0dGllCPwy5UhVykV/TnJXw\nu4Q/YqlUjAAc0BRnyV9Bn4tPWjtoLnYtuTKLJ4vdPHZFVoYCoLdf8juYTtKW\nkDN/DoPBlJ1tvQxcVo2qBeMkvOF3b5+CbzKVjbPMn3BJ0Tk/RfXllEfiZz+Z\novy/33KtA/nrqIY1M9xCUZsx3/Ki5Msrrrt6IPFHGdm70CXAxU4i4XxdURk2\nw5zK7GL+/yiv42i6sd8P0TnIDTQEhaS+NGaRn8/R9Nd4TcnY3+etDBI83l+z\nNYxfr6+OOk/IQcoMeKWrhWbB+dZ0YZByjerKTYCJPI9EQTkXfCGEAjy+yErm\nEYvsWq5WNYk0Z2Nie9JPSinAlh3Hzm3caIix2aCwloqrrDza14pCJB+oDrjq\njByShB6kTr2uo5OXn9bN5kWI3D656NtcZuxx/wt816AsRwZLLCHt6gBV2ify\nS8PSpfHPNXkC5IMLlXyCgmjpDCDNacUZyrrCX+urjoFcBY4AXe30AYWwdJl8\n2Ba2ROU7Vwg1EZKlojsiY7rNlPz0vXErGGiGjsG6ppnyXu1rhCPBpGREO94a\nQDKU90j/LpsB17x2SZm0+jJ1Nq3HfVRIaKlcJwGUAnCAQTCtfiPf/yKtgKG6\nit6m\r\n=n2Vr\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "mrmurphy",
+          "email": "m@mrmurphy.dev"
+        }
+      ],
+      "_npmUser": {
+        "name": "mrmurphy",
+        "email": "m@mrmurphy.dev"
+      },
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/bs-let_0.1.10_1574793486830_0.451992588756281"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.11": {
+      "name": "bs-let",
+      "version": "0.1.11",
+      "description": "A PPX for async/await (and general monadic binding) in ReasonML.",
+      "repository": {
+        "url": "git+https://github.com/reasonml-labs/bs-let.git"
+      },
+      "license": "MIT",
+      "esy": {
+        "build": "refmterr dune build -p let_anything_ppx"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "scripts": {
+        "build": "esy"
+      },
+      "dependencies": {},
+      "resolutions": {
+        "@esy-ocaml/esy-installer": "0.0.1",
+        "@opam/menhir": "20171013",
+        "@opam/re": "1.8.0"
+      },
+      "devDependencies": {
+        "@opam/dune": "*",
+        "@opam/ocaml-migrate-parsetree": "^1.0.11",
+        "@esy-ocaml/reason": "*",
+        "refmterr": "*",
+        "@esy-ocaml/merlin": "*",
+        "esy": "^0.5.8",
+        "ocaml": "~4.6.1000"
+      },
+      "gitHead": "dad1e6a828bbf51a65abd90a380ba974e0fc9742",
+      "bugs": {
+        "url": "https://github.com/reasonml-labs/bs-let/issues"
+      },
+      "homepage": "https://github.com/reasonml-labs/bs-let#readme",
+      "_id": "bs-let@0.1.11",
+      "_nodeVersion": "11.15.0",
+      "_npmVersion": "6.7.0",
+      "dist": {
+        "integrity": "sha512-Zp5wMGEmdTyabiLhNvt1rUQQ5zL2T5z6uj4v6WEIU+K+tseljqrpEz9Dlp5YbF1uePVsXeatmkkhb5xKtvEOPw==",
+        "shasum": "159d0194c890be29d47d54db6f015c881e3269db",
+        "tarball": "https://registry.npmjs.org/bs-let/-/bs-let-0.1.11.tgz",
+        "fileCount": 49,
+        "unpackedSize": 20798484,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJd5ZoqCRA9TVsSAnZWagAAxC8P/RnyB9T/1LgX7fA1fQFD\nvwfb9N0iC4ELRdk3CHjG1ArXj4DG0DzXbjtP87zCGn6n8bJPKaxUTrrZ/Y2i\nTcFMmBozr+YnLK95gphX+8l3Ko5kbVCAhU8VPWA7uVURdD6zkb+mGWa5HHaR\nVyMffQuV2leUY7JHqAX2t8/xlHsbxf2LVM7DCtZYjIOEBB2RVkxRDJn6iVUG\nI/udN3xoQqAOOu3OU2IgQppykOknTDNv/QnmewVwtfu7PIXd69hPpZ5nF6u0\nrs89MwDuw9uO6LE8tBtfDzKs5o94+QqwjdIYPj1gAxaS6MLFEBq5+x4AJ7do\n7oVN4aS55hyu/fGDOHj8zSB7Yp5HgJYGAQ7xSqplfb2s+xQiB4tAdfYSYhVZ\nIBFHrqKoioqIA0CigqgCKTZGz/ydbUf2z2VLI2wLx8cROVqZDkAbqhdKIE00\n3ShJMqQRNlDX+oC+0nbpTd1n8lp0dEbj1ESyea+1oZvto9p6Yf5DnHFrhhbi\nE12I4vNie33tppCnRC9DBhp2MaBAFejuFN2wi0w+6B6ZfCF+alCBzeOog4Vg\n0/DEnMQLSPvvUD/fthAq+yuY1gfkGODRC2bh7OCNV5Yze1EhZ1R8vOV7bZmt\nwUh6TsuhVy3ukpqBaqUGu8ww6oNnspmxeE0qSglrxUZfd2HPe1FHoC8uJt3a\n3m4z\r\n=bqAI\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "mrmurphy",
+          "email": "m@mrmurphy.dev"
+        }
+      ],
+      "_npmUser": {
+        "name": "mrmurphy",
+        "email": "m@mrmurphy.dev"
+      },
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/bs-let_0.1.11_1575328297080_0.22267136964113976"
+      },
+      "_hasShrinkwrap": false
+    }
+  },
+  "time": {
+    "created": "2019-11-20T18:17:45.698Z",
+    "0.1.8": "2019-11-20T18:17:46.237Z",
+    "modified": "2019-12-02T23:11:40.152Z",
+    "0.1.9": "2019-11-20T18:39:41.202Z",
+    "0.1.10": "2019-11-26T18:38:07.141Z",
+    "0.1.11": "2019-12-02T23:11:37.563Z"
+  },
+  "maintainers": [
+    {
+      "name": "mrmurphy",
+      "email": "m@mrmurphy.dev"
+    }
+  ],
+  "description": "A PPX for async/await (and general monadic binding) in ReasonML.",
+  "license": "MIT",
+  "readme": "# bs-let\n\n![A woman knitting some code](https://github.com/reasonml-labs/bs-let/raw/master/artwork/eastwood-page-under-construction.png)\n\nThis is a PPX (language extension) designed to make _monadic operations_ (think async functions with \"await\" statements in Javascript if you don't know what a monadic operation is) easy to write and read in ReasonML.\n\n## Warning: Experimental Project\n\nThis is package is an experimental community project (a.k.a \"labs\"). This means that community members use it and contribute to it, but it is not officially supported or recommended by the ReasonML community. Using this project in a production environment means being willing to contribute yourself if needs be.\n\nAlso, the expected lifetime of this PPX is relatively short. OCaml 4.08 has introduced native syntax for doing the same thing that this PPX does (`let+`). At the time of this writing, Bucklescript is still a ways out from supporting OCaml 4.08, or backporting support for `let+`. This PPX has two purposes:\n\n- Provide a temporary solution until Bucklescript and Reason both support `let+`.\n- Gague community interest in monadic syntax sugar in general and gather feedback on its usage.\n\n## Compatibility\n\nThis package only works with bs-platform 6.x and above. If you're stuck on 5.x take a look at [Jared's original repo](https://github.com/jaredly/let-anything).\n\n## Installation\n\n- `npm install --save-dev bs-let`\n- Open up your `bsconfig.json` and add `bs-let/ppx` to your `ppx-flags`. It should look something like this:\n  ```json\n    {\n        ...\n        \"bsc-flags\": [...],\n        \"ppx-flags\": [\"bs-let/ppx\", ...],\n        \"refmt\": ...\n    }\n  ```\n\n## Usage\n\nSimple and sweet, this is a language extension that flattens callbacks. All you need is a module which defines a function called `let_` which takes something to map over, and a callback to do the mapping. For example:\n\n```reasonml\nmodule Option = {\n    let let_ = Belt.Option.flatMap;\n}\n```\n\nThen, when you're working with something you want to map, add a `%<ModuleName>` onto your `let`, and the rest of the lines in the block will be turned into a callback and passed to the mapping function _at compile time_.\n\nFor example:\n\n```reasonml\n// Assume the `Option` module from above is defined already.\n\ntype address = {\n    street: option(string)\n};\n\ntype personalInfo = {\n    address: option(address)\n};\n\ntype user = {\n    info: option(personalInfo)\n};\n\n// Get the user's street name from a bunch of nested options. If anything is\n// None, return None.\nlet getStreet = (maybeUser: option(user)): option(string) => {\n    let%Option user = maybeUser;\n    // Notice that info isn't an option anymore once we use let%Pom!\n    let%Option info = user.info;\n    let%Option address = info.address;\n    let%Option street = info.street;\n    Some(street->Js.String.toUpperCase)\n};\n```\n\nThat code is flat, readable, and understandable. Here's an alternative without the syntax sugar:\n\n```reasonml\nlet getStreet = (maybeUser: option(user)): option(string) => {\n  maybeUser->Belt.Option.flatMap(user =>\n    user.info\n    ->Belt.Option.flatMap(personalInfo =>\n        personalInfo.address\n        ->Belt.Option.flatMap(address =>\n            address.street\n            ->Belt.Option.flatMap(street =>\n                Some(street->Js.String.toUpperCase)\n              )\n          )\n      )\n  );\n};\n```\n\nMuch nicer to have the sugar, no? This PPX really shines, though, when we use it to chain async operations, since that has to be done quite a lot in Javascript, especially server-side, and it typically happens multiple times in the middle of large and complex functions.\n\nHere's a more complex example of an async control flow using the [Repromise](https://aantron.github.io/repromise/docs/QuickStart) library to work with Javascript promises:\n\n```reasonml\n\n// Repromise doesn't ship with native support for this PPX, so we simply add our\n// own by re-defining the module, including all the stuff from the original\n// module, and adding our own function.\nmodule Repromise = {\n    include Repromise;\n    let let_ = Repromise.andThen;\n\n    // This is totally optional. It can be nice sometimes to return a\n    // non-promise value at the end of a function and have it automatically\n    // wrapped.\n    module Wrap = {\n        let let_ = Repromise.map;\n    }\n}\n\nlet logUserIn = (email: string, password: string) => {\n    // Assume this is a function that returns a promise of a hash.\n    let%Repromise hash = UserService.hashPassword(password)\n    let%Repromise maybeUser = UserService.findUserForEmailAndHash(email, hash);\n    let result = switch (maybeUser) {\n    | Some(user) =>\n        // It even works inside of a switch expression!\n        // Here you can see we're using \".Wrap\" to automatically wrap our result\n        // in a promise.\n        let%Repromise.Wrap apiToken = TokenService.generateForUser(user.id);\n        Ok( user.firstName, apiToken )\n    | None =>\n        // We resolve a promise here to match the branch above.\n        Error(\"Sorry, no user found for that email & password combination\")->Repromise.resolved\n    };\n\n    // Since let_ is defined as \"andThen\" we've got to remember to return a promise\n    // at the end of the function! Remember, all the lines after each let% just get\n    // turned into a callback!\n    Repromise.resolved(result)\n};\n```\n\nThere's a whole lot that can be done with this PPX. It's even possible to go a little crazy and start writing modules that combine monads, like `AsyncOption` that will specifically handle optional values inside of promises. But, in practice, those modules are seldom needed. Don't go too crazy, keeping it simple will get you a long, long way.\n\nThings to remember:\n\n- You don't have to name your module anything special. It could be named `Foo` and you can `let%Foo blah = ...`.\n- Simple is better than complex.\n- Obvious is usually better than hidden.\n\n## About Performance\n\nIt's worth noting that this PPX simply produces a _function callback structure_. Why is this important? There are potential performance gains in situations where avoiding a callback structure is possible.\n\nFor example, this handrwitten code, which is pretty much what the PPX produces:\n\n```reasonml\nlet getStreet = (maybeUser: option(user)): option(string) => {\n  maybeUser->Belt.Option.flatMap(user =>\n    user.info\n    ->Belt.Option.flatMap(personalInfo =>\n        personalInfo.address\n        ->Belt.Option.flatMap(address =>\n            address.street\n            ->Belt.Option.flatMap(street =>\n                Some(street->Js.String.toUpperCase)\n              )\n          )\n      )\n  );\n};\n```\n\nIs _functionally_ equivalent, but inferior in terms of performance, to the following hand-written code:\n\n```reasonml\nlet getStreetExplicit = (maybeUser: option(user)): option(string) => {\n  switch (maybeUser) {\n  | None => None\n  | Some(user) =>\n    switch (user.info) {\n    | None => None\n    | Some(personalInfo) =>\n      switch (personalInfo.address) {\n      | None => None\n      | Some(address) =>\n        switch (address.street) {\n        | None => None\n        | Some(street) => Some(street->Js.String.toUpperCase)\n        }\n      }\n    }\n  };\n};\n```\n\nBecause we're working with Options, we can `switch` on the values instead of `flatMap`-ing. The generated Javascript of the second approach looks like this:\n\n```javascript\nfunction getStreetExplicit(maybeUser) {\n  if (maybeUser !== undefined) {\n    var match = maybeUser[/* info */ 0];\n    if (match !== undefined) {\n      var match$1 = match[/* address */ 0];\n      if (match$1 !== undefined) {\n        var match$2 = match$1[/* street */ 0];\n        if (match$2 !== undefined) {\n          return match$2.toUpperCase();\n        } else {\n          return;\n        }\n      } else {\n        return;\n      }\n    } else {\n      return;\n    }\n  }\n}\n```\n\nOnly one total function invocation is produced by the compiler in this case instead of one invocation _for every bind_. This is significantly faster to execute and may be worth choosing if this function will be very highly trafficked.\n\nIn summary, this PPX is not designed to produce the most performant code in every case. It's just designed to make callbacks easier to use.\n\n## Notes\n\n**A Note about Native VS Bucklescript**\nThis is specifically designed to be helpful with writing Javascript code through ReasonML and Bucklescript. Native OCaml 4.08 implemented a native monadic sugar syntax. So if you're writing native code, I'd suggest skipping this PPX and waiting until [this PR](https://github.com/facebook/reason/pull/2487) lands in Reason, and then adopting the new syntax.\n\n**A Note about Windows**\nCurrently this project only precomiles binaries for linux and OS X according to the needs of existing maintainers. If you're a Windows user and would like to use this PPX, We'd love a pull-request that moves the project from Travis to Azure Pipelines and builds for all three platforms.\n\n## Credit\n\nThis PPX was created by @jaredly and upgraded to the latest OCaml by @anmonteiro. Murphy Randle has merged Antonio's changes to upgrade the package for Bucklescript 6.x and 7.x, re-packaged it to build with `esy` and precompiled binaries for osx and linux. Murphy has also written this readme to describe the most common use-case for this PPX. More features are available but undocumented in this readme. You can see them here: https://github.com/jaredly/let-anything.\n\n- Lovely readme artwork https://icons8.com/ouch/illustration/eastwood-page-under-construction\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/reasonml-labs/bs-let#readme",
+  "repository": {
+    "url": "git+https://github.com/reasonml-labs/bs-let.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reasonml-labs/bs-let/issues"
+  }
+}

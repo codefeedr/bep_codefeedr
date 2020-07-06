@@ -55,7 +55,9 @@ object Serializer extends Enumeration {
     * @tparam T the type which has to be serialized/deserialized.
     * @return the serde instance.
     */
-  def getSerde[T <: Serializable with AnyRef: ClassTag: TypeTag](name: String, topic: String = "") =
+  def getSerde[T <: Serializable with AnyRef: ClassTag: TypeTag](name: String,
+                                                                 topic: String =
+                                                                   "") =
     name match {
       case "JSON" => JSONSerde[T](topic)
       case "BSON" => BsonSerde[T](topic)

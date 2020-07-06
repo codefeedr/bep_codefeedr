@@ -67,7 +67,8 @@ class GHTCommitStage(stageName: String = "ght_commit",
           new FlinkKafkaProducer[Record](
             sideOutput.sideOutputTopic,
             Serializer.getSerde[Record](Serializer.JSON),
-            props))
+            props,
+            FlinkKafkaProducer.Semantic.NONE))
     }
 
     trans

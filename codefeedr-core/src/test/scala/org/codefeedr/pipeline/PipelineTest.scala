@@ -21,27 +21,17 @@ import java.util
 
 import com.github.sebruck.EmbeddedRedis
 import net.manub.embeddedkafka.{EmbeddedKafka, EmbeddedKafkaConfig}
-import org.apache.flink.streaming.api.scala.{
-  DataStream,
-  StreamExecutionEnvironment
-}
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.codefeedr.buffer.{Buffer, BufferType, KafkaBuffer, KafkaTopic}
 import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, FunSuite}
 import org.apache.flink.api.scala._
 import org.apache.flink.runtime.client.JobExecutionException
 import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.codefeedr.buffer.serialization.Serializer
-import org.codefeedr.buffer.serialization.schema_exposure.{
-  RedisSchemaExposer,
-  ZookeeperSchemaExposer
-}
 import org.codefeedr.stages.{InputStage, OutputStage2}
-import org.codefeedr.stages.utilities.{
-  JsonPrinterOutput,
-  StringInput,
-  StringType
-}
+import org.codefeedr.stages.utilities.{JsonPrinterOutput, StringInput, StringType}
 import org.codefeedr.testUtils._
+import org.codefeedr.util.schema_exposure.{RedisSchemaExposer, ZookeeperSchemaExposer}
 import redis.embedded.RedisServer
 
 import scala.collection.JavaConverters._

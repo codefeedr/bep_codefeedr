@@ -1,0 +1,120 @@
+{
+  "_id": "@bamblehorse/tiny",
+  "_rev": "2-9526bb8fdedb67c1fe82abbad9de9a4f",
+  "name": "@bamblehorse/tiny",
+  "dist-tags": {
+    "latest": "2.0.0"
+  },
+  "versions": {
+    "1.0.0": {
+      "name": "@bamblehorse/tiny",
+      "version": "1.0.0",
+      "gitHead": "059629d1df46c4cdb40c1f2f1964c7dd84bca991",
+      "_id": "@bamblehorse/tiny@1.0.0",
+      "_npmVersion": "5.6.0",
+      "_nodeVersion": "8.11.3",
+      "_npmUser": {
+        "name": "bamblehorse",
+        "email": "bamblehorse@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-NeqbFrUda1x1sJJF1/4AwWKCvm5x0faRrBZ1GswmzaeggE1zZf8e6Nw5oZZrTxgFpLU1/J7bWvoJ3Zf1N2Mppw==",
+        "shasum": "aa9862fdb97ee8f08889780e73860dee35fa3de3",
+        "tarball": "https://registry.npmjs.org/@bamblehorse/tiny/-/tiny-1.0.0.tgz",
+        "fileCount": 1,
+        "unpackedSize": 56,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbVG1pCRA9TVsSAnZWagAAn1EQAIiFIsqsLq6xODFpmsMT\nydYgndpdM2/rOsRQCXoDoS0shDQTrI6cAi9DZ2BJXT+dAwld4zO5tpFgy/Ly\nG/wI2n72wbAemqs/Rf+Lmo5DPswSu6jdkQw9Aiy78G/+5BQbwluXhHLOyEUE\ng17HIy3OF/zZGi4mAFWKLIUlC9PBco4o/dBa1cdLI6HF6M+WUZYB84Xm01nJ\nGDvzYEbGVsXQ6CufYMUneSgXPL+Etm1hJ23qLggeTBCASYa9CxrZNSOf9jE6\ntVk2MD5rKmNCqIWuAayEp6kQVuRHMQviBI0vgSzFXArnmaRj17dBosMWmSW2\nsXTh/Na9UhyzAggmNyFa7YsnzFUfwSpiG5YMSbBaJRW7kLvAdlM7hVEsoDf7\nwkuiu6xvaPImlL4JTx+fY1OonHx5D74ii1WpdvpIl0nOiEGkTP0bY6FCI64W\naJZ1cXyHAUM3pOf+8x9Y14k0CSbKlBufWwXC8JNSsqk5DsPfpAwdf8+6tESA\ncDE7xOoIljIZ3y0q4ft0+lZ4SWiVZt33IE+fvdvCL9EFY9mEsW2EoiYasZys\nEsQrfxeeWd9BPiH/3omymvQS9EL2lpqIXXahirSUjzPmN6QceenRmDx1oY45\nxpaAdvKvF1LSaZuUvt9qDTooceS8Rk2RUKM1joKlzOtUREIIegDggT7cbGfS\nPKpE\r\n=Yrzg\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "bamblehorse",
+          "email": "bamblehorse@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/tiny_1.0.0_1532259689529_0.44546873546737387"
+      }
+    },
+    "2.0.0": {
+      "name": "@bamblehorse/tiny",
+      "version": "2.0.0",
+      "description": "Removes all spaces from a string",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bamblehorse/tiny.git"
+      },
+      "main": "index.js",
+      "keywords": [
+        "tiny",
+        "npm",
+        "package",
+        "bamblehorse"
+      ],
+      "gitHead": "2a03af08285d3f989f8f6b4252293ec5e6ef7a26",
+      "bugs": {
+        "url": "https://github.com/bamblehorse/tiny/issues"
+      },
+      "homepage": "https://github.com/bamblehorse/tiny#readme",
+      "_id": "@bamblehorse/tiny@2.0.0",
+      "_npmVersion": "5.6.0",
+      "_nodeVersion": "8.11.3",
+      "_npmUser": {
+        "name": "bamblehorse",
+        "email": "bamblehorse@gmail.com"
+      },
+      "dist": {
+        "integrity": "sha512-l2muGeiKltR0sSAqV8n/qTNFdhuwpN/2cW919q/upK+KrUcVhW+rgH9ipOTjEzPOLUmJs6JH2RABUSGZ7Ly8lA==",
+        "shasum": "a58d73ac5a4affec8c8bb19824e36d72581db658",
+        "tarball": "https://registry.npmjs.org/@bamblehorse/tiny/-/tiny-2.0.0.tgz",
+        "fileCount": 3,
+        "unpackedSize": 1021,
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbVxXkCRA9TVsSAnZWagAAFNIP/3oYsl1slDfaavKSl9dm\nq18OjzPMZuElhtO+q3bsZKbJlOiivnlKAAQx8MWGjxCgarmNE86vAR1OQQgr\nuI6vUv0XzXTwVU588yRUKolaaso8QlJndGUzaIodeUkrn3UjSi4fOz0UusO+\ny3vqekpl+yvR+s+df8pVFSMX17b4fMdZqMvxEL/lyDvmaLzKmkQkQOMZairA\nvryVpyF9Lx7eiPVgmft9nm9XoA5wcILNCz0uZIiD/asTfnEvWmd5yZW+2XbB\nzKAkPpab6VvPyYK4sne5h6ANSxa3bsrdiisTvC6h7W9zHc81th22YyEq5qc+\nLMmfTmVHZw632tBdDlBDkkG7HmfjZKMvtwYSGdZdSNJmNwSVc86WRiv1YPCU\nRUJ9ql84ADBMcJVn63aMbuAFSzcrTdb5SMDAIJjNU7GaUf+8mV3upVMuTCNO\np5vqpVb2jqIB9fDGCC/27WB8cJwJlihKa3B7+QU1skGLoQLvUNbeekItamcq\ndcytmPOcwBMEVToLam+jU37D6AWfYkDIV8/vcvqP9EONmLcBoW9CgqYywlnP\nGSdz5IHFFuqIOl+3oe2T7fSMg0pluYsbipUixYcFyoomty4vyxkK0BoZ0lE9\nlZdeDglBu5K3HwlEcnIYyRdp/HEjsGn6D724ydBselaJwLvKRJTQVL5bXkp3\naFbb\r\n=d9hK\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "maintainers": [
+        {
+          "name": "bamblehorse",
+          "email": "bamblehorse@gmail.com"
+        }
+      ],
+      "directories": {},
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/tiny_2.0.0_1532433892870_0.7449554709515787"
+      }
+    }
+  },
+  "time": {
+    "created": "2018-07-22T11:41:29.226Z",
+    "1.0.0": "2018-07-22T11:41:29.631Z",
+    "modified": "2018-07-24T12:04:56.497Z",
+    "2.0.0": "2018-07-24T12:04:52.956Z"
+  },
+  "maintainers": [
+    {
+      "name": "bamblehorse",
+      "email": "bamblehorse@gmail.com"
+    }
+  ],
+  "readme": "# @bamblehorse/tiny\n\n[![npm (scoped)](https://img.shields.io/npm/v/@bamblehorse/tiny.svg)](https://www.npmjs.com/package/@bamblehorse/tiny)\n[![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/@bamblehorse/tiny.svg)](https://www.npmjs.com/package/@bamblehorse/tiny)\n\nRemoves all spaces from a string.\n\n## Install\n\n```\n$ npm install @bamblehorse/tiny\n```\n\n## Usage\n\n```js\nconst tiny = require(\"@bamblehorse/tiny\");\n\ntiny(\"So much space!\");\n//=> \"Somuchspace!\"\n\ntiny(1337);\n//=> Uncaught TypeError: Tiny wants a string!\n//    at tiny (<anonymous>:2:41)\n//    at <anonymous>:1:1\n```\n",
+  "readmeFilename": "README.md",
+  "description": "Removes all spaces from a string",
+  "homepage": "https://github.com/bamblehorse/tiny#readme",
+  "keywords": [
+    "tiny",
+    "npm",
+    "package",
+    "bamblehorse"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bamblehorse/tiny.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bamblehorse/tiny/issues"
+  },
+  "license": "MIT",
+  "_attachments": {}
+}

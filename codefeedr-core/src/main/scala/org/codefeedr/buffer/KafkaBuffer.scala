@@ -18,23 +18,31 @@
  */
 package org.codefeedr.buffer
 
-import java.util.{Optional, Properties}
+import java.util.Properties
 
 import org.apache.avro.reflect.ReflectData
 import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.apache.flink.streaming.api.scala.DataStream
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer.Semantic
-import org.apache.flink.streaming.connectors.kafka.partitioner.FlinkFixedPartitioner
-import org.apache.flink.streaming.connectors.kafka.{FlinkKafkaConsumer, FlinkKafkaProducer}
+import org.apache.flink.streaming.connectors.kafka.{
+  FlinkKafkaConsumer,
+  FlinkKafkaProducer
+}
 import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, NewTopic}
 import org.apache.logging.log4j.scala.Logging
-import org.codefeedr.buffer.serialization.schema_exposure.{RedisSchemaExposer, SchemaExposer, ZookeeperSchemaExposer}
 import org.codefeedr.pipeline.Pipeline
 
 import scala.collection.JavaConverters._
 import scala.reflect.ClassTag
 import scala.reflect.runtime.universe._
 import org.codefeedr.Properties._
+import org.codefeedr.util.schema_exposure.{
+  RedisSchemaExposer,
+  SchemaExposer,
+  ZookeeperSchemaExposer
+}
+
+import scala.language.implicitConversions
 
 /** Holds Kafka property names. */
 object KafkaBuffer {
@@ -110,7 +118,7 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
     val START_TIMESTAMP = 0x0
 
     //SEMANTIC
-    val SEMANTIC : Semantic = Semantic.AT_LEAST_ONCE
+    val SEMANTIC: Semantic = Semantic.AT_LEAST_ONCE
   }
 
   /** Get a Kafka Consumer as source for a stage.
@@ -169,11 +177,16 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
         .getOrElse[String](KafkaBuffer.BROKER, KafkaBufferDefaults.BROKER))
 
     // Check preferred partitioning
-    val semantic = properties.getOrElse[Semantic](KafkaBuffer.SEMANTIC, KafkaBufferDefaults.SEMANTIC)(stringToSemantic)
+    val semantic = properties.getOrElse[Semantic](
+      KafkaBuffer.SEMANTIC,
+      KafkaBufferDefaults.SEMANTIC)(stringToSemantic)
 
     // Create Kafka producer.
     val producer =
-      new FlinkKafkaProducer[T](topic, getSerializer(topic), getKafkaProperties, semantic)
+      new FlinkKafkaProducer[T](topic,
+                                getSerializer(topic),
+                                getKafkaProperties,
+                                semantic)
     producer.setWriteTimestampToKafka(true)
 
     producer

@@ -34,7 +34,6 @@ import org.codefeedr.testUtils.JobFinishedException
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
 import scala.collection.JavaConverters._
-import scala.collection.JavaConversions._
 
 class KafkaInputOutputTest
     extends FunSuite
@@ -114,7 +113,7 @@ class KafkaInputOutputTest
 object KafkaStringCollectSink {
   var result = new util.ArrayList[String]() //mutable list
 
-  def asList: List[String] = result.toList
+  def asList: List[String] = result.asScala.toList
 }
 
 class KafkaStringCollectSink(amount: Int) extends SinkFunction[StringType] {

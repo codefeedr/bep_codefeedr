@@ -1,0 +1,37 @@
+{
+  "_id": "@lizheng11/t1",
+  "_rev": "19-a7bf0b8b42b6b157b2b0f490a7222227",
+  "name": "@lizheng11/t1",
+  "time": {
+    "0.0.1": "2020-01-06T12:47:16.883Z",
+    "0.0.2": "2020-01-06T12:47:16.883Z",
+    "0.0.6": "2020-01-06T12:47:16.883Z",
+    "created": "2020-01-06T12:52:56.224Z",
+    "0.0.9": "2020-01-06T12:52:56.512Z",
+    "modified": "2020-01-06T13:35:24.946Z",
+    "0.0.10": "2020-01-06T13:00:07.387Z",
+    "unpublished": {
+      "name": "standlee",
+      "time": "2020-01-06T13:07:00.143Z",
+      "tags": {
+        "latest": "0.0.10"
+      },
+      "versions": [
+        "0.0.10",
+        "0.0.9"
+      ],
+      "maintainers": [
+        {
+          "name": "standlee",
+          "email": "lizhengnacl@gmail.com"
+        }
+      ]
+    }
+  },
+  "maintainers": [
+    {
+      "email": "lizhengnacl@gmail.com",
+      "name": "standlee"
+    }
+  ]
+}

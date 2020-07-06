@@ -39,6 +39,7 @@ parallelExecution in Test := false
 
 val projectPrefix = "codefeedr-"
 val pluginPrefix = projectPrefix + "plugin-"
+val utilPrefix = projectPrefix + "util-"
 
 lazy val root = (project in file("."))
   .settings(settings ++ noPublishSettings)
@@ -48,7 +49,14 @@ lazy val root = (project in file("."))
     pluginGitHub,
     pluginRabbitMQ,
     pluginGHTorrent,
-    pluginPypi)
+    pluginPypi,
+    pluginCargo,
+    pluginClearlyDefined,
+    pluginJSON,
+    pluginMaven,
+    pluginnpm,
+    utilSchemaExposure
+  )
 
 lazy val core = (project in file("codefeedr-core"))
   .settings(
@@ -88,9 +96,13 @@ lazy val core = (project in file("codefeedr-core"))
       dependencies.embeddedRedis,
 
       // Embedded kafka for integration tests
-      dependencies.embeddedKafka
+      dependencies.embeddedKafka,
+
+      // ZK schema registration
+      dependencies.avro4s
     )
   )
+  .dependsOn(utilSchemaExposure)
 
 lazy val pluginMongodb = (project in file("codefeedr-plugins/codefeedr-mongodb"))
   .settings(
@@ -162,6 +174,70 @@ lazy val pluginPypi = (project in file("codefeedr-plugins/codefeedr-pypi"))
     )
   ).dependsOn(core)
 
+lazy val pluginCargo = (project in file("codefeedr-plugins/codefeedr-cargo"))
+  .settings(
+    name := pluginPrefix + "cargo",
+    settings,
+    assemblySettings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      dependencies.flinkTablePlanner,
+      dependencies.spray
+    )
+  ).dependsOn(core)
+
+lazy val pluginClearlyDefined = (project in file("codefeedr-plugins/codefeedr-clearlydefined"))
+  .settings(
+    name := pluginPrefix + "clearlydefined",
+    settings,
+    assemblySettings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      dependencies.flinkTablePlanner
+    )
+  ).dependsOn(core, pluginMaven)
+
+lazy val pluginJSON = (project in file("codefeedr-plugins/codefeedr-json"))
+  .settings(
+    name := pluginPrefix + "json",
+    settings,
+    assemblySettings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+    )
+  ).dependsOn(core)
+
+lazy val pluginMaven = (project in file("codefeedr-plugins/codefeedr-maven"))
+  .settings(
+    name := pluginPrefix + "maven",
+    settings,
+    assemblySettings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      dependencies.flinkTablePlanner
+    )
+  ).dependsOn(core)
+
+lazy val pluginnpm = (project in file("codefeedr-plugins/codefeedr-npm"))
+  .settings(
+    name := pluginPrefix + "npm",
+    settings,
+    assemblySettings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      dependencies.flinkTablePlanner
+    )
+  ).dependsOn(core)
+
+lazy val utilSchemaExposure = (project in file("codefeedr-util/schema-exposure"))
+  .settings(
+    name := utilPrefix + "schema-exposure",
+    settings,
+    assemblySettings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      dependencies.avro,
+      dependencies.zookeeper,
+      dependencies.redis,
+      dependencies.embeddedKafka,
+      dependencies.embeddedRedis
+    )
+  )
+
 lazy val dependencies =
   new {
     val flinkVersion       = "1.9.1"
@@ -206,6 +282,11 @@ lazy val dependencies =
     //val embeddedRabbitMQ   = "io.arivera.oss"            %% "embedded-rabbitmq"              % "1.3.0"           % Test
 
     val avro               = "org.apache.avro"            % "avro"                           % "1.8.2"
+    val avro4s             = "com.sksamuel.avro4s"       %% "avro4s-core"                    % "3.1.0"
+
+    val flinkTablePlanner  = "org.apache.flink"          %% "flink-table-planner"            % flinkVersion
+
+    val spray              = "io.spray"                  %% "spray-json"                     % "1.3.4"
   }
 
 lazy val commonDependencies = Seq(
@@ -230,9 +311,9 @@ lazy val commonSettings = Seq(
   test in assembly := {},
   scalacOptions ++= compilerOptions,
   resolvers ++= Seq(
-    "confluent"                               at "http://packages.confluent.io/maven/",
+    "confluent"                               at "https://packages.confluent.io/maven/",
     "Apache Development Snapshot Repository"  at "https://repository.apache.org/content/repositories/snapshots/",
-    "Artima Maven Repository"                 at "http://repo.artima.com/releases",
+    "Artima Maven Repository"                 at "https://repo.artima.com/releases",
     Resolver.mavenLocal,
     Resolver.jcenterRepo
   ),
@@ -294,4 +375,3 @@ Global / cancelable := true
 
 // exclude Scala library from assembly
 assembly / assemblyOption  := (assembly / assemblyOption).value.copy(includeScala = false)
-

@@ -18,7 +18,10 @@
  */
 package org.codefeedr.buffer.serialization
 
-import org.apache.flink.api.common.serialization.{AbstractDeserializationSchema, SerializationSchema}
+import org.apache.flink.api.common.serialization.{
+  AbstractDeserializationSchema,
+  SerializationSchema
+}
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.api.java.typeutils.TypeExtractor
 import org.apache.flink.streaming.connectors.kafka.KafkaSerializationSchema
@@ -33,7 +36,8 @@ abstract class AbstractSerde[T <: Serializable: ClassTag](topic: String = "")
     extends AbstractDeserializationSchema[T](
       TypeExtractor.createTypeInfo(
         classTag[T].runtimeClass.asInstanceOf[Class[T]]))
-    with SerializationSchema[T] with KafkaSerializationSchema[T] {
+    with SerializationSchema[T]
+    with KafkaSerializationSchema[T] {
 
   // Get type of class
   val inputClassType: Class[T] = classTag[T].runtimeClass.asInstanceOf[Class[T]]
