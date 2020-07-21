@@ -2,16 +2,20 @@ package org.codefeedr.plugins.pypi.protocol
 
 import java.util.Date
 
+import com.sksamuel.avro4s.AvroProp
+
 object Protocol {
 
   case class PyPiRelease(title: String,
                          link: String,
                          description: String,
+                         @AvroProp("rowtime", "true")
                          pubDate: Date)
 
   case class PyPiReleaseExt(title: String,
                             link: String,
                             description: String,
+                            @AvroProp("rowtime", "true")
                             pubDate: Date,
                             project: PyPiProject)
 

@@ -1,6 +1,8 @@
 package org.codefeedr.plugins.pypi.stages
 
-import com.sksamuel.avro4s.AvroSchema
+import java.util.Date
+
+import com.sksamuel.avro4s.{AvroSchema, SchemaFor}
 import org.apache.avro.Schema
 import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.scala.DataStream
@@ -11,7 +13,6 @@ import org.codefeedr.plugins.pypi.operators.{
 }
 import org.codefeedr.plugins.pypi.protocol.Protocol.PyPiRelease
 import org.codefeedr.stages.InputStage
-import org.codefeedr.stages.utilities.DefaultTypeMapper._
 
 import scala.language.higherKinds
 
@@ -30,7 +31,8 @@ class PyPiReleasesStage(stageId: String = "pypi_releases_min",
       .addSource(new PyPiReleasesSource(sourceConfig))
 
   override def getSchema: Schema = {
-    implicit val dateSchema: DateSchemaFor = new DateSchemaFor(true)
+    implicit val dateSchemaFor: AnyRef with SchemaFor[Date] =
+      SchemaFor[Date](Schema.create(Schema.Type.STRING))
     AvroSchema[PyPiRelease]
   }
 }

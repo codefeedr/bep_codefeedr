@@ -3,6 +3,8 @@ package org.codefeedr.plugins.maven.protocol
 import java.io.Serializable
 import java.util.Date
 
+import com.sksamuel.avro4s.AvroProp
+
 object Protocol {
 
   /**
@@ -309,6 +311,7 @@ object Protocol {
       title: String,
       link: String,
       description: String,
+      @AvroProp("rowtime", "true")
       pubDate: Date,
       guid: Guid
   )
@@ -319,6 +322,7 @@ object Protocol {
       title: String,
       link: String,
       description: String,
+      @AvroProp("rowtime", "true")
       pubDate: Date,
       guid: Guid,
       project: MavenProject

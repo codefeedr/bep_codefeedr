@@ -1,6 +1,8 @@
 package org.codefeedr.plugins.maven.stages
 
-import com.sksamuel.avro4s.AvroSchema
+import java.util.Date
+
+import com.sksamuel.avro4s.{AvroSchema, SchemaFor}
 import org.apache.avro.Schema
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.scala.DataStream
@@ -11,7 +13,6 @@ import org.codefeedr.plugins.maven.operators.{
   MavenReleasesSource,
   MavenSourceConfig
 }
-import org.codefeedr.stages.utilities.DefaultTypeMapper._
 
 import scala.language.higherKinds
 
@@ -34,7 +35,8 @@ class MavenReleasesStage(stageId: String = "maven_releases_min",
   }
 
   override def getSchema: Schema = {
-    implicit val MavenSchema: DateSchemaFor = new DateSchemaFor(true)
+    implicit val dateSchemaFor: AnyRef with SchemaFor[Date] =
+      SchemaFor[Date](Schema.create(Schema.Type.STRING))
     AvroSchema[MavenRelease]
   }
 }

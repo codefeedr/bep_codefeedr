@@ -2,6 +2,8 @@ package org.codefeedr.plugins.npm.protocol
 
 import java.util.Date
 
+import com.sksamuel.avro4s.AvroProp
+
 /**
   * Contains all the case classes and POJO equivalent classes to represent a NPM package release
   *
@@ -10,9 +12,12 @@ import java.util.Date
   */
 object Protocol {
 
-  case class NpmRelease(name: String, retrieveDate: Date) // using ingestion time
+  case class NpmRelease(
+      name: String,
+      @AvroProp("rowtime", "true") retrieveDate: Date) // using ingestion time
 
   case class NpmReleaseExt(name: String,
+                           @AvroProp("rowtime", "true")
                            retrieveDate: Date,
                            project: NpmProject)
 

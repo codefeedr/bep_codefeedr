@@ -282,7 +282,7 @@ lazy val dependencies =
     //val embeddedRabbitMQ   = "io.arivera.oss"            %% "embedded-rabbitmq"              % "1.3.0"           % Test
 
     val avro               = "org.apache.avro"            % "avro"                           % "1.8.2"
-    val avro4s             = "com.sksamuel.avro4s"       %% "avro4s-core"                    % "3.1.0"
+    val avro4s             = "com.sksamuel.avro4s"       %% "avro4s-core"                    % "3.1.1"
 
     val flinkTablePlanner  = "org.apache.flink"          %% "flink-table-planner"            % flinkVersion
 

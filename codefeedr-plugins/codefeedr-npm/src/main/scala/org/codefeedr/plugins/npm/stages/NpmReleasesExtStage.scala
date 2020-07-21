@@ -1,8 +1,9 @@
 package org.codefeedr.plugins.npm.stages
 
+import java.util.Date
 import java.util.concurrent.TimeUnit
 
-import com.sksamuel.avro4s.AvroSchema
+import com.sksamuel.avro4s.{AvroSchema, SchemaFor}
 import org.apache.avro.Schema
 import org.apache.flink.streaming.api.datastream.{
   AsyncDataStream => JavaAsyncDataStream
@@ -11,7 +12,6 @@ import org.apache.flink.streaming.api.scala.DataStream
 import org.codefeedr.plugins.npm.operators.RetrieveProjectAsync
 import org.codefeedr.plugins.npm.protocol.Protocol.{NpmRelease, NpmReleaseExt}
 import org.codefeedr.stages.TransformStage
-import org.codefeedr.stages.utilities.DefaultTypeMapper.DateSchemaFor
 
 import scala.language.higherKinds
 
@@ -54,7 +54,8 @@ class NpmReleasesExtStage(stageId: String = "npm_releases")
   }
 
   override def getSchema: Schema = {
-    implicit val dateSchema: DateSchemaFor = new DateSchemaFor(true)
+    implicit val dateSchemaFor: AnyRef with SchemaFor[Date] =
+      SchemaFor[Date](Schema.create(Schema.Type.STRING))
     AvroSchema[NpmReleaseExt]
   }
 }

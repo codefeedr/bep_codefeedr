@@ -5,13 +5,12 @@ import org.apache.avro.Schema
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.scala.DataStream
 import org.codefeedr.pipeline.Context
-import org.codefeedr.stages.InputStage
 import org.codefeedr.plugins.clearlydefined.operators.{
   ClearlyDefinedReleasesSource,
   ClearlyDefinedSourceConfig
 }
 import org.codefeedr.plugins.clearlydefined.protocol.Protocol.ClearlyDefinedRelease
-import org.codefeedr.stages.utilities.DefaultTypeMapper.DateSchemaFor
+import org.codefeedr.stages.InputStage
 
 import scala.language.higherKinds
 
@@ -34,8 +33,5 @@ class ClearlyDefinedReleasesStage(stageId: String =
       .addSource(new ClearlyDefinedReleasesSource(sourceConfig))(typeInfo)
   }
 
-  override def getSchema: Schema = {
-    implicit val NpmSchema: DateSchemaFor = new DateSchemaFor(true)
-    AvroSchema[ClearlyDefinedRelease]
-  }
+  override def getSchema: Schema = AvroSchema[ClearlyDefinedRelease]
 }

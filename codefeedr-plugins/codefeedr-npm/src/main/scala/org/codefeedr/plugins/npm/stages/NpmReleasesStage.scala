@@ -1,6 +1,8 @@
 package org.codefeedr.plugins.npm.stages
 
-import com.sksamuel.avro4s.AvroSchema
+import java.util.Date
+
+import com.sksamuel.avro4s.{AvroSchema, SchemaFor}
 import org.apache.avro.Schema
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.scala.DataStream
@@ -8,7 +10,6 @@ import org.codefeedr.pipeline.Context
 import org.codefeedr.stages.InputStage
 import org.codefeedr.plugins.npm.operators.{NpmReleasesSource, NpmSourceConfig}
 import org.codefeedr.plugins.npm.protocol.Protocol.NpmRelease
-import org.codefeedr.stages.utilities.DefaultTypeMapper._
 
 import scala.language.higherKinds
 
@@ -36,7 +37,8 @@ class NpmReleasesStage(stageId: String = "npm_releases_min",
   }
 
   override def getSchema: Schema = {
-    implicit val NpmSchema: DateSchemaFor = new DateSchemaFor(true)
+    implicit val dateSchemaFor: AnyRef with SchemaFor[Date] =
+      SchemaFor[Date](Schema.create(Schema.Type.STRING))
     AvroSchema[NpmRelease]
   }
 }
