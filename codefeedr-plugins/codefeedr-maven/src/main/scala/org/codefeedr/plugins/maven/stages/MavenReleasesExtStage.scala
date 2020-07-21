@@ -1,7 +1,10 @@
 package org.codefeedr.plugins.maven.stages
 
+import java.util.Date
 import java.util.concurrent.TimeUnit
 
+import com.sksamuel.avro4s.{AvroSchema, SchemaFor}
+import org.apache.avro.Schema
 import org.apache.flink.streaming.api.datastream.{
   AsyncDataStream => JavaAsyncDataStream
 }
@@ -12,6 +15,8 @@ import org.codefeedr.plugins.maven.protocol.Protocol.{
   MavenRelease,
   MavenReleaseExt
 }
+
+import scala.language.higherKinds
 
 /** Transform a [[MavenRelease]] to [[MavenReleaseExt]].
   *
@@ -36,5 +41,11 @@ class MavenReleasesExtStage(stageId: String = "maven_releases")
                                                 100)
 
     new org.apache.flink.streaming.api.scala.DataStream(async)
+  }
+
+  override def getSchema: Schema = {
+    implicit val dateSchemaFor: AnyRef with SchemaFor[Date] =
+      SchemaFor[Date](Schema.create(Schema.Type.STRING))
+    AvroSchema[MavenReleaseExt]
   }
 }
