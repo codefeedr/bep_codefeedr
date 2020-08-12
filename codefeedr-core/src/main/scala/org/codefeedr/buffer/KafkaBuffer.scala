@@ -30,17 +30,17 @@ import org.apache.flink.streaming.connectors.kafka.{
 }
 import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, NewTopic}
 import org.apache.logging.log4j.scala.Logging
+import org.codefeedr.buffer.serialization.schema_exposure.{
+  RedisSchemaExposer,
+  SchemaExposer,
+  ZookeeperSchemaExposer
+}
 import org.codefeedr.pipeline.Pipeline
 
 import scala.collection.JavaConverters._
 import scala.reflect.ClassTag
 import scala.reflect.runtime.universe._
 import org.codefeedr.Properties._
-import org.codefeedr.util.schema_exposure.{
-  RedisSchemaExposer,
-  SchemaExposer,
-  ZookeeperSchemaExposer
-}
 
 import scala.language.implicitConversions
 
@@ -114,7 +114,7 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
     val COMPRESSION_TYPE = "none"
 
     //OFFSETS
-    val START_POSITION = KafkaBuffer.GROUP_OFFSETS
+    val START_POSITION: String = KafkaBuffer.GROUP_OFFSETS
     val START_TIMESTAMP = 0x0
 
     //SEMANTIC

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codefeedr.util.schema_exposure
+package org.codefeedr.buffer.serialization.schema_exposure
 
 import org.apache.avro.Schema
 

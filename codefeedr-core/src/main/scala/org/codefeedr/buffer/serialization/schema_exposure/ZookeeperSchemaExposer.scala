@@ -16,7 +16,7 @@
  * limitations under the License.
  *
  */
-package org.codefeedr.util.schema_exposure
+package org.codefeedr.buffer.serialization.schema_exposure
 
 import org.apache.avro.Schema
 import org.apache.zookeeper._
@@ -128,21 +128,5 @@ class ZookeeperSchemaExposer(host: String, root: String = "/codefeedr:schemas")
 
     //delete root afterwards
     client.delete(s"$root", -1)
-  }
-
-  /**
-    * Getter for all children in zookeeper path.
-    * @return list of all children in zookeeper path
-    */
-  def getAllChildren: List[String] = {
-    val exists = client.exists(s"$root", false)
-
-    //if not exists then return
-    if (exists == null) return null
-
-    //get all children
-    val children = client.getChildren(s"$root", false)
-
-    children.asScala.toList
   }
 }

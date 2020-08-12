@@ -31,7 +31,7 @@ import org.codefeedr.buffer.serialization.Serializer
 import org.codefeedr.stages.{InputStage, OutputStage2}
 import org.codefeedr.stages.utilities.{JsonPrinterOutput, StringInput, StringType}
 import org.codefeedr.testUtils._
-import org.codefeedr.util.schema_exposure.{RedisSchemaExposer, ZookeeperSchemaExposer}
+import org.codefeedr.buffer.serialization.schema_exposure.{RedisSchemaExposer, ZookeeperSchemaExposer}
 import redis.embedded.RedisServer
 
 import scala.collection.JavaConverters._

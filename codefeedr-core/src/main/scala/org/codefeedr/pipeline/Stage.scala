@@ -26,7 +26,7 @@ import org.apache.flink.streaming.api.scala.{
 }
 import org.codefeedr.Properties
 import org.codefeedr.buffer.{BufferFactory, KafkaBuffer}
-import org.codefeedr.util.schema_exposure.ZookeeperSchemaExposer
+import org.codefeedr.buffer.serialization.schema_exposure.ZookeeperSchemaExposer
 
 import scala.reflect.ClassTag
 import scala.reflect.runtime.universe._

@@ -16,25 +16,30 @@
  * limitations under the License.
  *
  */
-package org.codefeedr.util.schema_exposure
+package org.codefeedr.buffer.serialization.schema_exposure
 
-import net.manub.embeddedkafka.{EmbeddedKafka, EmbeddedKafkaConfig}
+import com.github.sebruck.EmbeddedRedis
 import org.scalatest.BeforeAndAfterAll
+import redis.embedded.RedisServer
 
-class ZookeeperSchemaExposerTest
+class RedisSchemaExposerTest
   extends SchemaExposerTest
-    with EmbeddedKafka
-    with BeforeAndAfterAll {
+    with BeforeAndAfterAll
+    with EmbeddedRedis {
+  var redis: RedisServer = _
+  var redisPort: Int = 0
 
+  // Before all tests, setup an embedded redis
   override def beforeAll(): Unit = {
-    implicit val config: EmbeddedKafkaConfig = EmbeddedKafkaConfig(zooKeeperPort = 2181)
-    EmbeddedKafka.start()
+    redis = startRedis()
+    redisPort = redis.ports().get(0)
   }
 
+  // After all tests, stop embedded redis
   override def afterAll(): Unit = {
-    EmbeddedKafka.stop()
+    stopRedis(redis)
   }
 
   override def getSchemaExposer: SchemaExposer =
-    new ZookeeperSchemaExposer("localhost:2181")
+    new RedisSchemaExposer(s"redis://localhost:$redisPort")
 }

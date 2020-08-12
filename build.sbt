@@ -39,7 +39,6 @@ parallelExecution in Test := false
 
 val projectPrefix = "codefeedr-"
 val pluginPrefix = projectPrefix + "plugin-"
-val utilPrefix = projectPrefix + "util-"
 
 lazy val root = (project in file("."))
   .settings(settings ++ noPublishSettings)
@@ -54,8 +53,7 @@ lazy val root = (project in file("."))
     pluginClearlyDefined,
     pluginJSON,
     pluginMaven,
-    pluginnpm,
-    utilSchemaExposure
+    pluginnpm
   )
 
 lazy val core = (project in file("codefeedr-core"))
@@ -102,7 +100,6 @@ lazy val core = (project in file("codefeedr-core"))
       dependencies.avro4s
     )
   )
-  .dependsOn(utilSchemaExposure)
 
 lazy val pluginMongodb = (project in file("codefeedr-plugins/codefeedr-mongodb"))
   .settings(
@@ -223,20 +220,6 @@ lazy val pluginnpm = (project in file("codefeedr-plugins/codefeedr-npm"))
       dependencies.flinkTablePlanner
     )
   ).dependsOn(core)
-
-lazy val utilSchemaExposure = (project in file("codefeedr-util/schema-exposure"))
-  .settings(
-    name := utilPrefix + "schema-exposure",
-    settings,
-    assemblySettings,
-    libraryDependencies ++= commonDependencies ++ Seq(
-      dependencies.avro,
-      dependencies.zookeeper,
-      dependencies.redis,
-      dependencies.embeddedKafka,
-      dependencies.embeddedRedis
-    )
-  )
 
 lazy val dependencies =
   new {
