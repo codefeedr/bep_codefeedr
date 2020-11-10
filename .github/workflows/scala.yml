@@ -1,0 +1,26 @@
+name: Scala CI
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: olafurpg/setup-scala@v10
+      with:
+        java-version: adopt@1.8
+    - name: Run tests
+      run: sbt 'set parallelExecution in ThisBuild := false' clean coverage test coverageReport && sbt coverageAggregate
+    - name: Scala format check
+      run: sbt scalafmtCheck
+    - name: Coveralls
+      run: sbt coveralls

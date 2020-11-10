@@ -29,6 +29,7 @@ class ZookeeperSchemaExposerTest
   override def beforeAll(): Unit = {
     implicit val config = EmbeddedKafkaConfig(zooKeeperPort = 2181)
     EmbeddedKafka.start()
+    println("Just started embedded kafka.")
   }
 
   override def afterAll(): Unit = {
