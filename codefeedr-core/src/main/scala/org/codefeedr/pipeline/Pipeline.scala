@@ -317,7 +317,7 @@ case class Pipeline(var name: String,
 
     // Add sink.
     if (sink != null) {
-      transformed.addSink(sink)
+      transformed.addSink(sink).name(s"Producing to topic ${stage.stageId.get}")
     }
   }
 

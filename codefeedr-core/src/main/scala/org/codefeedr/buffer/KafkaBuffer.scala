@@ -25,10 +25,17 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.apache.flink.streaming.api.scala.DataStream
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer.Semantic
 import org.apache.flink.streaming.connectors.kafka.partitioner.FlinkFixedPartitioner
-import org.apache.flink.streaming.connectors.kafka.{FlinkKafkaConsumer, FlinkKafkaProducer}
+import org.apache.flink.streaming.connectors.kafka.{
+  FlinkKafkaConsumer,
+  FlinkKafkaProducer
+}
 import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, NewTopic}
 import org.apache.logging.log4j.scala.Logging
-import org.codefeedr.buffer.serialization.schema_exposure.{RedisSchemaExposer, SchemaExposer, ZookeeperSchemaExposer}
+import org.codefeedr.buffer.serialization.schema_exposure.{
+  RedisSchemaExposer,
+  SchemaExposer,
+  ZookeeperSchemaExposer
+}
 import org.codefeedr.pipeline.Pipeline
 
 import scala.collection.JavaConverters._
@@ -76,11 +83,11 @@ object KafkaBuffer {
   * @tparam T Type of the data in this Buffer.
   */
 class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
-    pipeline: Pipeline,
-    properties: org.codefeedr.Properties,
-    topic: String,
-    groupId: String)
-    extends Buffer[T](pipeline, properties, topic)
+  pipeline: Pipeline,
+  properties: org.codefeedr.Properties,
+  topic: String,
+  groupId: String
+) extends Buffer[T](pipeline, properties, topic)
     with Logging {
 
   implicit def stringToSemantic(str: String): Semantic = Semantic.valueOf(str)
@@ -110,7 +117,7 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
     val START_TIMESTAMP = 0x0
 
     //SEMANTIC
-    val SEMANTIC : Semantic = Semantic.AT_LEAST_ONCE
+    val SEMANTIC: Semantic = Semantic.AT_LEAST_ONCE
   }
 
   /** Get a Kafka Consumer as source for a stage.
@@ -121,16 +128,19 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
     val serde = getSerializer()
 
     // Make sure the topic already exists, otherwise create it.
-    checkAndCreateSubject(topic,
-                          properties
-                            .get[String](KafkaBuffer.BROKER)
-                            .getOrElse(KafkaBufferDefaults.BROKER))
+    checkAndCreateSubject(
+      topic,
+      properties
+        .get[String](KafkaBuffer.BROKER)
+        .getOrElse(KafkaBufferDefaults.BROKER)
+    )
 
     val kafkaConsumer =
       new FlinkKafkaConsumer[T](topic, serde, getKafkaProperties)
     val startPosition = properties.getOrElse[String](
       KafkaBuffer.START_POSITION,
-      KafkaBufferDefaults.START_POSITION)
+      KafkaBufferDefaults.START_POSITION
+    )
 
     /** Configure the starting point FromGroupOffsets. */
     startPosition match {
@@ -140,13 +150,17 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
         kafkaConsumer.setStartFromTimestamp(
           properties.getOrElse[Long](
             KafkaBuffer.START_TIMESTAMP,
-            KafkaBufferDefaults.START_TIMESTAMP)(_.toLong))
+            KafkaBufferDefaults.START_TIMESTAMP
+          )(_.toLong)
+        )
       case KafkaBuffer.GROUP_OFFSETS => kafkaConsumer.setStartFromGroupOffsets()
       case _                         => kafkaConsumer.setStartFromGroupOffsets()
     }
 
     // Add a source.
-    pipeline.environment.addSource(kafkaConsumer)
+    pipeline.environment
+      .addSource(kafkaConsumer)
+      .name(s"Consuming from topic /$topic")
   }
 
   /** Get a Kafka Producer as sink to the buffer.
@@ -166,14 +180,23 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
     checkAndCreateSubject(
       topic,
       properties
-        .getOrElse[String](KafkaBuffer.BROKER, KafkaBufferDefaults.BROKER))
+        .getOrElse[String](KafkaBuffer.BROKER, KafkaBufferDefaults.BROKER)
+    )
 
     // Check preferred partitioning
-    val semantic = properties.getOrElse[Semantic](KafkaBuffer.SEMANTIC, KafkaBufferDefaults.SEMANTIC)(stringToSemantic)
+    val semantic = properties.getOrElse[Semantic](
+      KafkaBuffer.SEMANTIC,
+      KafkaBufferDefaults.SEMANTIC
+    )(stringToSemantic)
 
     // Create Kafka producer.
     val producer =
-      new FlinkKafkaProducer[T](topic, getSerializer(topic), getKafkaProperties, semantic)
+      new FlinkKafkaProducer[T](
+        topic,
+        getSerializer(topic),
+        getKafkaProperties,
+        semantic
+      )
     producer.setWriteTimestampToKafka(true)
 
     producer
@@ -188,8 +211,10 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
     kafkaProp.put("bootstrap.servers", KafkaBufferDefaults.BROKER)
     kafkaProp.put("zookeeper.connect", KafkaBufferDefaults.ZOOKEEPER)
     kafkaProp.put("auto.offset.reset", KafkaBufferDefaults.AUTO_OFFSET_RESET)
-    kafkaProp.put("auto.commit.interval.ms",
-                  KafkaBufferDefaults.AUTO_COMMIT_INTERVAL_MS)
+    kafkaProp.put(
+      "auto.commit.interval.ms",
+      KafkaBufferDefaults.AUTO_COMMIT_INTERVAL_MS
+    )
     kafkaProp.put("enable.auto.commit", KafkaBufferDefaults.ENABLE_AUTO_COMMIT)
     kafkaProp.put("compression.type", KafkaBufferDefaults.COMPRESSION_TYPE)
     kafkaProp.put("group.id", groupId)
@@ -226,10 +251,13 @@ class KafkaBuffer[T <: Serializable with AnyRef: ClassTag: TypeTag](
         topic,
         properties.getOrElse[Int](
           KafkaBuffer.AMOUNT_OF_PARTITIONS,
-          KafkaBufferDefaults.AMOUNT_OF_PARTITIONS)(_.toInt),
+          KafkaBufferDefaults.AMOUNT_OF_PARTITIONS
+        )(_.toInt),
         properties
-          .getOrElse[Int](KafkaBuffer.AMOUNT_OF_REPLICAS,
-                          KafkaBufferDefaults.AMOUNT_OF_REPLICAS)(_.toInt)
+          .getOrElse[Int](
+            KafkaBuffer.AMOUNT_OF_REPLICAS,
+            KafkaBufferDefaults.AMOUNT_OF_REPLICAS
+          )(_.toInt)
           .asInstanceOf[Short]
       )
       createTopic(adminClient, newTopic)
